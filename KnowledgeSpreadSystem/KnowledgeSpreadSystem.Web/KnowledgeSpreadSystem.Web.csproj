@@ -283,11 +283,11 @@
     <None Include="Project_Readme.html" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\HelpMeGraduate.Data\KnowledgeSpreadSystem.Data.csproj">
+    <ProjectReference Include="..\KnowledgeSpreadSystem.Data\KnowledgeSpreadSystem.Data.csproj">
       <Project>{B01F9460-02D6-4295-8773-596E5E2671D9}</Project>
       <Name>KnowledgeSpreadSystem.Data</Name>
     </ProjectReference>
-    <ProjectReference Include="..\HelpMeGraduate.Models\KnowledgeSpreadSystem.Models.csproj">
+    <ProjectReference Include="..\KnowledgeSpreadSystem.Models\KnowledgeSpreadSystem.Models.csproj">
       <Project>{3CCFBE1D-2AD4-422A-B72E-2FA04ECC07A9}</Project>
       <Name>KnowledgeSpreadSystem.Models</Name>
     </ProjectReference>

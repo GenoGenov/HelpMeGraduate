@@ -3,14 +3,6 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
 VisualStudioVersion = 12.0.30723.0
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KnowledgeSpreadSystem.Web", "HelpMeGraduate.Web\KnowledgeSpreadSystem.Web.csproj", "{5803BD6B-8C24-49CF-966F-988F9D420CD5}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KnowledgeSpreadSystem.Web.Tests", "HelpMeGraduate.Web.Tests\KnowledgeSpreadSystem.Web.Tests.csproj", "{B381A4B6-8C21-4FAB-BC5B-9BFED9AE78B9}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KnowledgeSpreadSystem.Models", "HelpMeGraduate.Models\KnowledgeSpreadSystem.Models.csproj", "{3CCFBE1D-2AD4-422A-B72E-2FA04ECC07A9}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KnowledgeSpreadSystem.Data", "HelpMeGraduate.Data\KnowledgeSpreadSystem.Data.csproj", "{B01F9460-02D6-4295-8773-596E5E2671D9}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{4CB96EA0-EA79-4258-AEF6-9AB0EA8E09C9}"
 	ProjectSection(SolutionItems) = preProject
 		.nuget\NuGet.Config = .nuget\NuGet.Config
@@ -18,12 +10,28 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{4CB96E
 		.nuget\NuGet.targets = .nuget\NuGet.targets
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KnowledgeSpreadSystem.Data", "KnowledgeSpreadSystem.Data\KnowledgeSpreadSystem.Data.csproj", "{B01F9460-02D6-4295-8773-596E5E2671D9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KnowledgeSpreadSystem.Models", "KnowledgeSpreadSystem.Models\KnowledgeSpreadSystem.Models.csproj", "{3CCFBE1D-2AD4-422A-B72E-2FA04ECC07A9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KnowledgeSpreadSystem.Web", "KnowledgeSpreadSystem.Web\KnowledgeSpreadSystem.Web.csproj", "{5803BD6B-8C24-49CF-966F-988F9D420CD5}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KnowledgeSpreadSystem.Web.Tests", "KnowledgeSpreadSystem.Web.Tests\KnowledgeSpreadSystem.Web.Tests.csproj", "{B381A4B6-8C21-4FAB-BC5B-9BFED9AE78B9}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{B01F9460-02D6-4295-8773-596E5E2671D9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B01F9460-02D6-4295-8773-596E5E2671D9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B01F9460-02D6-4295-8773-596E5E2671D9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B01F9460-02D6-4295-8773-596E5E2671D9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3CCFBE1D-2AD4-422A-B72E-2FA04ECC07A9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3CCFBE1D-2AD4-422A-B72E-2FA04ECC07A9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3CCFBE1D-2AD4-422A-B72E-2FA04ECC07A9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3CCFBE1D-2AD4-422A-B72E-2FA04ECC07A9}.Release|Any CPU.Build.0 = Release|Any CPU
 		{5803BD6B-8C24-49CF-966F-988F9D420CD5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{5803BD6B-8C24-49CF-966F-988F9D420CD5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5803BD6B-8C24-49CF-966F-988F9D420CD5}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -32,14 +40,6 @@ Global
 		{B381A4B6-8C21-4FAB-BC5B-9BFED9AE78B9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B381A4B6-8C21-4FAB-BC5B-9BFED9AE78B9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B381A4B6-8C21-4FAB-BC5B-9BFED9AE78B9}.Release|Any CPU.Build.0 = Release|Any CPU
-		{3CCFBE1D-2AD4-422A-B72E-2FA04ECC07A9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{3CCFBE1D-2AD4-422A-B72E-2FA04ECC07A9}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{3CCFBE1D-2AD4-422A-B72E-2FA04ECC07A9}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{3CCFBE1D-2AD4-422A-B72E-2FA04ECC07A9}.Release|Any CPU.Build.0 = Release|Any CPU
-		{B01F9460-02D6-4295-8773-596E5E2671D9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{B01F9460-02D6-4295-8773-596E5E2671D9}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{B01F9460-02D6-4295-8773-596E5E2671D9}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{B01F9460-02D6-4295-8773-596E5E2671D9}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

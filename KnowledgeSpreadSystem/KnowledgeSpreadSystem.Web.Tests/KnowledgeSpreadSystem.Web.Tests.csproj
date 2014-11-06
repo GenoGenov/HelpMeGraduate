@@ -94,7 +94,7 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\HelpMeGraduate.Web\KnowledgeSpreadSystem.Web.csproj">
+    <ProjectReference Include="..\KnowledgeSpreadSystem.Web\KnowledgeSpreadSystem.Web.csproj">
       <Project>{5803BD6B-8C24-49CF-966F-988F9D420CD5}</Project>
       <Name>KnowledgeSpreadSystem.Web</Name>
     </ProjectReference>
