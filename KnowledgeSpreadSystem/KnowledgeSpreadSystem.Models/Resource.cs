@@ -33,5 +33,8 @@
 
         [Required]
         public ResourceType ResourceType { get; set; }
+
+        [Required]
+        public byte[] Content { get; set; }
     }
 }

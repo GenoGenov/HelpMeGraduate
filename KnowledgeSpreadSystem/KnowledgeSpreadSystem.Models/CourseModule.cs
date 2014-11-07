@@ -34,9 +34,9 @@ namespace KnowledgeSpreadSystem.Models
         public DateTime End { get; set; }
 
         [Required]
-        public string LecturerId { get; set; }
-
-        public virtual User Lecturer { get; set; }
+        [MinLength(5)]
+        [MaxLength(50)]
+        public string Lecturer { get; set; }
 
         public virtual ICollection<CalendarEvent> Events
         {

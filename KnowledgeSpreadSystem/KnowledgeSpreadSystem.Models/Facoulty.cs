@@ -16,7 +16,7 @@
         [Required]
         [MinLength(3)]
         [MaxLength(100)]
-        public int Name { get; set; }
+        public string Name { get; set; }
 
         [Required]
         public int UniversityId { get; set; }
