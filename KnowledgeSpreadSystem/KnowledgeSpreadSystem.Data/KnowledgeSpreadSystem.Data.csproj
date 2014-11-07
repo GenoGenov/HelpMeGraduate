@@ -57,6 +57,7 @@
     <Compile Include="KSSData.cs" />
     <Compile Include="IKSSData.cs" />
     <Compile Include="KSSDBContext.cs" />
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositories\EFRepository.cs" />
     <Compile Include="Repositories\IRepository.cs" />

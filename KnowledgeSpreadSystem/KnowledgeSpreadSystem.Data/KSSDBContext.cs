@@ -2,6 +2,7 @@
 {
     using System.Data.Entity;
 
+    using KnowledgeSpreadSystem.Data.Migrations;
     using KnowledgeSpreadSystem.Models;
 
     using Microsoft.AspNet.Identity.EntityFramework;
@@ -11,6 +12,7 @@
         public KSSDBContext()
             : base("DefaultConnection", throwIfV1Schema: false)
         {
+            Database.SetInitializer(new MigrateDatabaseToLatestVersion<KSSDBContext,Configuration>());
         }
 
         public static KSSDBContext Create()
