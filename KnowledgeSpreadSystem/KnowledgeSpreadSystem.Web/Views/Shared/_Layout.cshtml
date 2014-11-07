@@ -6,7 +6,7 @@
     <title>@ViewBag.Title - Help Me Graduate</title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
-    <link href="~/Content/themes/base/all.css" rel="stylesheet" />
+    @RenderSection("styles",false)
 
 </head>
 <body>
@@ -30,14 +30,14 @@
             </div>
         </div>
     </div>
-    <div class="container body-content">
+    <div class="container-fluid body-content">
         @if (TempData["notification"] != null)
         {
             <div class="notificator" data-msg="@TempData["notification"]" data-type="@TempData["type"]"></div>
         }
         @RenderBody()
         <hr />
-        <footer class="text-center">
+        <footer class="text-center" id="main-footer">
             <strong>
                 &copy; @DateTime.Now.Year - <a href="http://telerikacademy.com">Telerik Academy</a>. Author: Geno Genov
             </strong>

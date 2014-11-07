@@ -2,8 +2,22 @@
 {
     using System.Web.Mvc;
 
-    public class HomeController : Controller
+    using KnowledgeSpreadSystem.Data;
+
+    using ProjectGallery.Data;
+
+    public class HomeController : BaseController
     {
+        public HomeController(IKSSData data)
+            : base(data)
+        {
+        }
+
+        public HomeController():base(new KSSData())
+        {
+            
+        }
+
         public ActionResult Index()
         {
             return this.View();

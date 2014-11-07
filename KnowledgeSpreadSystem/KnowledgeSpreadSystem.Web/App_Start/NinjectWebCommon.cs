@@ -1,9 +1,7 @@
-using KnowledgeSpreadSystem.Web;
+[assembly: WebActivatorEx.PreApplicationStartMethod(typeof(KnowledgeSpreadSystem.Web.App_Start.NinjectWebCommon), "Start")]
+[assembly: WebActivatorEx.ApplicationShutdownMethodAttribute(typeof(KnowledgeSpreadSystem.Web.App_Start.NinjectWebCommon), "Stop")]
 
-[assembly: WebActivatorEx.PreApplicationStartMethod(typeof(NinjectWebCommon), "Start")]
-[assembly: WebActivatorEx.ApplicationShutdownMethodAttribute(typeof(NinjectWebCommon), "Stop")]
-
-namespace KnowledgeSpreadSystem.Web
+namespace KnowledgeSpreadSystem.Web.App_Start
 {
     using System;
     using System.Web;
