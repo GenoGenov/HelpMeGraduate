@@ -4,12 +4,17 @@
 namespace KnowledgeSpreadSystem.Web.App_Start
 {
     using System;
+    using System.Data.Entity;
     using System.Web;
+
+    using KnowledgeSpreadSystem.Data;
 
     using Microsoft.Web.Infrastructure.DynamicModuleHelper;
 
     using Ninject;
     using Ninject.Web.Common;
+
+    using ProjectGallery.Data;
 
     public static class NinjectWebCommon 
     {
@@ -61,6 +66,8 @@ namespace KnowledgeSpreadSystem.Web.App_Start
         /// <param name="kernel">The kernel.</param>
         private static void RegisterServices(IKernel kernel)
         {
+            kernel.Bind<DbContext>().To<KSSDBContext>();
+            kernel.Bind<IKSSData>().To<KSSData>();
         }        
     }
 }

@@ -1,8 +1,12 @@
 ﻿namespace KnowledgeSpreadSystem.Web.Controllers
 {
+    using System.Linq;
     using System.Web.Mvc;
 
+    using AutoMapper.QueryableExtensions;
+
     using KnowledgeSpreadSystem.Data;
+    using KnowledgeSpreadSystem.Web.Models;
 
     using ProjectGallery.Data;
 
@@ -23,17 +27,11 @@
             return this.View();
         }
 
-        public ActionResult About()
+        [ChildActionOnly]
+        public ActionResult Links()
         {
-            this.ViewBag.Message = "Your application description page.";
-            return this.View();
-        }
-
-        public ActionResult Contact()
-        {
-            this.ViewBag.Message = "Your contact page.";
-
-            return this.View();
+            var universities = this.Data.Universities.All().Project().To<UniversityViewModel>().ToList();
+            return this.PartialView("_LinksPartial",universities);
         }
     }
 }
