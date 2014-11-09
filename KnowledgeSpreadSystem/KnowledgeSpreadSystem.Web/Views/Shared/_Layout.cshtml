@@ -10,7 +10,7 @@
 
 </head>
 <body>
-    <div class="navbar navbar-inverse navbar-fixed-top">
+    <div class="navbar navbar-default">
         <div class="container">
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
@@ -22,20 +22,41 @@
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    @{ Html.RenderAction("Links", "Home", null); }
+                    @{ Html.RenderAction("UniversityLinks","Menu"); }
                   
                 </ul>
                 @Html.Partial("_LoginPartial")
             </div>
         </div>
     </div>
-    <br/>
     <div class="container-fluid body-content">
         @if (TempData["notification"] != null)
         {
             <div class="notificator" data-msg="@TempData["notification"]" data-type="@TempData["type"]"></div>
         }
-        @RenderBody()
+        @if (Request.IsAuthenticated)
+        {
+            <div class="row">
+                <div class="col-md-10">@RenderBody()</div>
+                <div class="col-md-2" id="chat">
+                    <div class="panel panel-default">
+                        <div class="panel-heading text-center">
+                            <h2>Chat</h2>
+
+                        </div>
+                        <div class="panel-body">
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+        else
+        {
+            @RenderBody()
+        }
+        
+        
         <hr />
         <footer class="text-center" id="main-footer">
             <strong>

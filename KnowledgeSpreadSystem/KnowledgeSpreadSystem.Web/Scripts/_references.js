@@ -30,3 +30,4 @@
 /// <reference path="noty/layouts/topright.js" />
 /// <reference path="noty/themes/bootstrap.js" />
 /// <reference path="noty/themes/default.js" />
+/// <reference path="jquery.unobtrusive-ajax.min.js" />

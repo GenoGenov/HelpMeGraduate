@@ -21,7 +21,7 @@ namespace ProjectGallery.Data
 
         IRepository<CourseModule> CourseModules { get; }
 
-        IRepository<Facoulty> Facoulties { get; }
+        IRepository<Faculty> Faculties { get; }
 
         IRepository<Resource> Recourses { get; }
  

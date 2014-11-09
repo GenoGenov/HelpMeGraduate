@@ -66,11 +66,11 @@
             }
         }
 
-        public IRepository<Facoulty> Facoulties
+        public IRepository<Faculty> Faculties
         {
             get
             {
-                return this.GetRepository<Facoulty>();
+                return this.GetRepository<Faculty>();
             }
         }
 

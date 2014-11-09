@@ -23,8 +23,8 @@
         public string Name { get; set; }
 
         [Required]
-        [MinLength(10)]
-        [MaxLength(700)]
+        [MinLength(5)]
+        [MaxLength(400)]
         public string Description { get; set; }
 
         public virtual ICollection<CalendarEvent> Events
@@ -43,9 +43,9 @@
         public int Year { get; set; }
 
         [Required]
-        public int FacoultyId { get; set; }
+        public int FacultyId { get; set; }
 
-        public virtual Facoulty Facoulty { get; set; }
+        public virtual Faculty Faculty { get; set; }
 
         public virtual ICollection<CourseModule> CourseModules
         {
@@ -58,5 +58,12 @@
                 this.courseModules = value;
             }
         }
+
+        [Required]
+        public string ModeratorId { get; set; }
+
+        public User Moderator { get; set; }
+
+
     }
 }

@@ -6,6 +6,7 @@
     using AutoMapper.QueryableExtensions;
 
     using KnowledgeSpreadSystem.Data;
+    using KnowledgeSpreadSystem.Web.Infrastructure;
     using KnowledgeSpreadSystem.Web.Models;
 
     using ProjectGallery.Data;
@@ -27,11 +28,6 @@
             return this.View();
         }
 
-        [ChildActionOnly]
-        public ActionResult Links()
-        {
-            var universities = this.Data.Universities.All().Project().To<UniversityViewModel>().ToList();
-            return this.PartialView("_LinksPartial",universities);
-        }
+        
     }
 }

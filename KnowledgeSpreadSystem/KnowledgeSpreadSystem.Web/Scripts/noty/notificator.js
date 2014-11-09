@@ -5,5 +5,4 @@
         $target.removeAttr('data-msg');
         $target.removeAttr('data-type');
     }
-
 });

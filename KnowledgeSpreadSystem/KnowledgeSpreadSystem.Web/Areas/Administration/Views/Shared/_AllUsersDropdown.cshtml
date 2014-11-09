@@ -1,0 +1,3 @@
+﻿@model IList<KnowledgeSpreadSystem.Web.Areas.Administration.Models.UserViewModel>
+
+@Html.DropDownList("Moderator", Model.Select(x => new SelectListItem() { Text = x.Username, Value = x.Id.ToString() }))

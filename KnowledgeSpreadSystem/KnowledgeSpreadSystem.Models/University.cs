@@ -7,18 +7,18 @@
     {
         private ICollection<CalendarEvent> events;
 
-        private ICollection<Facoulty> facoulties;
+        private ICollection<Faculty> faculties;
  
         public University()
         {
-            this.events=new HashSet<CalendarEvent>();
-            this.facoulties=new HashSet<Facoulty>();
+            this.events = new HashSet<CalendarEvent>();
+            this.faculties = new HashSet<Faculty>();
         }
 
         public int Id { get; set; }
 
         [Required]
-        [MinLength(5)]
+        [MinLength(3)]
         [MaxLength(30)]
         public string Name { get; set; }
 
@@ -38,15 +38,15 @@
         [MaxLength(700)]
         public string About { get; set; }
 
-        public virtual ICollection<Facoulty> Facoulties
+        public virtual ICollection<Faculty> Faculties
         {
             get
             {
-                return this.facoulties;
+                return this.faculties;
             }
             set
             {
-                this.facoulties = value;
+                this.faculties = value;
             }
         }
     }

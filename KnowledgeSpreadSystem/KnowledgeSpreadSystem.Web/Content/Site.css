@@ -1,13 +1,4 @@
-﻿body {
-    padding-top: 50px;
-    padding-bottom: 20px;
-}
-
-/* Set padding to keep content from hitting the edges */
-.body-content {
-}
-
-/* Override the default bootstrap behavior where horizontal description lists 
+﻿/* Override the default bootstrap behavior where horizontal description lists 
    will truncate terms that are too long to fit in the left column 
 */
 .dl-horizontal dt {
@@ -31,14 +22,14 @@ textarea {
     height: 100%;
 }
 
-.flexslider .slides {
-    height: 100% !important;
-}
+    .flexslider .slides {
+        height: 100% !important;
+    }
 
-.flexslider .slides li {
-    position: relative;
-    height: 100%;
-}
+        .flexslider .slides li {
+            position: relative;
+            height: 100%;
+        }
 
 .flex-viewport {
     position: relative;
@@ -47,4 +38,39 @@ textarea {
 
 #flex-container {
     height: 500px;
+}
+
+.equal, .equal > div[class*='col-'] {
+    display: -webkit-box;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+    flex: 1 1 auto;
+    background: transparent;
+}
+
+#chat {
+    position: fixed;
+}
+
+    #chat, #chat div.panel {
+        right: 2px;
+        height: 97%;
+    }
+
+        #chat div.panel {
+            width: 97%;
+        }
+
+.blue-background {
+    background-color: #70a0d4;
+}
+
+.vanilla-background {
+    background-color: #eeb56f;
+}
+
+.centered {
+    padding: 20px 20px;
 }

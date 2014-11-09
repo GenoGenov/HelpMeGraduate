@@ -19,11 +19,11 @@ namespace KnowledgeSpreadSystem.Models
         public int Id { get; set; }
 
         [Required]
-        [MinLength(5)]
+        [MinLength(3)]
         [MaxLength(100)]
         public string Name { get; set; }
 
-        [MinLength(10)]
+        [MinLength(5)]
         [MaxLength(500)]
         public string Description { get; set; }
 
@@ -38,6 +38,11 @@ namespace KnowledgeSpreadSystem.Models
         [MaxLength(50)]
         public string Lecturer { get; set; }
 
+        [Required]
+        public int CourseId { get; set; }
+
+        public virtual Course Course { get; set; }
+
         public virtual ICollection<CalendarEvent> Events
         {
             get
@@ -50,6 +55,10 @@ namespace KnowledgeSpreadSystem.Models
             }
         }
 
+        [Required]
+        public string ModeratorId { get; set; }
+
+        public User Moderator { get; set; }
 
     }
 }

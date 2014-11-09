@@ -1,0 +1,57 @@
+﻿@using Kendo.Mvc.UI
+@using KnowledgeSpreadSystem.Web.Areas.Administration.Models
+<div class="col-md-12">
+    @(Html.Kendo()
+          .Grid<FacultyViewModel>()
+          .Name("grid-faculties")
+          .ToolBar(tool =>
+                       {
+                           tool.Create();
+                       })
+          .Columns(columns =>
+                       {
+                           columns.Bound(model => model.Name);
+                           columns.Bound(model => model.Description);
+                           columns.Bound(model => model.University);
+                           columns.Command(command =>
+                                               {
+                                                   command.Edit();
+                                                   command.Destroy();
+                                               });
+                       })
+
+          .Pageable(page =>
+                        {
+                            page.PreviousNext(true);
+                            page.Numeric(true);
+                        })
+          .Sortable(sort =>
+                        {
+                            sort.AllowUnsort(true);
+                            sort.SortMode(GridSortMode.SingleColumn);
+                        })
+          .Groupable()
+          .Filterable()
+          .Resizable(resize => resize.Columns(true))
+          .Navigatable()
+          .Editable(edit =>
+                        {
+                            edit.Mode(GridEditMode.PopUp);
+                        })
+          .Selectable(select => select.Mode(GridSelectionMode.Multiple).Type(GridSelectionType.Cell))
+          .DataSource(data => data.Ajax()
+                                  .Model(m => m.Id(b => b.Id))
+                                  .PageSize(10)
+                                  .ServerOperation(true)
+                                  .Create("CreateFaculty", "Faculties")
+                                  .Read("AllFaculties", "Faculties")
+                                  .Update("UpdateFaculty", "Faculties")
+                                  .Destroy("DeleteFaculty", "Faculties")
+                                  .Events(events =>
+                                      {
+                                          events.RequestEnd("onRequestEnd");
+                                          events.Error("handleError");
+                                      }))
+
+          .Resizable(x => { x.Columns(true); }))
+</div>

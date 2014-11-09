@@ -4,7 +4,7 @@
         theme: 'bootstrap',
         type: 'alert',
         text: '', // can be html or string
-        dismissQueue: false, // If you want to use queue feature set this true
+        dismissQueue: true, // If you want to use queue feature set this true
         template: '<div class="noty_message"><span class="noty_text lead"></span><div class="noty_close"></div></div>',
         animation: {
             open: { height: 'toggle' },

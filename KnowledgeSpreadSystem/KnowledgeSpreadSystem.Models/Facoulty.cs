@@ -3,12 +3,13 @@
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
 
-    public class Facoulty
+    public class Faculty
     {
-        private ICollection<Course> courses; 
-        public Facoulty()
+        private ICollection<Course> courses;
+
+        public Faculty()
         {
-            this.courses=new HashSet<Course>();
+            this.courses = new HashSet<Course>();
         }
 
         public int Id { get; set; }

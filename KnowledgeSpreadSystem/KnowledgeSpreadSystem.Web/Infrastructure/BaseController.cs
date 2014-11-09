@@ -1,11 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.Mvc;
-
-namespace KnowledgeSpreadSystem.Web.Controllers
+﻿namespace KnowledgeSpreadSystem.Web.Infrastructure
 {
+    using System.Web.Mvc;
+
     using KnowledgeSpreadSystem.Models;
 
     using Microsoft.AspNet.Identity;
@@ -25,8 +21,14 @@ namespace KnowledgeSpreadSystem.Web.Controllers
         {
             get
             {
-                return Data.Users.Find(User.Identity.GetUserId());
+                return this.Data.Users.Find(this.User.Identity.GetUserId());
             }
+        }
+
+        protected void AddNotification(string notification, string type)
+        {
+            TempData["notification"] = notification;
+            TempData["type"] = type;
         }
     }
 }

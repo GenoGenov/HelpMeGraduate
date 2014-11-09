@@ -1,0 +1,54 @@
+﻿<div class="col-lg-4 centered">
+    <div class="panel panel-default text-center">
+        <h1>
+            @Ajax.ActionLink("Create Resource", "CreateResource", "Resources",
+                             new AjaxOptions()
+                                 {
+                                     AllowCache = false,
+                                     InsertionMode = InsertionMode.Replace,
+                                     UpdateTargetId = "ajax-admin-content",
+                                     LoadingElementId = "ajax-loading",
+                                 })
+        </h1>
+        
+        <div class="panel-body">
+            Add resource to Course or to Module
+        </div>
+    </div>
+</div>
+<div class="col-lg-4 centered">
+    <div class="panel panel-default text-center">
+        <h1>
+            @Ajax.ActionLink("Delete Resource", "DeleteResource", "Resources",
+                             new AjaxOptions()
+                                 {
+                                     AllowCache = false,
+                                     InsertionMode = InsertionMode.Replace,
+                                     UpdateTargetId = "ajax-admin-content",
+                                     LoadingElementId = "ajax-loading",
+                                 })
+        </h1>
+        <div class="panel-body">
+            Remove Resource from Course or Module
+        </div>
+    </div>
+    
+</div>
+<div class="col-lg-4 centered">
+    <div class="panel panel-default text-center">
+        <h1>
+            @Ajax.ActionLink("Manage Resources", "AllResources", "Resources",
+                    new AjaxOptions()
+                        {
+                            AllowCache = false,
+                            InsertionMode = InsertionMode.Replace,
+                            UpdateTargetId = "ajax-admin-content",
+                            LoadingElementId = "ajax-loading",
+                        })
+        </h1>
+        <div class="panel-body">
+            View and edit all resources
+        </div>
+    </div>
+    
+</div>

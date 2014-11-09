@@ -1,0 +1,43 @@
+﻿@model KnowledgeSpreadSystem.Web.Areas.Administration.Models.UserViewModel
+
+<div class="col-lg-6 centered">
+    <div class="row">
+        <h3>Search by Username</h3>
+        @using (Ajax.BeginForm("SearchByUsername", "Users", new AjaxOptions()
+                                                                {
+                                                                    AllowCache = false,
+                                                                    HttpMethod = "Post",
+                                                                    InsertionMode = InsertionMode.Replace,
+                                                                    UpdateTargetId = "ajax-user-search-results",
+                                                                    LoadingElementId = "ajax-loading",
+                                                                }, new { @class = "form-inline" }))
+        {
+            @Html.AntiForgeryToken()
+            @Html.EditorFor(x => x.Username, new { htmlAttributes = new { @class = "form-control", placeholder = "Username" } })
+            <input type="submit" class="btn btn-success" value="Search" />
+
+        }
+    </div>
+    <div class="row" id="ajax-user-search-results">
+
+    </div>
+    
+</div>
+<div class="col-lg-6 centered">
+    <div class="panel panel-default text-center">
+        <h1>
+            @Ajax.ActionLink("All Users", "AllUsers", "Users",
+                             new AjaxOptions()
+                                 {
+                                     AllowCache = false,
+                                     InsertionMode = InsertionMode.Replace,
+                                     UpdateTargetId = "ajax-admin-content",
+                                     LoadingElementId = "ajax-loading",
+                                 })
+        </h1>
+        <div class="panel-body">
+            Manage All Users
+        </div>
+    </div>
+
+</div>

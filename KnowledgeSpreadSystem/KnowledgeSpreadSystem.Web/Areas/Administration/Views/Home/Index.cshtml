@@ -1,0 +1,131 @@
+﻿@{
+    Layout = "~/Areas/Administration/Views/Shared/_EqualBoxes.cshtml";
+}
+<div class="row equal">
+    <div class="col-lg-4">
+        <div class="panel panel-success centered">
+            <div class="panel-default text-center">
+                <h1>
+                    @Ajax.ActionLink("Manage Users", "Index", "Users",
+                                     new AjaxOptions()
+                                         {
+                                             AllowCache = false,
+                                             InsertionMode = InsertionMode.Replace,
+                                             UpdateTargetId = "ajax-admin-content",
+                                             LoadingElementId = "ajax-loading",
+                                         })
+                </h1>
+
+            </div>
+            <div class="panel-body">
+                Full control over user accounts, including rights changing and deletion.
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-4">
+        <div class="panel panel-success centered">
+            <div class="panel-default text-center">
+                <h1>
+                    @Ajax.ActionLink("Manage Universities", "Index", "Universities",
+                                     new AjaxOptions()
+                                         {
+                                             AllowCache = false,
+                                             InsertionMode = InsertionMode.Replace,
+                                             UpdateTargetId = "ajax-admin-content",
+                                             LoadingElementId = "ajax-loading",
+                                         })
+                </h1>
+
+            </div>
+            <div class="panel-body">
+                Create/Edit/Delete/Review Universities
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-4">
+        <div class="panel panel-success centered">
+            <div class="panel-default text-center">
+                <h1>
+                    @Ajax.ActionLink("Manage Resources", "Index", "Resources",
+                                     new AjaxOptions()
+                                         {
+                                             AllowCache = false,
+                                             InsertionMode = InsertionMode.Replace,
+                                             UpdateTargetId = "ajax-admin-content",
+                                             LoadingElementId = "ajax-loading",
+                                         })
+                </h1>
+
+            </div>
+            <div class="panel-body">
+                Full control over resources, uploaded for a course or a module.
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row equal">
+    <div class="col-lg-4">
+        <div class="panel panel-success centered">
+            <div class="panel-default text-center">
+                <h1>
+                    @Ajax.ActionLink("Manage Faculties", "Index", "Faculties",
+                                     new AjaxOptions()
+                                         {
+                                             AllowCache = false,
+                                             InsertionMode = InsertionMode.Replace,
+                                             UpdateTargetId = "ajax-admin-content",
+                                             LoadingElementId = "ajax-loading",
+                                         })
+                </h1>
+
+            </div>
+            <div class="panel-body">
+                Create/Edit/Delete/Review Faculties
+            </div>
+        </div>
+    </div>
+    
+    <div class="col-lg-4">
+        <div class="panel panel-success centered">
+            <div class="panel-default text-center">
+                <h1>
+                    @Ajax.ActionLink("Manage Courses", "Index", "Courses",
+                                     new AjaxOptions()
+                                         {
+                                             AllowCache = false,
+                                             InsertionMode = InsertionMode.Replace,
+                                             UpdateTargetId = "ajax-admin-content",
+                                             LoadingElementId = "ajax-loading",
+                                         })
+                </h1>
+
+            </div>
+            <div class="panel-body">
+                Create/Edit/Delete/Review Courses
+            </div>
+        </div>
+    </div>
+    
+    <div class="col-lg-4">
+        <div class="panel panel-success centered">
+            <div class="panel-default text-center">
+                <h1>
+                    @Ajax.ActionLink("Manage Course Modules", "Index", "CourseModules",
+                                     new AjaxOptions()
+                                         {
+                                             AllowCache = false,
+                                             InsertionMode = InsertionMode.Replace,
+                                             UpdateTargetId = "ajax-admin-content",
+                                             LoadingElementId = "ajax-loading",
+                                         })
+                </h1>
+
+            </div>
+            <div class="panel-body">
+                Create/Edit/Delete/Review Course Modules
+            </div>
+        </div>
+    </div>
+</div>
+
+

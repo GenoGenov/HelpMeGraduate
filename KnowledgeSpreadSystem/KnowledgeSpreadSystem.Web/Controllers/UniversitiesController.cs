@@ -6,6 +6,8 @@ using System.Web.Mvc;
 
 namespace KnowledgeSpreadSystem.Web.Controllers
 {
+    using KnowledgeSpreadSystem.Web.Infrastructure;
+
     using ProjectGallery.Data;
 
     [Authorize]
@@ -26,5 +28,7 @@ namespace KnowledgeSpreadSystem.Web.Controllers
         {
             return Content("");
         }
+
+
     }
 }
