@@ -4,8 +4,7 @@
     using System.Data.Entity;
     using System.Linq;
 
-    using ForumSystem.Data.Common.Models;
-
+    using KnowledgeSpreadSystem.Data.Common.Models;
     using KnowledgeSpreadSystem.Data.Migrations;
     using KnowledgeSpreadSystem.Models;
 

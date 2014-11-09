@@ -4,7 +4,7 @@
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
 
-    using ForumSystem.Data.Common.Models;
+    using KnowledgeSpreadSystem.Data.Common.Models;
 
     public class Faculty : AuditInfo, IDeletableEntity
     {

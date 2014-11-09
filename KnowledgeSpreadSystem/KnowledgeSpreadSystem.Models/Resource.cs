@@ -3,8 +3,7 @@
     using System;
     using System.ComponentModel.DataAnnotations;
 
-    using ForumSystem.Data.Common.Models;
-
+    using KnowledgeSpreadSystem.Data.Common.Models;
     using KnowledgeSpreadSystem.Models.Enums;
 
     public class Resource : AuditInfo, IDeletableEntity

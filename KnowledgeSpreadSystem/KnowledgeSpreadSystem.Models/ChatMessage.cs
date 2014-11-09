@@ -8,7 +8,7 @@ namespace KnowledgeSpreadSystem.Models
 {
     using System.ComponentModel.DataAnnotations;
 
-    using ForumSystem.Data.Common.Models;
+    using KnowledgeSpreadSystem.Data.Common.Models;
 
     public class ChatMessage : AuditInfo, IDeletableEntity
     {

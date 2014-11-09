@@ -4,9 +4,7 @@
     using System.Collections.Generic;
     using System.Data.Entity;
 
-    using ForumSystem.Data.Common.Models;
-    using ForumSystem.Data.Common.Repository;
-
+    using KnowledgeSpreadSystem.Data.Common.Models;
     using KnowledgeSpreadSystem.Data.Common.Repositories;
     using KnowledgeSpreadSystem.Models;
 

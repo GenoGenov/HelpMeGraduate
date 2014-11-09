@@ -5,7 +5,7 @@
     using System.Security.Claims;
     using System.Threading.Tasks;
 
-    using ForumSystem.Data.Common.Models;
+    using KnowledgeSpreadSystem.Data.Common.Models;
 
     using Microsoft.AspNet.Identity;
     using Microsoft.AspNet.Identity.EntityFramework;
