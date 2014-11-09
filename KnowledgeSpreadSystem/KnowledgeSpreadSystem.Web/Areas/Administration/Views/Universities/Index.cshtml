@@ -2,7 +2,7 @@
 @using KnowledgeSpreadSystem.Web.Areas.Administration.Models
 <div class="col-md-12">
     @(Html.Kendo()
-          .Grid<UserViewModel>()
+          .Grid<UniversityViewModel>()
           .Name("grid-universities")
           .ToolBar(tool =>
                        {
@@ -10,9 +10,8 @@
                        })
           .Columns(columns =>
                        {
-                           columns.Bound(model => model.Username);
-                           columns.Bound(model => model.Email);
-                           columns.Bound(model=>model.)
+                           columns.Bound(model => model.Name);
+                           columns.Bound(model => model.About);
                            columns.Command(command =>
                                                {
                                                    command.Edit();

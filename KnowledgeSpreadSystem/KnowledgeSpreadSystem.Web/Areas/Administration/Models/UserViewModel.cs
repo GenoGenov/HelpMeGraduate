@@ -23,16 +23,17 @@ namespace KnowledgeSpreadSystem.Web.Areas.Administration.Models
 
         public string Email { get; set; }
 
-        public ICollection<CourseViewModel> ModeratorForCourses { get; set; }
+        //public IList<CourseViewModel> Courses { get; set; }
 
-        public ICollection<CourseModuleViewModel> ModeratorForModules { get; set; }
+        //public IList<CourseModuleViewModel> CourseModules { get; set; }
 
         public void CreateMappings(IConfiguration configuration)
         {
+
             //configuration.CreateMap<User, UserViewModel>()
             //             .ForMember(
-            //                        x => x.ModeratorForCourses,
-            //                        opt => opt.MapFrom(y => y.Courses.AsQueryable().Project().To<CourseViewModel>()));
+            //                        x => x.Courses,
+            //                        opt => opt.MapFrom(y => y.Courses));
             //configuration.CreateMap<User, UserViewModel>()
             //             .ForMember(
             //                        x => x.ModeratorForModules,

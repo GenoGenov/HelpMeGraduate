@@ -10,10 +10,9 @@ namespace KnowledgeSpreadSystem.Web.Controllers
 
     using AutoMapper.QueryableExtensions;
 
+    using KnowledgeSpreadSystem.Data;
     using KnowledgeSpreadSystem.Web.Infrastructure;
     using KnowledgeSpreadSystem.Web.Models;
-
-    using ProjectGallery.Data;
 
     public class MenuController : BaseController
     {

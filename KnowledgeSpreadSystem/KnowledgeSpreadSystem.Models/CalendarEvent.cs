@@ -3,7 +3,9 @@
     using System;
     using System.ComponentModel.DataAnnotations;
 
-    public class CalendarEvent
+    using ForumSystem.Data.Common.Models;
+
+    public class CalendarEvent : AuditInfo, IDeletableEntity
     {
         public int Id { get; set; }
 
@@ -37,5 +39,9 @@
         public int UniversityId { get; set; }
 
         public virtual University University { get; set; }
+
+        public bool IsDeleted { get; set; }
+
+        public DateTime? DeletedOn { get; set; }
     }
 }

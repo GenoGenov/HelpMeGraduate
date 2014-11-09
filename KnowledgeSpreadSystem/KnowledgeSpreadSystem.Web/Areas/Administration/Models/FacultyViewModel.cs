@@ -25,14 +25,14 @@
         public string Description { get; set; }
 
         [UIHint("UniversitiesEditor")]
-        public string University { get; set; }
+        public UniversityViewModel University { get; set; }
 
         public void CreateMappings(IConfiguration configuration)
         {
-            configuration.CreateMap<Faculty, FacultyViewModel>()
-                         .ForMember(
-                                    x => x.University,
-                                    opt => opt.MapFrom(y => y.University.Name));
+            //configuration.CreateMap<Faculty, FacultyViewModel>()
+            //             .ForMember(
+            //                        x => x.University,
+            //                        opt => opt.MapFrom(y => y.University.Name));
         }
     }
 }

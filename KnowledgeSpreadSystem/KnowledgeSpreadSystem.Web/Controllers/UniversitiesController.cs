@@ -6,9 +6,8 @@ using System.Web.Mvc;
 
 namespace KnowledgeSpreadSystem.Web.Controllers
 {
+    using KnowledgeSpreadSystem.Data;
     using KnowledgeSpreadSystem.Web.Infrastructure;
-
-    using ProjectGallery.Data;
 
     [Authorize]
     public class UniversitiesController : BaseController

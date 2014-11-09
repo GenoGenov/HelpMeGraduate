@@ -6,14 +6,16 @@ using System.Web;
 namespace KnowledgeSpreadSystem.Web.Areas.Administration.Models
 {
     using System.ComponentModel.DataAnnotations;
+    using System.ComponentModel.DataAnnotations.Schema;
     using System.Web.Mvc;
 
     using AutoMapper;
+    using AutoMapper.QueryableExtensions;
 
     using KnowledgeSpreadSystem.Models;
     using KnowledgeSpreadSystem.Web.Infrastructure.Mapping;
 
-    public class CourseViewModel : IMapFrom<Course>, IHaveCustomMappings
+    public class CourseViewModel : IMapFrom<Course>
     {
         [HiddenInput]
         public int Id { get; set; }
@@ -31,32 +33,11 @@ namespace KnowledgeSpreadSystem.Web.Areas.Administration.Models
         [Required]
         public int Year { get; set; }
 
-        [Required]
         [UIHint("UsersEditor")]
-        public string Moderator { get; set; }
+        public IList<UserViewModel> Moderators { get; set; }
 
         [Required]
         [UIHint("FacultiesEditor")]
-        public string Faculty { get; set; }
-
-        public string University { get; set; }
-
-        public void CreateMappings(IConfiguration configuration)
-        {
-            configuration.CreateMap<Course, CourseViewModel>()
-                         .ForMember(
-                                    x => x.Moderator,
-                                    opt => opt.MapFrom(y => y.Moderator.UserName));
-
-            configuration.CreateMap<Course, CourseViewModel>()
-                         .ForMember(
-                                    x => x.Faculty,
-                                    opt => opt.MapFrom(y => y.Faculty.Name));
-
-            configuration.CreateMap<Course, CourseViewModel>()
-                         .ForMember(
-                                    x => x.University,
-                                    opt => opt.MapFrom(y => y.Faculty.University.Name));
-        }
+        public FacultyViewModel Faculty { get; set; }
     }
 }

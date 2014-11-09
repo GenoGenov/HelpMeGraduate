@@ -8,7 +8,9 @@ namespace KnowledgeSpreadSystem.Models
 {
     using System.ComponentModel.DataAnnotations;
 
-    public class ChatMessage
+    using ForumSystem.Data.Common.Models;
+
+    public class ChatMessage : AuditInfo, IDeletableEntity
     {
         public int Id { get; set; }
 
@@ -27,5 +29,9 @@ namespace KnowledgeSpreadSystem.Models
 
         [Required]
         public DateTime CreatedOn { get; set; }
+
+        public bool IsDeleted { get; set; }
+
+        public DateTime? DeletedOn { get; set; }
     }
 }

@@ -3,8 +3,10 @@
     using System;
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
+    using System.Linq;
 
     using AutoMapper;
+    using AutoMapper.QueryableExtensions;
 
     using KnowledgeSpreadSystem.Models;
     using KnowledgeSpreadSystem.Web.Infrastructure.Mapping;
@@ -36,25 +38,20 @@
         [MaxLength(50)]
         public string Lecturer { get; set; }
 
-        [Required]
         [UIHint("UsersEditor")]
-        public string Moderator { get; set; }
+        public IList<UserViewModel> Moderators { get; set; }
 
         [Required]
         [UIHint("CourseEditor")]
-        public string Course { get; set; }
+        public CourseViewModel Course { get; set; }
 
         public void CreateMappings(IConfiguration configuration)
         {
-            configuration.CreateMap<CourseModule, CourseModuleViewModel>()
-                         .ForMember(
-                                    x => x.Moderator,
-                                    opt => opt.MapFrom(y => y.Moderator.UserName));
 
-            configuration.CreateMap<CourseModule, CourseModuleViewModel>()
-                         .ForMember(
-                                    x => x.Course,
-                                    opt => opt.MapFrom(y => y.Course.Name));
+            //configuration.CreateMap<CourseModule, CourseModuleViewModel>()
+            //             .ForMember(
+            //                        x => x.Course,
+            //                        opt => opt.MapFrom(y => y.Course.Name));
         }
     }
 }

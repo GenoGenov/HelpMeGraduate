@@ -8,12 +8,18 @@ namespace KnowledgeSpreadSystem.Models
 {
     using System.ComponentModel.DataAnnotations;
 
-    public class CourseModule
+    using ForumSystem.Data.Common.Models;
+
+    public class CourseModule : AuditInfo, IDeletableEntity
     {
         private ICollection<CalendarEvent> events;
+
+        private ICollection<User> moderators;
+ 
         public CourseModule()
         {
-            this.events=new HashSet<CalendarEvent>();
+            this.events = new HashSet<CalendarEvent>();
+            this.moderators = new HashSet<User>();
         }
 
         public int Id { get; set; }
@@ -55,10 +61,21 @@ namespace KnowledgeSpreadSystem.Models
             }
         }
 
-        [Required]
-        public string ModeratorId { get; set; }
 
-        public User Moderator { get; set; }
+        public ICollection<User> Moderators
+        {
+            get
+            {
+                return this.moderators;
+            }
+            set
+            {
+                this.moderators = value;
+            }
+        }
 
+        public bool IsDeleted { get; set; }
+
+        public DateTime? DeletedOn { get; set; }
     }
 }

@@ -1,9 +1,12 @@
 ﻿namespace KnowledgeSpreadSystem.Models
 {
+    using System;
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
 
-    public class Faculty
+    using ForumSystem.Data.Common.Models;
+
+    public class Faculty : AuditInfo, IDeletableEntity
     {
         private ICollection<Course> courses;
 
@@ -39,5 +42,9 @@
         [MinLength(10)]
         [MaxLength(800)]
         public string Description { get; set; }
+
+        public bool IsDeleted { get; set; }
+
+        public DateTime? DeletedOn { get; set; }
     }
 }

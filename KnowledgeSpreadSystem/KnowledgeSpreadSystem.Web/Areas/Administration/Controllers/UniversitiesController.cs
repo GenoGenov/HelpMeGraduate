@@ -9,11 +9,10 @@
     using Kendo.Mvc.Extensions;
     using Kendo.Mvc.UI;
 
+    using KnowledgeSpreadSystem.Data;
     using KnowledgeSpreadSystem.Models;
     using KnowledgeSpreadSystem.Web.Areas.Administration.Models;
     using KnowledgeSpreadSystem.Web.Infrastructure;
-
-    using ProjectGallery.Data;
 
     [Authorize(Roles = "Administrator")]
     public class UniversitiesController : BaseController
@@ -108,13 +107,6 @@
             var result = this.Data.Universities.All().Project().To<UniversityViewModel>();
 
             return this.Json(result.ToDataSourceResult(request), JsonRequestBehavior.AllowGet);
-        }
-
-        [ChildActionOnly]
-        public ActionResult AllUniversitiesDropDown()
-        {
-            var result = this.Data.Universities.All().Project().To<UniversityViewModel>().ToList();
-            return this.PartialView("_AllUniversitiesDDL", result);
         }
     }
 }

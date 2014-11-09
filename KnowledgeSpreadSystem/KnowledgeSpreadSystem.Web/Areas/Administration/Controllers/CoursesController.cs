@@ -6,19 +6,20 @@ using System.Web.Mvc;
 
 namespace KnowledgeSpreadSystem.Web.Areas.Administration.Controllers
 {
+    using System.Data.Entity;
+
     using AutoMapper.QueryableExtensions;
 
     using Kendo.Mvc.Extensions;
     using Kendo.Mvc.UI;
 
+    using KnowledgeSpreadSystem.Data;
     using KnowledgeSpreadSystem.Models;
     using KnowledgeSpreadSystem.Web.Areas.Administration.Models;
     using KnowledgeSpreadSystem.Web.Infrastructure;
 
     using Microsoft.AspNet.Identity;
     using Microsoft.AspNet.Identity.EntityFramework;
-
-    using ProjectGallery.Data;
 
     public class CoursesController : BaseController
     {
@@ -32,14 +33,6 @@ namespace KnowledgeSpreadSystem.Web.Areas.Administration.Controllers
         {
             this.ViewData["faculties"] = this.Data.Faculties.All().Project().To<FacultyViewModel>();
 
-            var roleManager = new RoleManager<IdentityRole>(new RoleStore<IdentityRole>(this.Data.Context));
-            var adminRole = roleManager.Roles.First(x => x.Name == "Administrator");
-            this.ViewData["users"] =
-                this.Data.Users.All()
-                    .Where(u => u.Roles.All(r => r.RoleId != adminRole.Id))
-                    .Project()
-                    .To<UserViewModel>().ToList();
-
             if (Request.IsAjaxRequest())
             {
                 return this.PartialView();
@@ -50,7 +43,7 @@ namespace KnowledgeSpreadSystem.Web.Areas.Administration.Controllers
 
         public JsonResult AllCourses([DataSourceRequest] DataSourceRequest request)
         {
-            var result = this.Data.Courses.All().Project().To<CourseViewModel>();
+            var result = this.Data.Courses.All().Project().To<CourseViewModel>().ToList();
 
             return this.Json(result.ToDataSourceResult(request), JsonRequestBehavior.AllowGet);
         }
@@ -63,9 +56,7 @@ namespace KnowledgeSpreadSystem.Web.Areas.Administration.Controllers
                 {
                     Description = course.Description,
                     Name = course.Name,
-                    FacultyId = int.Parse(course.Faculty),
-                    Moderator = this.Data.Users.Find(course.Moderator),
-                    ModeratorId = course.Moderator,
+                    FacultyId = course.Faculty.Id,
                     Year = course.Year,
                 };
                 this.Data.Courses.Add(newCourse);
@@ -86,16 +77,14 @@ namespace KnowledgeSpreadSystem.Web.Areas.Administration.Controllers
             {
                 courseExisting.Name = course.Name;
                 courseExisting.Description = course.Description;
-                courseExisting.FacultyId = int.Parse(course.Faculty);
-                courseExisting.Moderator = this.Data.Users.Find(course.Moderator);
-                courseExisting.ModeratorId = course.Moderator;
+                courseExisting.FacultyId = course.Faculty.Id;
                 courseExisting.Year = course.Year;
                 this.Data.SaveChanges();
             }
 
             if (courseExisting == null)
             {
-                this.ModelState.AddModelError(string.Empty, "No such faculty exists!");
+                this.ModelState.AddModelError(string.Empty, "No such course exists!");
             }
 
             return this.Json(

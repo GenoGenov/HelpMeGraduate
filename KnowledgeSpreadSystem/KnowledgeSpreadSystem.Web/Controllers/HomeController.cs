@@ -9,8 +9,6 @@
     using KnowledgeSpreadSystem.Web.Infrastructure;
     using KnowledgeSpreadSystem.Web.Models;
 
-    using ProjectGallery.Data;
-
     public class HomeController : BaseController
     {
         public HomeController(IKSSData data)

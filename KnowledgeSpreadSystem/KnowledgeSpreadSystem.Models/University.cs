@@ -1,9 +1,12 @@
 ﻿namespace KnowledgeSpreadSystem.Models
 {
+    using System;
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
 
-    public class University
+    using ForumSystem.Data.Common.Models;
+
+    public class University : AuditInfo, IDeletableEntity
     {
         private ICollection<CalendarEvent> events;
 
@@ -49,5 +52,9 @@
                 this.faculties = value;
             }
         }
+
+        public bool IsDeleted { get; set; }
+
+        public DateTime? DeletedOn { get; set; }
     }
 }

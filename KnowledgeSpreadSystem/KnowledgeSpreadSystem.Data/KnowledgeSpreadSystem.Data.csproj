@@ -59,8 +59,6 @@
     <Compile Include="KSSDBContext.cs" />
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Repositories\EFRepository.cs" />
-    <Compile Include="Repositories\IRepository.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config">
@@ -69,6 +67,10 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\KnowledgeSpreadSystem.Data.Common\KnowledgeSpreadSystem.Data.Common.csproj">
+      <Project>{6DF59016-C5E9-4789-93CE-EB70B8BF5B83}</Project>
+      <Name>KnowledgeSpreadSystem.Data.Common</Name>
+    </ProjectReference>
     <ProjectReference Include="..\KnowledgeSpreadSystem.Models\KnowledgeSpreadSystem.Models.csproj">
       <Project>{3CCFBE1D-2AD4-422A-B72E-2FA04ECC07A9}</Project>
       <Name>KnowledgeSpreadSystem.Models</Name>

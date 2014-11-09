@@ -1,6 +1,10 @@
 ﻿namespace KnowledgeSpreadSystem.Data
 {
+    using System;
     using System.Data.Entity;
+    using System.Linq;
+
+    using ForumSystem.Data.Common.Models;
 
     using KnowledgeSpreadSystem.Data.Migrations;
     using KnowledgeSpreadSystem.Models;
@@ -34,13 +38,67 @@
             return new KSSDBContext();
         }
 
+        public override int SaveChanges()
+        {
+            this.ApplyAuditInfoRules();
+            this.ApplyDeletableEntityRules();
+            return base.SaveChanges();
+        }
+
+        private void ApplyAuditInfoRules()
+        {
+            // Approach via @julielerman: http://bit.ly/123661P
+            foreach (var entry in
+                this.ChangeTracker.Entries()
+                    .Where(
+                        e =>
+                        e.Entity is IAuditInfo && ((e.State == EntityState.Added) || (e.State == EntityState.Modified))))
+            {
+                var entity = (IAuditInfo)entry.Entity;
+
+                if (entry.State == EntityState.Added)
+                {
+                    if (!entity.PreserveCreatedOn)
+                    {
+                        entity.CreatedOn = DateTime.Now;
+                    }
+                }
+                else
+                {
+                    entity.ModifiedOn = DateTime.Now;
+                }
+            }
+        }
+
+        private void ApplyDeletableEntityRules()
+        {
+            // Approach via @julielerman: http://bit.ly/123661P
+            foreach (
+                var entry in
+                    this.ChangeTracker.Entries()
+                        .Where(e => e.Entity is IDeletableEntity && (e.State == EntityState.Deleted)))
+            {
+                var entity = (IDeletableEntity)entry.Entity;
+
+                entity.DeletedOn = DateTime.Now;
+                entity.IsDeleted = true;
+                entry.State = EntityState.Modified;
+            }
+        }
+
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<Faculty>().HasRequired(f => f.University).WithMany().WillCascadeOnDelete(false);
-            modelBuilder.Entity<CourseModule>().HasRequired(f => f.Course).WithMany().WillCascadeOnDelete(false);
+            modelBuilder.Entity<Faculty>()
+                        .HasRequired(f => f.University)
+                        .WithMany(n => n.Faculties).WillCascadeOnDelete(false);
+
+            modelBuilder.Entity<CourseModule>()
+                        .HasRequired(f => f.Course)
+                        .WithMany(n => n.CourseModules)
+                        .WillCascadeOnDelete(false);
+
             modelBuilder.Entity<ChatMessage>().HasRequired(m => m.Receiver).WithMany().WillCascadeOnDelete(false);
-            modelBuilder.Entity<CourseModule>().HasRequired(m => m.Moderator).WithOptional().WillCascadeOnDelete(false);
-            modelBuilder.Entity<Course>().HasRequired(m => m.Moderator).WithMany().WillCascadeOnDelete(false);
+
             base.OnModelCreating(modelBuilder);
         }
     }

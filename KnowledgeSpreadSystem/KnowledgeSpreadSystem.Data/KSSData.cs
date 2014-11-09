@@ -4,10 +4,11 @@
     using System.Collections.Generic;
     using System.Data.Entity;
 
-    using KnowledgeSpreadSystem.Data.Repositories;
-    using KnowledgeSpreadSystem.Models;
+    using ForumSystem.Data.Common.Models;
+    using ForumSystem.Data.Common.Repository;
 
-    using ProjectGallery.Data;
+    using KnowledgeSpreadSystem.Data.Common.Repositories;
+    using KnowledgeSpreadSystem.Models;
 
     public class KSSData : IKSSData
     {
@@ -30,7 +31,7 @@
 
         public DbContext Context { get; set; }
 
-        public IRepository<User> Users
+        public IDeletableEntityRepository<User> Users
         {
             get
             {
@@ -38,7 +39,7 @@
             }
         }
 
-        public IRepository<CalendarEvent> CalendarEvents
+        public IDeletableEntityRepository<CalendarEvent> CalendarEvents
         {
             get
             {
@@ -46,7 +47,7 @@
             }
         }
 
-        public IRepository<ChatMessage> ChatMessages
+        public IDeletableEntityRepository<ChatMessage> ChatMessages
         {
             get
             {
@@ -54,7 +55,7 @@
             }
         }
 
-        public IRepository<Course> Courses
+        public IDeletableEntityRepository<Course> Courses
         {
             get
             {
@@ -62,7 +63,7 @@
             }
         }
 
-        public IRepository<CourseModule> CourseModules
+        public IDeletableEntityRepository<CourseModule> CourseModules
         {
             get
             {
@@ -70,7 +71,7 @@
             }
         }
 
-        public IRepository<Faculty> Faculties
+        public IDeletableEntityRepository<Faculty> Faculties
         {
             get
             {
@@ -78,7 +79,7 @@
             }
         }
 
-        public IRepository<Resource> Recourses
+        public IDeletableEntityRepository<Resource> Recourses
         {
             get
             {
@@ -86,7 +87,7 @@
             }
         }
 
-        public IRepository<University> Universities
+        public IDeletableEntityRepository<University> Universities
         {
             get
             {
@@ -99,16 +100,16 @@
             return this.Context.SaveChanges();
         }
 
-        private IRepository<T> GetRepository<T>() where T : class
+        private IDeletableEntityRepository<T> GetRepository<T>() where T : class, IDeletableEntity
         {
             var typeOfRepository = typeof(T);
             if(!this.repositories.ContainsKey(typeOfRepository))
             {
-                var newRepository = Activator.CreateInstance(typeof(EFRepository<T>), this.Context);
+                var newRepository = Activator.CreateInstance(typeof(DeletableEntityRepository<T>), this.Context);
                 this.repositories.Add(typeOfRepository, newRepository);
             }
 
-            return (IRepository<T>)this.repositories[typeOfRepository];
+            return (IDeletableEntityRepository<T>)this.repositories[typeOfRepository];
         }
     }
 }

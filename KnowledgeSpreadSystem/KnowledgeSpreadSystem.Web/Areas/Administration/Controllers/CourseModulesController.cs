@@ -1,26 +1,17 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.Mvc;
-
-namespace KnowledgeSpreadSystem.Web.Areas.Administration.Controllers
+﻿namespace KnowledgeSpreadSystem.Web.Areas.Administration.Controllers
 {
-    using System.Web.Security;
+    using System.Linq;
+    using System.Web.Mvc;
 
     using AutoMapper.QueryableExtensions;
 
     using Kendo.Mvc.Extensions;
     using Kendo.Mvc.UI;
 
+    using KnowledgeSpreadSystem.Data;
     using KnowledgeSpreadSystem.Models;
     using KnowledgeSpreadSystem.Web.Areas.Administration.Models;
     using KnowledgeSpreadSystem.Web.Infrastructure;
-
-    using Microsoft.AspNet.Identity;
-    using Microsoft.AspNet.Identity.EntityFramework;
-
-    using ProjectGallery.Data;
 
     public class CourseModulesController : BaseController
     {
@@ -32,16 +23,8 @@ namespace KnowledgeSpreadSystem.Web.Areas.Administration.Controllers
 
         public ActionResult Index()
         {
-            var roleManager = new RoleManager<IdentityRole>(new RoleStore<IdentityRole>(this.Data.Context));
-            var adminRole = roleManager.Roles.First(x => x.Name == "Administrator");
-            this.ViewData["users"] =
-                this.Data.Users.All()
-                    .Where(u => u.Roles.All(r => r.RoleId != adminRole.Id))
-                    .Project()
-                    .To<UserViewModel>();
-
             this.ViewData["courses"] = this.Data.Courses.All().Project().To<CourseViewModel>();
-            if (Request.IsAjaxRequest())
+            if (this.Request.IsAjaxRequest())
             {
                 return this.PartialView();
             }
@@ -56,29 +39,74 @@ namespace KnowledgeSpreadSystem.Web.Areas.Administration.Controllers
             return this.Json(result.ToDataSourceResult(request), JsonRequestBehavior.AllowGet);
         }
 
-        public JsonResult CreateCourseModule([DataSourceRequest] DataSourceRequest request, CourseModuleViewModel courseModule)
+        public JsonResult CreateCourseModule(
+            [DataSourceRequest] DataSourceRequest request, 
+            CourseModuleViewModel courseModule)
         {
             if (this.ModelState.IsValid)
             {
                 var newModule = new CourseModule()
-                {
-                    Description = courseModule.Description,
-                    Name = courseModule.Name,
-                    CourseId = int.Parse(courseModule.Course),
-                    Moderator = this.Data.Users.Find(courseModule.Moderator),
-                    ModeratorId = courseModule.Moderator,
-                    Started = courseModule.Started,
-                    End = courseModule.End,
-                    Lecturer = courseModule.Lecturer
-                };
+                                    {
+                                        Description = courseModule.Description, 
+                                        Name = courseModule.Name, 
+                                        CourseId = courseModule.Course.Id, 
+                                        Started = courseModule.Started, 
+                                        End = courseModule.End, 
+                                        Lecturer = courseModule.Lecturer
+                                    };
                 this.Data.CourseModules.Add(newModule);
                 this.Data.SaveChanges();
                 courseModule.Id = newModule.Id;
             }
 
             return this.Json(
-                             new[] { courseModule }.ToDataSourceResult(request, this.ModelState),
+                             new[] { courseModule }.ToDataSourceResult(request, this.ModelState), 
                              JsonRequestBehavior.AllowGet);
+        }
+
+        public JsonResult UpdateCourseModule(
+            [DataSourceRequest] DataSourceRequest request, 
+            CourseModuleViewModel module)
+        {
+            var moduleExisting = this.Data.CourseModules.All().FirstOrDefault(x => x.Id == module.Id);
+
+            if (this.ModelState.IsValid)
+            {
+                moduleExisting.Name = module.Name;
+                moduleExisting.Description = module.Description;
+                moduleExisting.Started = module.Started;
+                moduleExisting.End = module.End;
+                moduleExisting.Lecturer = module.Lecturer;
+                moduleExisting.CourseId = module.Course.Id;
+                this.Data.SaveChanges();
+            }
+
+            if (moduleExisting == null)
+            {
+                this.ModelState.AddModelError(string.Empty, "No such module exists!");
+            }
+
+            return this.Json(
+                             new[] { module }.ToDataSourceResult(request, this.ModelState), 
+                             JsonRequestBehavior.AllowGet);
+        }
+
+        public JsonResult DeleteCourseModule([DataSourceRequest] DataSourceRequest request, CourseModuleViewModel module)
+        {
+            var moduleExisting = this.Data.CourseModules.All().FirstOrDefault(x => x.Id == module.Id);
+            if (moduleExisting != null)
+            {
+                foreach (var calendarEvent in moduleExisting.Events.ToList())
+                {
+                    this.Data.CalendarEvents.Delete(calendarEvent);
+                }
+
+                this.Data.CourseModules.Delete(moduleExisting);
+
+                this.Data.SaveChanges();
+            }
+
+            return this.Json(new[] { module }, JsonRequestBehavior.AllowGet);
         }
     }
 }

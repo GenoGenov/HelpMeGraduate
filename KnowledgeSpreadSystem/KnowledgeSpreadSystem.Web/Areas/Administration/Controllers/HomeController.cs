@@ -6,9 +6,8 @@ using System.Web.Mvc;
 
 namespace KnowledgeSpreadSystem.Web.Areas.Administration.Controllers
 {
+    using KnowledgeSpreadSystem.Data;
     using KnowledgeSpreadSystem.Web.Infrastructure;
-
-    using ProjectGallery.Data;
 
     public class HomeController : BaseController
     {

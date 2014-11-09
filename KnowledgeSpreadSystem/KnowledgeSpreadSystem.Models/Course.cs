@@ -4,15 +4,20 @@
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
 
-    public class Course
+    using ForumSystem.Data.Common.Models;
+
+    public class Course : AuditInfo, IDeletableEntity
     {
         private ICollection<CalendarEvent> events;
 
-        private ICollection<CourseModule> courseModules; 
+        private ICollection<CourseModule> courseModules;
+
+        private ICollection<User> moderators; 
         public Course()
         {
             this.events=new HashSet<CalendarEvent>();
             this.courseModules=new HashSet<CourseModule>();
+            this.moderators=new HashSet<User>();
         }
 
         public int Id { get; set; }
@@ -59,11 +64,20 @@
             }
         }
 
-        [Required]
-        public string ModeratorId { get; set; }
+        public ICollection<User> Moderators
+        {
+            get
+            {
+                return this.moderators;
+            }
+            set
+            {
+                this.moderators = value;
+            }
+        }
 
-        public User Moderator { get; set; }
+        public bool IsDeleted { get; set; }
 
-
+        public DateTime? DeletedOn { get; set; }
     }
 }

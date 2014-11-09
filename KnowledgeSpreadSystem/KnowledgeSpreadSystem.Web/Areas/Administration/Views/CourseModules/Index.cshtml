@@ -15,8 +15,9 @@
                            columns.Bound(model => model.Started).Format("{0:dd-MM-yyyy}");
                            columns.Bound(model => model.End).Format("{0:dd-MM-yyyy}");
                            columns.Bound(model => model.Lecturer);
-                           columns.Bound(model => model.Course);
-                           columns.Bound(model => model.Moderator);
+                           columns.Bound(model => model.Course).ClientTemplate("#= Course.Name #");
+                           columns.Bound(model => model.Course.Faculty).ClientTemplate("#= Course.Faculty.Name #");
+                           columns.Bound(model => model.Course.Faculty.University).ClientTemplate("#= Course.Faculty.University.Name #");
                            columns.Command(command =>
                                                {
                                                    command.Edit();
@@ -43,7 +44,9 @@
                             edit.Mode(GridEditMode.PopUp);
                         })
           .DataSource(data => data.Ajax()
-                                  .Model(m => m.Id(b => b.Id))
+                                  .Model(m => { m.Id(b => b.Id);
+                                                  m.Field(x => x.Course).DefaultValue(new CourseViewModel() { Faculty = new FacultyViewModel(){University = new UniversityViewModel() }});
+                                  })
                                   .PageSize(10)
                                   .ServerOperation(true)
                                   .Create("CreateCourseModule", "CourseModules")
@@ -51,10 +54,10 @@
                                   .Update("UpdateCourseModule", "CourseModules")
                                   .Destroy("DeleteCourseModule", "CourseModules")
                                   .Events(events =>
-                                      {
-                                          events.RequestEnd("onRequestEnd");
-                                          events.Error("handleError");
-                                      }))
+                                              {
+                                                  events.RequestEnd("onRequestEnd");
+                                                  events.Error("handleError");
+                                              }))
 
           .Resizable(x => { x.Columns(true); }))
 </div>

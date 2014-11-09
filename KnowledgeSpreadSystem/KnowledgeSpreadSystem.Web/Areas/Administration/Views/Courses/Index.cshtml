@@ -13,9 +13,8 @@
                            columns.Bound(model => model.Name);
                            columns.Bound(model => model.Description);
                            columns.Bound(model => model.Year);
-                           columns.Bound(model => model.Faculty);
-                           columns.Bound(model => model.University);
-                           columns.Bound(model => model.Moderator);
+                           columns.Bound(model => model.Faculty).ClientTemplate("#= Faculty.Name #");
+                           columns.Bound(model => model.Faculty.University).ClientTemplate("#= Faculty.University.Name #");
                            columns.Command(command =>
                                                {
                                                    command.Edit();
@@ -42,7 +41,9 @@
                             edit.Mode(GridEditMode.PopUp);
                         })
           .DataSource(data => data.Ajax()
-                                  .Model(m => m.Id(b => b.Id) )
+                                  .Model(m => { m.Id(b => b.Id);
+                                                  m.Field(x => x.Faculty).DefaultValue(new FacultyViewModel(){University = new UniversityViewModel()});
+                                  })
                                   .PageSize(10)
                                   .ServerOperation(true)
                                           .Create("CreateCourse", "Courses")

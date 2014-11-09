@@ -18,6 +18,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KnowledgeSpreadSystem.Web",
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KnowledgeSpreadSystem.Web.Tests", "KnowledgeSpreadSystem.Web.Tests\KnowledgeSpreadSystem.Web.Tests.csproj", "{B381A4B6-8C21-4FAB-BC5B-9BFED9AE78B9}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KnowledgeSpreadSystem.Data.Common", "KnowledgeSpreadSystem.Data.Common\KnowledgeSpreadSystem.Data.Common.csproj", "{6DF59016-C5E9-4789-93CE-EB70B8BF5B83}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -40,6 +42,10 @@ Global
 		{B381A4B6-8C21-4FAB-BC5B-9BFED9AE78B9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B381A4B6-8C21-4FAB-BC5B-9BFED9AE78B9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B381A4B6-8C21-4FAB-BC5B-9BFED9AE78B9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6DF59016-C5E9-4789-93CE-EB70B8BF5B83}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6DF59016-C5E9-4789-93CE-EB70B8BF5B83}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6DF59016-C5E9-4789-93CE-EB70B8BF5B83}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6DF59016-C5E9-4789-93CE-EB70B8BF5B83}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

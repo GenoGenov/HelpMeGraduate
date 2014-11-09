@@ -14,8 +14,6 @@ namespace KnowledgeSpreadSystem.Web.App_Start
     using Ninject;
     using Ninject.Web.Common;
 
-    using ProjectGallery.Data;
-
     public static class NinjectWebCommon 
     {
         private static readonly Bootstrapper bootstrapper = new Bootstrapper();

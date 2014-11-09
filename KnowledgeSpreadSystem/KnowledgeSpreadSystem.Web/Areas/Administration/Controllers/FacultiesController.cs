@@ -8,11 +8,10 @@
     using Kendo.Mvc.Extensions;
     using Kendo.Mvc.UI;
 
+    using KnowledgeSpreadSystem.Data;
     using KnowledgeSpreadSystem.Models;
     using KnowledgeSpreadSystem.Web.Areas.Administration.Models;
     using KnowledgeSpreadSystem.Web.Infrastructure;
-
-    using ProjectGallery.Data;
 
     public class FacultiesController : BaseController
     {
@@ -48,7 +47,7 @@
                                      {
                                          Description = faculty.Description, 
                                          Name = faculty.Name, 
-                                         UniversityId = int.Parse(faculty.University)
+                                         UniversityId = faculty.University.Id
                                      };
                 this.Data.Faculties.Add(newfaculty);
                 this.Data.SaveChanges();
@@ -68,7 +67,7 @@
             {
                 facultyExisting.Name = faculty.Name;
                 facultyExisting.Description = faculty.Description;
-                facultyExisting.UniversityId = int.Parse(faculty.University);
+                facultyExisting.UniversityId = faculty.University.Id;
                 this.Data.SaveChanges();
             }
 
@@ -113,13 +112,6 @@
             }
 
             return this.Json(new[] { faculty }, JsonRequestBehavior.AllowGet);
-        }
-
-        [ChildActionOnly]
-        public ActionResult AllFacultiesDropDown()
-        {
-            var result = this.Data.Faculties.All().Project().To<FacultyViewModel>().ToList();
-            return this.PartialView("_AllFacultiesDropdown", result);
         }
     }
 }

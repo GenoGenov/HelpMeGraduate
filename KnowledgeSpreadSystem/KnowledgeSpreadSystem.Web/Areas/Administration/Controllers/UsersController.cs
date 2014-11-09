@@ -9,11 +9,10 @@ namespace KnowledgeSpreadSystem.Web.Areas.Administration.Controllers
     using AutoMapper;
     using AutoMapper.QueryableExtensions;
 
+    using KnowledgeSpreadSystem.Data;
     using KnowledgeSpreadSystem.Models;
     using KnowledgeSpreadSystem.Web.Areas.Administration.Models;
     using KnowledgeSpreadSystem.Web.Infrastructure;
-
-    using ProjectGallery.Data;
 
     public class UsersController : BaseController
     {

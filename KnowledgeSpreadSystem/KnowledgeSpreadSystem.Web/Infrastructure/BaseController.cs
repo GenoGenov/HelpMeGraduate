@@ -2,11 +2,10 @@
 {
     using System.Web.Mvc;
 
+    using KnowledgeSpreadSystem.Data;
     using KnowledgeSpreadSystem.Models;
 
     using Microsoft.AspNet.Identity;
-
-    using ProjectGallery.Data;
 
     public abstract class BaseController : Controller
     {

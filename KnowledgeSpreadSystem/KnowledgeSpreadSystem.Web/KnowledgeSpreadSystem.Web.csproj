@@ -241,6 +241,7 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\CreateResourceController.cs" />
     <Compile Include="Controllers\DeleteUniversityController.cs" />
+    <Compile Include="Areas\Administration\Controllers\LogsController.cs" />
     <Compile Include="Controllers\SearchByUsernameController.cs" />
     <Compile Include="Infrastructure\BaseController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -385,7 +386,6 @@
     <Content Include="Areas\Administration\Views\Shared\_Layout.cshtml" />
     <Content Include="Areas\Administration\Views\Universities\Index.cshtml" />
     <Content Include="Areas\Administration\Views\Shared\EditorTemplates\UniversityViewModel.cshtml" />
-    <Content Include="Areas\Administration\Views\Shared\_EqualBoxes.cshtml" />
     <Content Include="Areas\Administration\Views\Faculties\Index.cshtml" />
     <Content Include="Areas\Administration\Views\Shared\EditorTemplates\FacultyViewModel.cshtml" />
     <Content Include="Areas\Administration\Views\Courses\Index.cshtml" />
@@ -398,6 +398,7 @@
     <Content Include="Areas\Administration\Views\Shared\EditorTemplates\UsersEditor.cshtml" />
     <Content Include="Areas\Administration\Views\Shared\EditorTemplates\FacultiesEditor.cshtml" />
     <Content Include="Areas\Administration\Views\Shared\EditorTemplates\CourseEditor.cshtml" />
+    <Content Include="Areas\Administration\Views\Logs\Index.cshtml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <None Include="Scripts\jquery-2.1.1.intellisense.js" />
     <Content Include="Content\fonts\flexslider-icon.svg" />
@@ -500,6 +501,10 @@
     <None Include="Project_Readme.html" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\KnowledgeSpreadSystem.Data.Common\KnowledgeSpreadSystem.Data.Common.csproj">
+      <Project>{6DF59016-C5E9-4789-93CE-EB70B8BF5B83}</Project>
+      <Name>KnowledgeSpreadSystem.Data.Common</Name>
+    </ProjectReference>
     <ProjectReference Include="..\KnowledgeSpreadSystem.Data\KnowledgeSpreadSystem.Data.csproj">
       <Project>{B01F9460-02D6-4295-8773-596E5E2671D9}</Project>
       <Name>KnowledgeSpreadSystem.Data</Name>

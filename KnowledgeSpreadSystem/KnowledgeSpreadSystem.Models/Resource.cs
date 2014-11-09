@@ -3,9 +3,11 @@
     using System;
     using System.ComponentModel.DataAnnotations;
 
+    using ForumSystem.Data.Common.Models;
+
     using KnowledgeSpreadSystem.Models.Enums;
 
-    public class Resource
+    public class Resource : AuditInfo, IDeletableEntity
     {
         public Guid Id { get; set; }
 
@@ -36,5 +38,9 @@
 
         [Required]
         public byte[] Content { get; set; }
+
+        public bool IsDeleted { get; set; }
+
+        public DateTime? DeletedOn { get; set; }
     }
 }
