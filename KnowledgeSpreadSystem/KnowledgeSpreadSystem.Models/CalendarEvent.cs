@@ -14,6 +14,7 @@
         [MaxLength(100)]
         public string Content { get; set; }
 
+
         [Required]
         public DateTime TargetDate { get; set; }
 
