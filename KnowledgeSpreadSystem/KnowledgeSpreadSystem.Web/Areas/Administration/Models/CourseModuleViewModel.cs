@@ -37,9 +37,11 @@
         public string Lecturer { get; set; }
 
         [Required]
+        [UIHint("UsersEditor")]
         public string Moderator { get; set; }
 
         [Required]
+        [UIHint("CourseEditor")]
         public string Course { get; set; }
 
         public void CreateMappings(IConfiguration configuration)

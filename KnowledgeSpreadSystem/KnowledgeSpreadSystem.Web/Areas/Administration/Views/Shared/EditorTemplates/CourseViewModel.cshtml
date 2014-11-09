@@ -1,4 +1,6 @@
-﻿@using KnowledgeSpreadSystem.Web.Areas.Administration.Models
+﻿@using System.Collections
+@using Kendo.Mvc.UI
+@using KnowledgeSpreadSystem.Web.Areas.Administration.Models
 @model CourseViewModel
 
 <h3>Create new course</h3>
@@ -24,12 +26,14 @@
 
 <div class="form-group">
     @Html.LabelFor(x => x.Faculty)
-    @{ Html.RenderAction("AllFacultiesDropDown", "Faculties"); }
+    @Html.EditorFor(x=>x.Faculty)
+    @Html.ValidationMessageFor(x => x.Faculty)
 </div>
 
 <div class="form-group">
     @Html.LabelFor(x => x.Moderator)
-    @{ Html.RenderAction("AllUsersDropDown", "Users"); }
+    @Html.EditorFor(x=>x.Moderator)
+    @Html.ValidationMessageFor(x => x.Moderator)
 </div>
 
 

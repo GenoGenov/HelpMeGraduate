@@ -11,7 +11,7 @@
 
     public class KSSData : IKSSData
     {
-        private DbContext context;
+
 
         private IDictionary<Type, object> repositories;
 
@@ -20,11 +20,15 @@
         {
         }
 
+
+
         public KSSData(DbContext context)
         {
-            this.context = context;
+            this.Context = context;
             this.repositories = new Dictionary<Type, object>();
         }
+
+        public DbContext Context { get; set; }
 
         public IRepository<User> Users
         {
@@ -92,7 +96,7 @@
 
         public int SaveChanges()
         {
-            return this.context.SaveChanges();
+            return this.Context.SaveChanges();
         }
 
         private IRepository<T> GetRepository<T>() where T : class
@@ -100,7 +104,7 @@
             var typeOfRepository = typeof(T);
             if(!this.repositories.ContainsKey(typeOfRepository))
             {
-                var newRepository = Activator.CreateInstance(typeof(EFRepository<T>), this.context);
+                var newRepository = Activator.CreateInstance(typeof(EFRepository<T>), this.Context);
                 this.repositories.Add(typeOfRepository, newRepository);
             }
 

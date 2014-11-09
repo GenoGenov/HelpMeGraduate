@@ -31,8 +31,12 @@ namespace KnowledgeSpreadSystem.Web.Areas.Administration.Models
         [Required]
         public int Year { get; set; }
 
+        [Required]
+        [UIHint("UsersEditor")]
         public string Moderator { get; set; }
 
+        [Required]
+        [UIHint("FacultiesEditor")]
         public string Faculty { get; set; }
 
         public string University { get; set; }

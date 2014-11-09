@@ -6,6 +6,8 @@ using System.Web.Mvc;
 
 namespace KnowledgeSpreadSystem.Web.Areas.Administration.Controllers
 {
+    using System.Web.Security;
+
     using AutoMapper.QueryableExtensions;
 
     using Kendo.Mvc.Extensions;
@@ -14,6 +16,9 @@ namespace KnowledgeSpreadSystem.Web.Areas.Administration.Controllers
     using KnowledgeSpreadSystem.Models;
     using KnowledgeSpreadSystem.Web.Areas.Administration.Models;
     using KnowledgeSpreadSystem.Web.Infrastructure;
+
+    using Microsoft.AspNet.Identity;
+    using Microsoft.AspNet.Identity.EntityFramework;
 
     using ProjectGallery.Data;
 
@@ -27,6 +32,15 @@ namespace KnowledgeSpreadSystem.Web.Areas.Administration.Controllers
 
         public ActionResult Index()
         {
+            var roleManager = new RoleManager<IdentityRole>(new RoleStore<IdentityRole>(this.Data.Context));
+            var adminRole = roleManager.Roles.First(x => x.Name == "Administrator");
+            this.ViewData["users"] =
+                this.Data.Users.All()
+                    .Where(u => u.Roles.All(r => r.RoleId != adminRole.Id))
+                    .Project()
+                    .To<UserViewModel>();
+
+            this.ViewData["courses"] = this.Data.Courses.All().Project().To<CourseViewModel>();
             if (Request.IsAjaxRequest())
             {
                 return this.PartialView();

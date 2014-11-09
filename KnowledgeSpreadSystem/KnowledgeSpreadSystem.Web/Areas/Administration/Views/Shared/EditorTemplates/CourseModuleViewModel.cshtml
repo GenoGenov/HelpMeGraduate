@@ -1,4 +1,6 @@
-﻿@using KnowledgeSpreadSystem.Web.Areas.Administration.Models
+﻿@using System.Collections
+@using Kendo.Mvc.UI
+@using KnowledgeSpreadSystem.Web.Areas.Administration.Models
 @model CourseModuleViewModel
 
 <h3>Create new module</h3>
@@ -36,12 +38,14 @@
 
 <div class="form-group">
     @Html.LabelFor(x => x.Moderator)
-    @{ Html.RenderAction("AllUsersDropDown", "Users"); }
+    @Html.EditorFor(x=>x.Moderator)
+    @Html.ValidationMessageFor(x => x.Moderator)
 </div>
 
 <div class="form-group">
     @Html.LabelFor(x => x.Course)
-    @{ Html.RenderAction("AllCoursesDropDown", "Courses"); }
+    @Html.EditorFor(x=>x.Course)
+    @Html.ValidationMessageFor(x => x.Course)
 </div>
 
 

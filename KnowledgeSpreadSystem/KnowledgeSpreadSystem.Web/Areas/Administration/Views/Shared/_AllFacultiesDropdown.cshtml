@@ -1,3 +1,0 @@
-﻿@model IList<KnowledgeSpreadSystem.Web.Areas.Administration.Models.FacultyViewModel>
-
-@Html.DropDownList("Faculty", Model.Select(x => new SelectListItem() { Text = x.Name, Value = x.Id.ToString() }))

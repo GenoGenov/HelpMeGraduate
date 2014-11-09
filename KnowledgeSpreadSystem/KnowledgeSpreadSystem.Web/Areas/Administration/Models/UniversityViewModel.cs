@@ -15,7 +15,6 @@ namespace KnowledgeSpreadSystem.Web.Areas.Administration.Models
 
     public class UniversityViewModel : IMapFrom<University>
     {
-        [Required]
         [ScaffoldColumn(false)]
         public int Id { get; set; }
 

@@ -23,6 +23,8 @@
 
         public ActionResult Index()
         {
+            this.ViewData["universities"] = this.Data.Universities.All().Project().To<UniversityViewModel>();
+
             if (this.Request.IsAjaxRequest())
             {
                 return this.PartialView();

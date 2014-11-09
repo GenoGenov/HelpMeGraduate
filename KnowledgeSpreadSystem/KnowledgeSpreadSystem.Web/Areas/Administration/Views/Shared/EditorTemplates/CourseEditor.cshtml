@@ -1,0 +1,9 @@
+﻿@using System.Collections
+@using Kendo.Mvc.UI
+@(Html.Kendo().DropDownList()
+    .Name("Course")
+    .DataValueField("Id")
+    .DataTextField("Name")
+        .OptionLabel("--Please Select--")
+    .BindTo((IEnumerable)ViewData["courses"])
+)

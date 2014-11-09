@@ -40,7 +40,7 @@
             modelBuilder.Entity<CourseModule>().HasRequired(f => f.Course).WithMany().WillCascadeOnDelete(false);
             modelBuilder.Entity<ChatMessage>().HasRequired(m => m.Receiver).WithMany().WillCascadeOnDelete(false);
             modelBuilder.Entity<CourseModule>().HasRequired(m => m.Moderator).WithOptional().WillCascadeOnDelete(false);
-            modelBuilder.Entity<Course>().HasRequired(m => m.Moderator).WithOptional().WillCascadeOnDelete(false);
+            modelBuilder.Entity<Course>().HasRequired(m => m.Moderator).WithMany().WillCascadeOnDelete(false);
             base.OnModelCreating(modelBuilder);
         }
     }

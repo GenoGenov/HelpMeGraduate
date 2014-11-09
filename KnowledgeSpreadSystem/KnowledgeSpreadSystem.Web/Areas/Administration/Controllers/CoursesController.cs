@@ -15,6 +15,9 @@ namespace KnowledgeSpreadSystem.Web.Areas.Administration.Controllers
     using KnowledgeSpreadSystem.Web.Areas.Administration.Models;
     using KnowledgeSpreadSystem.Web.Infrastructure;
 
+    using Microsoft.AspNet.Identity;
+    using Microsoft.AspNet.Identity.EntityFramework;
+
     using ProjectGallery.Data;
 
     public class CoursesController : BaseController
@@ -27,6 +30,16 @@ namespace KnowledgeSpreadSystem.Web.Areas.Administration.Controllers
 
         public ActionResult Index()
         {
+            this.ViewData["faculties"] = this.Data.Faculties.All().Project().To<FacultyViewModel>();
+
+            var roleManager = new RoleManager<IdentityRole>(new RoleStore<IdentityRole>(this.Data.Context));
+            var adminRole = roleManager.Roles.First(x => x.Name == "Administrator");
+            this.ViewData["users"] =
+                this.Data.Users.All()
+                    .Where(u => u.Roles.All(r => r.RoleId != adminRole.Id))
+                    .Project()
+                    .To<UserViewModel>().ToList();
+
             if (Request.IsAjaxRequest())
             {
                 return this.PartialView();
@@ -117,13 +130,6 @@ namespace KnowledgeSpreadSystem.Web.Areas.Administration.Controllers
             }
 
             return this.Json(new[] { course }, JsonRequestBehavior.AllowGet);
-        }
-
-        [ChildActionOnly]
-        public ActionResult AllCoursesDropDown()
-        {
-            var result = this.Data.Courses.All().Project().To<CourseViewModel>().ToList();
-            return this.PartialView("_AllCoursesDropdown", result);
         }
     }
 }

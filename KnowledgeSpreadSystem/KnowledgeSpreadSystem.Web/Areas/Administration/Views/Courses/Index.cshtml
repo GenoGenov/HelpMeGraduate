@@ -42,7 +42,7 @@
                             edit.Mode(GridEditMode.PopUp);
                         })
           .DataSource(data => data.Ajax()
-                                  .Model(m => m.Id(b => b.Id))
+                                  .Model(m => m.Id(b => b.Id) )
                                   .PageSize(10)
                                   .ServerOperation(true)
                                           .Create("CreateCourse", "Courses")

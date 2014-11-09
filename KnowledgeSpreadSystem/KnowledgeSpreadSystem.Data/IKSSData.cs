@@ -6,11 +6,15 @@ using System.Threading.Tasks;
 
 namespace ProjectGallery.Data
 {
+    using System.Data.Entity;
+
     using KnowledgeSpreadSystem.Data.Repositories;
     using KnowledgeSpreadSystem.Models;
 
     public interface IKSSData
     {
+        DbContext Context { get; }
+
         IRepository<User> Users { get; }
 
         IRepository<CalendarEvent> CalendarEvents { get; }

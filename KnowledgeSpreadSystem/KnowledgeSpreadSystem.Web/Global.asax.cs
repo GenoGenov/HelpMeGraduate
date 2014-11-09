@@ -34,7 +34,6 @@
                 userManager.AddToRole(admin.Id, "Administrator");
                 db.SaveChanges();
 
-             
                 db.Roles.Add(new IdentityRole("CourseModerator"));
                 db.Roles.Add(new IdentityRole("ModuleModerator"));
                 
