@@ -1,9 +1,42 @@
 ﻿@using System.Collections
 @using Kendo.Mvc.UI
-@(Html.Kendo().DropDownList()
-    .Name("Faculty")
-    .DataValueField("Id")
-    .DataTextField("Name")
-        .OptionLabel("--Please Select--")
-    .BindTo((IEnumerable)ViewData["faculties"])
-)
+
+<div class="form-group">
+    <label for="University">University:</label>
+    @(Html.Kendo().DropDownList()
+          .Name("University")
+          .OptionLabel("--Please Select--")
+          .DataTextField("Name")
+          .DataValueField("Id")
+          .DataSource(source =>
+                          {
+                              source.Read(read =>
+                                              {
+                                                  read.Action("GetCascadeUniversities", "DropDown");
+                                              });
+                          })
+          )
+</div>
+
+<div class="form-group">
+    <label for="Faculty">Faculty:</label>
+    @(Html.Kendo().DropDownList()
+          .Name("Faculty")
+          .OptionLabel("--Please Select--")
+          .DataTextField("Name")
+          .DataValueField("Id")
+          .DataSource(source =>
+                          {
+                              source.Read(read =>
+                                              {
+                                                  read.Action("GetCascadeFaculties", "DropDown")
+                                                      .Data("filterFaculties");
+                                              })
+                                    .ServerFiltering(true);
+                          })
+          .Enable(false)
+          .AutoBind(false)
+          .CascadeFrom("University")
+          )
+</div>
+

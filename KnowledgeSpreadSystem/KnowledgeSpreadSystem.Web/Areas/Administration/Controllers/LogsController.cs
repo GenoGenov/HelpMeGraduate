@@ -2,6 +2,7 @@
 {
     using System.Web.Mvc;
 
+        [Authorize(Roles = "Administrator")]
     public class LogsController : Controller
     {
         public ActionResult Index()

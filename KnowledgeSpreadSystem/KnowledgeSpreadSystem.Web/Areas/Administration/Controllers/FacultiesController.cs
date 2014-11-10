@@ -13,6 +13,7 @@
     using KnowledgeSpreadSystem.Web.Areas.Administration.Models;
     using KnowledgeSpreadSystem.Web.Infrastructure;
 
+        [Authorize(Roles = "Administrator")]
     public class FacultiesController : BaseController
     {
         public FacultiesController(IKSSData data)

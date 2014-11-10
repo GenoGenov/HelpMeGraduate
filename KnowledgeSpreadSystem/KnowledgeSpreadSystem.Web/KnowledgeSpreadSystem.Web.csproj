@@ -227,6 +227,7 @@
     <Compile Include="Areas\Administration\AdministrationAreaRegistration.cs" />
     <Compile Include="Areas\Administration\Controllers\CourseModulesController.cs" />
     <Compile Include="Areas\Administration\Controllers\CoursesController.cs" />
+    <Compile Include="Areas\Administration\Controllers\DropDownController.cs" />
     <Compile Include="Areas\Administration\Controllers\FacultiesController.cs" />
     <Compile Include="Areas\Administration\Controllers\HomeController.cs" />
     <Compile Include="Areas\Administration\Controllers\ResourcesController.cs" />

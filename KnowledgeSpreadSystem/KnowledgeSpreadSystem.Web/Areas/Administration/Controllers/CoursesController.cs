@@ -21,6 +21,7 @@ namespace KnowledgeSpreadSystem.Web.Areas.Administration.Controllers
     using Microsoft.AspNet.Identity;
     using Microsoft.AspNet.Identity.EntityFramework;
 
+        [Authorize(Roles = "Administrator")]
     public class CoursesController : BaseController
     {
         // GET: Administration/Courses

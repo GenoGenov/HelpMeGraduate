@@ -1,9 +1,27 @@
 ﻿@using System.Collections
 @using Kendo.Mvc.UI
-@(Html.Kendo().DropDownList()
-    .Name("Course")
-    .DataValueField("Id")
-    .DataTextField("Name")
-        .OptionLabel("--Please Select--")
-    .BindTo((IEnumerable)ViewData["courses"])
-)
+
+@{ Html.RenderPartial("EditorTemplates/FacultiesEditor"); }
+
+<div class="form-group">
+    <label for="Course">Course:</label>
+    @(Html.Kendo().DropDownList()
+              .Name("Course")
+                  .OptionLabel("--Please Select--")
+              .DataTextField("Name")
+              .DataValueField("Id")
+              .DataSource(source =>
+              {
+                  source.Read(read =>
+                  {
+                      read.Action("GetCascadeCourses", "DropDown")
+                          .Data("filterCourses");
+                  })
+                  .ServerFiltering(true);
+              })
+              .Enable(false)
+              .AutoBind(false)
+              .CascadeFrom("Faculty")
+    )
+</div>
+

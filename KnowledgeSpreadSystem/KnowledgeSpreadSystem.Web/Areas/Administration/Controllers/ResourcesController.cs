@@ -6,6 +6,7 @@ using System.Web.Mvc;
 
 namespace KnowledgeSpreadSystem.Web.Areas.Administration.Controllers
 {
+        [Authorize(Roles = "Administrator")]
     public class ResourcesController : Controller
     {
         // GET: Administration/Resources

@@ -14,6 +14,7 @@ namespace KnowledgeSpreadSystem.Web.Areas.Administration.Controllers
     using KnowledgeSpreadSystem.Web.Areas.Administration.Models;
     using KnowledgeSpreadSystem.Web.Infrastructure;
 
+        [Authorize(Roles = "Administrator")]
     public class UsersController : BaseController
     {
         public UsersController(IKSSData data)
@@ -43,13 +44,6 @@ namespace KnowledgeSpreadSystem.Web.Areas.Administration.Controllers
         public ActionResult AllUsers()
         {
             throw new NotImplementedException();
-        }
-
-        [ChildActionOnly]
-        public ActionResult AllUsersDropDown()
-        {
-            var result = this.Data.Users.All().Project().To<UserViewModel>().ToList();
-            return this.PartialView("_AllUsersDropdown", result);
         }
     }
 }

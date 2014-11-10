@@ -9,6 +9,7 @@ namespace KnowledgeSpreadSystem.Web.Areas.Administration.Controllers
     using KnowledgeSpreadSystem.Data;
     using KnowledgeSpreadSystem.Web.Infrastructure;
 
+        [Authorize(Roles = "Administrator")]
     public class HomeController : BaseController
     {
         public HomeController(IKSSData data)
