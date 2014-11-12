@@ -1,11 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-
-namespace KnowledgeSpreadSystem.Web.Areas.Administration.Models
+﻿namespace KnowledgeSpreadSystem.Web.Areas.Administration.ViewModels.Event
 {
     using KnowledgeSpreadSystem.Models;
+    using KnowledgeSpreadSystem.Web.Areas.Administration.ViewModels.Base;
     using KnowledgeSpreadSystem.Web.Infrastructure.Mapping;
 
     public class EventViewModel : AdminViewModel, IMapFrom<CalendarEvent>

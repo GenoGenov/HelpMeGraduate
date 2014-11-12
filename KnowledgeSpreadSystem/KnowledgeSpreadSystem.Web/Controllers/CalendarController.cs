@@ -1,11 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.Mvc;
-
-namespace KnowledgeSpreadSystem.Web.Controllers
+﻿namespace KnowledgeSpreadSystem.Web.Controllers
 {
+    using System.Web.Mvc;
+
     public class CalendarController : Controller
     {
         // GET: Calendar

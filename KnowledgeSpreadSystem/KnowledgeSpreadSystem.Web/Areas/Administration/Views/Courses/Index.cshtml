@@ -1,6 +1,5 @@
 ﻿@using Kendo.Mvc.UI
-@using KnowledgeSpreadSystem.Web.Areas.Administration.Models
-@using KnowledgeSpreadSystem.Web.Areas.Administration.ViewModels
+@using KnowledgeSpreadSystem.Web.Areas.Administration.ViewModels.Base
 @using KnowledgeSpreadSystem.Web.Areas.Administration.ViewModels.Course
 <div class="col-md-12">
     @(Html.Kendo()
@@ -53,10 +52,10 @@
                                   })
                                   .PageSize(10)
                                   .ServerOperation(true)
-                                          .Create("CreateCourse", "Courses")
-                                  .Read("AllCourses", "Courses")
-                                          .Update("UpdateCourse", "Courses")
-                                          .Destroy("DeleteCourse", "Courses")
+                                          .Create("Create", "Courses")
+                                  .Read("Read", "Courses")
+                                          .Update("Update", "Courses")
+                                          .Destroy("Delete", "Courses")
                                   .Events(events =>
                                       {
                                           events.RequestEnd("onRequestEnd");

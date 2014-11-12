@@ -1,5 +1,5 @@
 ﻿@using Kendo.Mvc.UI
-@using KnowledgeSpreadSystem.Web.Areas.Administration.Models
+@using KnowledgeSpreadSystem.Web.Areas.Administration.ViewModels.University
 <div class="col-md-12">
     @(Html.Kendo()
           .Grid<UniversityViewModel>()
@@ -45,14 +45,14 @@
                                   .Model(m => m.Id(b => b.Id))
                                   .PageSize(10)
                                   .ServerOperation(true)
-                                  .Create("CreateUniversity", "Universities")
+                                  .Create("Create", "Universities")
                                   .Events(events =>
                                               {
                                                   events.RequestEnd("onRequestEnd");
                                                   events.Error("handleError");
                                               })
-                                  .Read("AllUniversities", "Universities")
-                                  .Update("UpdateUniversity", "Universities")
-                                  .Destroy("DeleteUniversity", "Universities"))
+                                  .Read("Read", "Universities")
+                                  .Update("Update", "Universities")
+                                  .Destroy("Delete", "Universities"))
           .Resizable(x => { x.Columns(true); }))
 </div>

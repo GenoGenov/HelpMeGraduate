@@ -1,13 +1,15 @@
 ﻿namespace KnowledgeSpreadSystem.Web.Areas.Administration.Controllers
 {
     using System;
+    using System.Collections;
     using System.Linq;
     using System.Web.Mvc;
 
     using AutoMapper;
 
     using KnowledgeSpreadSystem.Data;
-    using KnowledgeSpreadSystem.Web.Areas.Administration.Models;
+    using KnowledgeSpreadSystem.Web.Areas.Administration.Controllers.Base;
+    using KnowledgeSpreadSystem.Web.Areas.Administration.ViewModels.User;
 
     public class UsersController : AdministratorController
     {
@@ -36,6 +38,11 @@
         }
 
         public ActionResult AllUsers()
+        {
+            throw new NotImplementedException();
+        }
+
+        protected override IEnumerable GetData()
         {
             throw new NotImplementedException();
         }

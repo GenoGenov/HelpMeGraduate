@@ -1,13 +1,11 @@
-﻿namespace KnowledgeSpreadSystem.Web.Areas.Administration.Controllers
+﻿namespace KnowledgeSpreadSystem.Web.Areas.Administration.Controllers.Base
 {
-    using System.Linq;
     using System.Web.Mvc;
 
     using KnowledgeSpreadSystem.Data;
-    using KnowledgeSpreadSystem.Web.Infrastructure;
 
     [Authorize(Roles = "Administrator")]
-    public abstract class AdministratorController : BaseController
+    public abstract class AdministratorController : AdministrationKendoGridController
     {
         public AdministratorController(IKSSData data)
             : base(data)

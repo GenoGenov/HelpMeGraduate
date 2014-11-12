@@ -29,7 +29,7 @@
 
         public DbContext Context { get; set; }
 
-        public IDeletableEntityRepository<User> Users
+        public IRepository<User> Users
         {
             get
             {
@@ -41,7 +41,7 @@
         {
             get
             {
-                return this.GetRepository<CalendarEvent>();
+                return this.GetDeletableEntityRepository<CalendarEvent>();
             }
         }
 
@@ -49,7 +49,7 @@
         {
             get
             {
-                return this.GetRepository<ChatMessage>();
+                return this.GetDeletableEntityRepository<ChatMessage>();
             }
         }
 
@@ -57,7 +57,7 @@
         {
             get
             {
-                return this.GetRepository<Course>();
+                return this.GetDeletableEntityRepository<Course>();
             }
         }
 
@@ -65,7 +65,7 @@
         {
             get
             {
-                return this.GetRepository<CourseModule>();
+                return this.GetDeletableEntityRepository<CourseModule>();
             }
         }
 
@@ -73,7 +73,7 @@
         {
             get
             {
-                return this.GetRepository<Faculty>();
+                return this.GetDeletableEntityRepository<Faculty>();
             }
         }
 
@@ -81,7 +81,7 @@
         {
             get
             {
-                return this.GetRepository<Resource>();
+                return this.GetDeletableEntityRepository<Resource>();
             }
         }
 
@@ -89,8 +89,13 @@
         {
             get
             {
-                return this.GetRepository<University>();
+                return this.GetDeletableEntityRepository<University>();
             }
+        }
+
+        public IDeletableEntityRepository<T> GetDeletableGenericRepository<T>() where T : class, IDeletableEntity
+        {
+            return this.GetDeletableEntityRepository<T>();
         }
 
         public int SaveChanges()
@@ -98,16 +103,26 @@
             return this.Context.SaveChanges();
         }
 
-        private IDeletableEntityRepository<T> GetRepository<T>() where T : class, IDeletableEntity
+        private IRepository<T> GetRepository<T>() where T : class
         {
-            var typeOfRepository = typeof(T);
-            if(!this.repositories.ContainsKey(typeOfRepository))
+            if (!this.repositories.ContainsKey(typeof(T)))
             {
-                var newRepository = Activator.CreateInstance(typeof(DeletableEntityRepository<T>), this.Context);
-                this.repositories.Add(typeOfRepository, newRepository);
+                var type = typeof(GenericRepository<T>);
+                this.repositories.Add(typeof(T), Activator.CreateInstance(type, this.Context));
             }
 
-            return (IDeletableEntityRepository<T>)this.repositories[typeOfRepository];
+            return (IRepository<T>)this.repositories[typeof(T)];
+        }
+
+        private IDeletableEntityRepository<T> GetDeletableEntityRepository<T>() where T : class, IDeletableEntity
+        {
+            if (!this.repositories.ContainsKey(typeof(T)))
+            {
+                var type = typeof(DeletableEntityRepository<T>);
+                this.repositories.Add(typeof(T), Activator.CreateInstance(type, this.Context));
+            }
+
+            return (IDeletableEntityRepository<T>)this.repositories[typeof(T)];
         }
     }
 }

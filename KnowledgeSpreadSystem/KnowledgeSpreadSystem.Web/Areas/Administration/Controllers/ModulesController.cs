@@ -1,17 +1,16 @@
 ﻿namespace KnowledgeSpreadSystem.Web.Areas.Administration.Controllers
 {
-    using System.Linq;
+    using System.Collections;
     using System.Web.Mvc;
 
     using AutoMapper.QueryableExtensions;
 
-    using Kendo.Mvc.Extensions;
     using Kendo.Mvc.UI;
 
     using KnowledgeSpreadSystem.Data;
     using KnowledgeSpreadSystem.Models;
-    using KnowledgeSpreadSystem.Web.Areas.Administration.Models;
-    using KnowledgeSpreadSystem.Web.Areas.Administration.ViewModels.Course;
+    using KnowledgeSpreadSystem.Web.Areas.Administration.Controllers.Base;
+    using KnowledgeSpreadSystem.Web.Areas.Administration.ViewModels.Module;
 
     public class ModulesController : AdministratorController
     {
@@ -23,7 +22,6 @@
 
         public ActionResult Index()
         {
-            this.ViewData["courses"] = this.Data.Courses.All().Project().To<CourseViewModel>();
             if (this.Request.IsAjaxRequest())
             {
                 return this.PartialView();
@@ -33,94 +31,34 @@
         }
 
         [HttpPost]
-        public JsonResult AllCourseModules([DataSourceRequest] DataSourceRequest request)
+        public ActionResult Create([DataSourceRequest] DataSourceRequest request, CourseModuleViewModel model)
         {
-            var result = this.Data.CourseModules.All().Project().To<CourseModuleViewModel>();
+            var dbModel = base.Create<CourseModule>(model);
 
-            return this.Json(result.ToDataSourceResult(request), JsonRequestBehavior.AllowGet);
+            model.Id = dbModel != null ? dbModel.Id : (int?)null;
+
+            return this.GridOperation(model, request);
         }
 
         [HttpPost]
-        public JsonResult CreateCourseModule(
-            [DataSourceRequest] DataSourceRequest request,
-            CourseModuleViewModel courseModule)
+        public JsonResult Update([DataSourceRequest] DataSourceRequest request, CourseModuleViewModel model)
         {
-            if (courseModule.End <= courseModule.Started)
-            {
-                ModelState.AddModelError(string.Empty, "The end date must be after the start date");
-            }
+            base.Update<CourseModule, CourseModuleViewModel>(model, model.Id);
 
-            if (this.ModelState.IsValid)
-            {
-                var newModule = new CourseModule()
-                                    {
-                                        Description = courseModule.Description,
-                                        Name = courseModule.Name,
-                                        CourseId = courseModule.Course.Id,
-                                        Started = courseModule.Started,
-                                        End = courseModule.End,
-                                        Lecturer = courseModule.Lecturer
-                                    };
-                this.Data.CourseModules.Add(newModule);
-                this.Data.SaveChanges();
-                courseModule.Id = newModule.Id;
-            }
-
-            return this.Json(
-                             new[] { courseModule }.ToDataSourceResult(request, this.ModelState),
-                             JsonRequestBehavior.AllowGet);
+            return this.GridOperation(model, request);
         }
 
         [HttpPost]
-        public JsonResult UpdateCourseModule(
-            [DataSourceRequest] DataSourceRequest request,
-            CourseModuleViewModel module)
+        public JsonResult DeleteFaculty([DataSourceRequest] DataSourceRequest request, CourseModuleViewModel model)
         {
-            var moduleExisting = this.Data.CourseModules.All().FirstOrDefault(x => x.Id == module.Id);
+            base.Delete<CourseModule>(model.Id, true);
 
-            if (this.ModelState.IsValid)
-            {
-                moduleExisting.Name = module.Name;
-                moduleExisting.Description = module.Description;
-                moduleExisting.Started = module.Started;
-                moduleExisting.End = module.End;
-                moduleExisting.Lecturer = module.Lecturer;
-                moduleExisting.CourseId = module.Course.Id;
-                this.Data.SaveChanges();
-            }
-
-            if (moduleExisting == null)
-            {
-                this.ModelState.AddModelError(string.Empty, "No such module exists!");
-            }
-
-            return this.Json(
-                             new[] { module }.ToDataSourceResult(request, this.ModelState),
-                             JsonRequestBehavior.AllowGet);
+            return this.GridOperation(model, request);
         }
 
-        [HttpPost]
-        public JsonResult DeleteCourseModule([DataSourceRequest] DataSourceRequest request, CourseModuleViewModel module)
+        protected override IEnumerable GetData()
         {
-            var moduleExisting = this.Data.CourseModules.All().FirstOrDefault(x => x.Id == module.Id);
-            if (moduleExisting != null)
-            {
-                foreach (var calendarEvent in moduleExisting.Events.ToList())
-                {
-                    this.Data.CalendarEvents.Delete(calendarEvent);
-                }
-
-                this.Data.CourseModules.Delete(moduleExisting);
-
-                this.Data.SaveChanges();
-            }
-
-            return this.Json(new[] { module }, JsonRequestBehavior.AllowGet);
-        }
-
-        public ActionResult Details(string id)
-        {
-            throw new System.NotImplementedException();
+            return this.Data.Courses.All().Project().To<CourseModuleViewModel>();
         }
     }
 }

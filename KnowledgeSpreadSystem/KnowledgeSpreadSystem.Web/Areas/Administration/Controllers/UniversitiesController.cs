@@ -1,18 +1,16 @@
 ﻿namespace KnowledgeSpreadSystem.Web.Areas.Administration.Controllers
 {
-    using System.Data.Entity;
-    using System.Linq;
+    using System.Collections;
     using System.Web.Mvc;
 
     using AutoMapper.QueryableExtensions;
 
-    using Kendo.Mvc.Extensions;
     using Kendo.Mvc.UI;
 
     using KnowledgeSpreadSystem.Data;
     using KnowledgeSpreadSystem.Models;
-    using KnowledgeSpreadSystem.Web.Areas.Administration.Models;
-    using KnowledgeSpreadSystem.Web.Infrastructure;
+    using KnowledgeSpreadSystem.Web.Areas.Administration.Controllers.Base;
+    using KnowledgeSpreadSystem.Web.Areas.Administration.ViewModels.University;
 
     public class UniversitiesController : AdministratorController
     {
@@ -32,84 +30,34 @@
         }
 
         [HttpPost]
-        public JsonResult UpdateUniversity([DataSourceRequest] DataSourceRequest request, UniversityViewModel uni)
+        public ActionResult Create([DataSourceRequest] DataSourceRequest request, UniversityViewModel model)
         {
-            var uniExisting = this.Data.Universities.All().FirstOrDefault(x => x.Id == uni.Id);
+            var dbModel = base.Create<University>(model);
 
-            if (this.ModelState.IsValid)
-            {
-                uniExisting.Name = uni.Name;
-                uniExisting.About = uni.About;
+            model.Id = dbModel != null ? dbModel.Id : (int?)null;
 
-                this.Data.SaveChanges();
-            }
-
-            if (uniExisting == null)
-            {
-                this.ModelState.AddModelError(string.Empty, "No such university exists!");
-            }
-
-            return this.Json(new[] { uni }.ToDataSourceResult(request, this.ModelState), JsonRequestBehavior.AllowGet);
+            return this.GridOperation(model, request);
         }
 
         [HttpPost]
-        public JsonResult DeleteUniversity([DataSourceRequest] DataSourceRequest request, UniversityViewModel uni)
+        public JsonResult Update([DataSourceRequest] DataSourceRequest request, UniversityViewModel model)
         {
-            var uniExisting = this.Data.Universities.All().FirstOrDefault(x => x.Id == uni.Id);
-            if (uniExisting != null)
-            {
-                foreach (var faculty in uniExisting.Faculties.ToList())
-                {
-                    foreach (var course in faculty.Courses.ToList())
-                    {
-                        foreach (var courseModule in course.CourseModules.ToList())
-                        {
-                            foreach (var calendarEvent in courseModule.Events.ToList())
-                            {
-                                this.Data.CalendarEvents.Delete(calendarEvent);
-                            }
+            base.Update<University, UniversityViewModel>(model, model.Id);
 
-                            this.Data.CourseModules.Delete(courseModule);
-                        }
-
-                        foreach (var calendarEvent in course.Events.ToList())
-                        {
-                            this.Data.CalendarEvents.Delete(calendarEvent);
-                        }
-
-                        this.Data.Courses.Delete(course);
-                    }
-
-                    this.Data.Faculties.Delete(faculty);
-                }
-
-                this.Data.Universities.Delete(uniExisting);
-                this.Data.SaveChanges();
-            }
-
-            return this.Json(new[] { uni }, JsonRequestBehavior.AllowGet);
+            return this.GridOperation(model, request);
         }
 
         [HttpPost]
-        public JsonResult CreateUniversity([DataSourceRequest] DataSourceRequest request, UniversityViewModel uni)
+        public JsonResult DeleteFaculty([DataSourceRequest] DataSourceRequest request, UniversityViewModel model)
         {
-            if (this.ModelState.IsValid)
-            {
-                var newUni = new University() { About = uni.About, Name = uni.Name };
-                this.Data.Universities.Add(newUni);
-                this.Data.SaveChanges();
-                uni.Id = newUni.Id;
-            }
+            base.Delete<University>(model.Id, true);
 
-            return this.Json(new[] { uni }.ToDataSourceResult(request, this.ModelState), JsonRequestBehavior.AllowGet);
+            return this.GridOperation(model, request);
         }
 
-        [HttpPost]
-        public JsonResult AllUniversities([DataSourceRequest] DataSourceRequest request)
+        protected override IEnumerable GetData()
         {
-            var result = this.Data.Universities.All().Project().To<UniversityViewModel>();
-
-            return this.Json(result.ToDataSourceResult(request), JsonRequestBehavior.AllowGet);
+            return this.Data.Courses.All().Project().To<UniversityViewModel>();
         }
     }
 }

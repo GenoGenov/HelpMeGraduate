@@ -1,13 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.Mvc;
-
-namespace KnowledgeSpreadSystem.Web.Areas.Administration.Controllers
+﻿namespace KnowledgeSpreadSystem.Web.Areas.Administration.Controllers
 {
+    using System;
+    using System.Collections;
+    using System.Web.Mvc;
+
     using KnowledgeSpreadSystem.Data;
-    using KnowledgeSpreadSystem.Web.Infrastructure;
+    using KnowledgeSpreadSystem.Web.Areas.Administration.Controllers.Base;
 
     public class HomeController : AdministratorController
     {
@@ -36,6 +34,11 @@ namespace KnowledgeSpreadSystem.Web.Areas.Administration.Controllers
                                           "Logs"
                                       };
             return this.View("_SideMenuPartial");
+        }
+
+        protected override IEnumerable GetData()
+        {
+            throw new NotImplementedException();
         }
     }
 }

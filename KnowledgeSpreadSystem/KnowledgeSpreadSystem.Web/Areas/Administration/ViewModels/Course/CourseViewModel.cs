@@ -1,20 +1,18 @@
 ﻿namespace KnowledgeSpreadSystem.Web.Areas.Administration.ViewModels.Course
 {
-    using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
     using System.Web.Mvc;
 
     using AutoMapper;
 
     using KnowledgeSpreadSystem.Models;
-    using KnowledgeSpreadSystem.Web.Areas.Administration.Models;
-    using KnowledgeSpreadSystem.Web.Areas.Administration.ViewModels;
+    using KnowledgeSpreadSystem.Web.Areas.Administration.ViewModels.Base;
     using KnowledgeSpreadSystem.Web.Infrastructure.Mapping;
 
     public class CourseViewModel : AdminViewModel, IMapFrom<Course>, ISimpleView<SimpleViewModel>, IHaveCustomMappings
     {
         [HiddenInput(DisplayValue = false)]
-        public int Id { get; set; }
+        public int? Id { get; set; }
 
         [Required]
         [MinLength(3)]
@@ -42,6 +40,13 @@
 
             configuration.CreateMap<Course, CourseViewModel>()
                          .ForMember(x => x.University, opt => opt.MapFrom(y => y.Faculty.University));
+
+            configuration.CreateMap<CourseViewModel, Course>()
+                        .ForMember(
+                                   x => x.FacultyId,
+                                   opt => opt.MapFrom(y => y.Faculty.Id));
+
+            configuration.CreateMap<CourseViewModel, Course>().ForMember(x => x.Faculty, opt => opt.Ignore());
         }
     }
 }

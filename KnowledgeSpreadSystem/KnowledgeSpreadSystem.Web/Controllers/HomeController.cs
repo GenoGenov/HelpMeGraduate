@@ -1,12 +1,9 @@
 ﻿namespace KnowledgeSpreadSystem.Web.Controllers
 {
-    using System.Linq;
     using System.Web.Mvc;
 
-    using AutoMapper.QueryableExtensions;
-
     using KnowledgeSpreadSystem.Data;
-    using KnowledgeSpreadSystem.Web.Infrastructure;
+    using KnowledgeSpreadSystem.Web.Controllers.Base;
 
     public class HomeController : BaseController
     {

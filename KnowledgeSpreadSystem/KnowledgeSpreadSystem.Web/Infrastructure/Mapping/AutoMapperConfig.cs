@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-
-namespace KnowledgeSpreadSystem.Web.Infrastructure.Mapping
+﻿namespace KnowledgeSpreadSystem.Web.Infrastructure.Mapping
 {
     using System;
     using System.Collections.Generic;
@@ -41,6 +36,7 @@ namespace KnowledgeSpreadSystem.Web.Infrastructure.Mapping
             foreach (var map in maps)
             {
                 Mapper.CreateMap(map.Source, map.Destination);
+                Mapper.CreateMap(map.Destination, map.Source);
             }
         }
 
@@ -61,7 +57,7 @@ namespace KnowledgeSpreadSystem.Web.Infrastructure.Mapping
             foreach (var map in maps)
             {
                 Mapper.CreateMap(map.Source, map.Destination);
-
+                Mapper.CreateMap(map.Destination, map.Source);
             }
         }
 

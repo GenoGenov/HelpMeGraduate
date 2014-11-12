@@ -1,7 +1,7 @@
-﻿@using System.Collections
-@using Kendo.Mvc.UI
-@using KnowledgeSpreadSystem.Web.Areas.Administration.Models
+﻿@using Kendo.Mvc.UI
 @using KnowledgeSpreadSystem.Web.Areas.Administration.ViewModels
+@using KnowledgeSpreadSystem.Web.Areas.Administration.ViewModels.Base
+@using KnowledgeSpreadSystem.Web.Areas.Administration.ViewModels.Faculty
 <div class="col-md-12">
     @(Html.Kendo()
           .Grid<FacultyViewModel>()
@@ -51,9 +51,9 @@
                                   })
                                   .PageSize(10)
                                   .ServerOperation(true)
-                                  .Create("CreateFaculty", "Faculties")
-                                  .Read("AllFaculties", "Faculties")
-                                  .Update("UpdateFaculty", "Faculties")
+                                  .Create("Create", "Faculties")
+                                  .Read("Read", "Faculties")
+                                  .Update("Update", "Faculties")
                                   .Destroy("DeleteFaculty", "Faculties")
                                   .Events(events =>
                                       {

@@ -2,6 +2,7 @@
 {
     using System.Data.Entity;
 
+    using KnowledgeSpreadSystem.Data.Common.Models;
     using KnowledgeSpreadSystem.Data.Common.Repositories;
     using KnowledgeSpreadSystem.Models;
 
@@ -9,7 +10,7 @@
     {
         DbContext Context { get; }
 
-        IDeletableEntityRepository<User> Users { get; }
+        IRepository<User> Users { get; }
 
         IDeletableEntityRepository<CalendarEvent> CalendarEvents { get; }
         
@@ -24,6 +25,8 @@
         IDeletableEntityRepository<Resource> Recourses { get; }
  
         IDeletableEntityRepository<University> Universities { get; }
+
+        IDeletableEntityRepository<T> GetDeletableGenericRepository<T>() where T : class, IDeletableEntity;
 
         int SaveChanges();
     }

@@ -1,22 +1,19 @@
-﻿namespace KnowledgeSpreadSystem.Web.Areas.Administration.Models
+﻿namespace KnowledgeSpreadSystem.Web.Areas.Administration.ViewModels.Module
 {
     using System;
-    using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
-    using System.Linq;
     using System.Web.Mvc;
 
     using AutoMapper;
-    using AutoMapper.QueryableExtensions;
 
     using KnowledgeSpreadSystem.Models;
-    using KnowledgeSpreadSystem.Web.Areas.Administration.ViewModels;
+    using KnowledgeSpreadSystem.Web.Areas.Administration.ViewModels.Base;
     using KnowledgeSpreadSystem.Web.Infrastructure.Mapping;
 
     public class CourseModuleViewModel : AdminViewModel, IMapFrom<CourseModule>,IHaveCustomMappings
     {
         [HiddenInput(DisplayValue = false)]
-        public int Id { get; set; }
+        public int? Id { get; set; }
 
         [Required]
         [MinLength(3)]
@@ -40,10 +37,6 @@
         [MaxLength(50)]
         public string Lecturer { get; set; }
 
-        //[UIHint("UsersEditor")]
-        //public IList<UserViewModel> Moderators { get; set; }
-
-
         [Required]
         [UIHint("CourseEditor")]
         public SimpleViewModel Course { get; set; }
@@ -59,6 +52,13 @@
 
             configuration.CreateMap<CourseModule, CourseModuleViewModel>()
                         .ForMember(x => x.University, opt => opt.MapFrom(y => y.Course.Faculty.University));
+
+            configuration.CreateMap<CourseModuleViewModel, CourseModule>()
+                        .ForMember(
+                                   x => x.CourseId,
+                                   opt => opt.MapFrom(y => y.Course.Id));
+
+            configuration.CreateMap<CourseModuleViewModel, CourseModule>().ForMember(x => x.Course, opt => opt.Ignore());
         }
     }
 }

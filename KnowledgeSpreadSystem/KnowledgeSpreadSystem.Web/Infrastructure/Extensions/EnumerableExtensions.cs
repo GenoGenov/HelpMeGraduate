@@ -1,11 +1,8 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-
-namespace KnowledgeSpreadSystem.Web.Infrastructure.Extensions
+﻿namespace KnowledgeSpreadSystem.Web.Infrastructure.Extensions
 {
+    using System;
+    using System.Collections.Generic;
+
     public static class EnumerableExtensions
     {
         public static IEnumerable<T> ForEach<T>(this IEnumerable<T> source, Func<T,T> action)

@@ -1,27 +1,20 @@
-﻿namespace KnowledgeSpreadSystem.Web.Infrastructure
+﻿namespace KnowledgeSpreadSystem.Web.Controllers.Base
 {
-    using System.Linq;
     using System.Web.Mvc;
-
-    using AutoMapper.QueryableExtensions;
-
-    using Kendo.Mvc.Extensions;
-    using Kendo.Mvc.UI;
 
     using KnowledgeSpreadSystem.Data;
     using KnowledgeSpreadSystem.Models;
-    using KnowledgeSpreadSystem.Web.ViewModels;
 
     using Microsoft.AspNet.Identity;
 
     public abstract class BaseController : Controller
     {
-        protected IKSSData Data { get; set; }
-
         protected BaseController(IKSSData data)
         {
             this.Data = data;
         }
+
+        protected IKSSData Data { get; set; }
 
         protected User CurrentUser
         {

@@ -12,12 +12,13 @@
 
         private ICollection<CourseModule> courseModules;
 
-        private ICollection<User> moderators; 
+        private ICollection<User> moderators;
+
         public Course()
         {
-            this.events=new HashSet<CalendarEvent>();
-            this.courseModules=new HashSet<CourseModule>();
-            this.moderators=new HashSet<User>();
+            this.events = new HashSet<CalendarEvent>();
+            this.courseModules = new HashSet<CourseModule>();
+            this.moderators = new HashSet<User>();
         }
 
         public int Id { get; set; }

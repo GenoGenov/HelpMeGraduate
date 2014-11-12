@@ -9,7 +9,7 @@
     using Kendo.Mvc.UI;
 
     using KnowledgeSpreadSystem.Data;
-    using KnowledgeSpreadSystem.Web.Infrastructure;
+    using KnowledgeSpreadSystem.Web.Controllers.Base;
     using KnowledgeSpreadSystem.Web.Infrastructure.Extensions;
     using KnowledgeSpreadSystem.Web.ViewModels;
 

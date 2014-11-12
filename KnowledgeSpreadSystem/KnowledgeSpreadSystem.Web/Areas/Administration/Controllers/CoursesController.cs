@@ -1,23 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.Mvc;
-
-namespace KnowledgeSpreadSystem.Web.Areas.Administration.Controllers
+﻿namespace KnowledgeSpreadSystem.Web.Areas.Administration.Controllers
 {
+    using System.Collections;
+    using System.Web.Mvc;
 
     using AutoMapper.QueryableExtensions;
 
-    using Kendo.Mvc.Extensions;
     using Kendo.Mvc.UI;
 
     using KnowledgeSpreadSystem.Data;
     using KnowledgeSpreadSystem.Models;
-    using KnowledgeSpreadSystem.Web.Areas.Administration.Models;
+    using KnowledgeSpreadSystem.Web.Areas.Administration.Controllers.Base;
     using KnowledgeSpreadSystem.Web.Areas.Administration.ViewModels.Course;
-    using KnowledgeSpreadSystem.Web.Infrastructure;
-
 
     public class CoursesController : AdministratorController
     {
@@ -29,8 +22,6 @@ namespace KnowledgeSpreadSystem.Web.Areas.Administration.Controllers
 
         public ActionResult Index()
         {
-            this.ViewData["faculties"] = this.Data.Faculties.All().Project().To<FacultyViewModel>();
-
             if (Request.IsAjaxRequest())
             {
                 return this.PartialView();
@@ -40,87 +31,34 @@ namespace KnowledgeSpreadSystem.Web.Areas.Administration.Controllers
         }
 
         [HttpPost]
-        public JsonResult AllCourses([DataSourceRequest] DataSourceRequest request)
+        public ActionResult Create([DataSourceRequest] DataSourceRequest request, CourseViewModel model)
         {
-            var result = this.Data.Courses.All().Project().To<CourseViewModel>().ToList();
+            var dbModel = base.Create<Course>(model);
 
-            return this.Json(result.ToDataSourceResult(request), JsonRequestBehavior.AllowGet);
+            model.Id = dbModel != null ? dbModel.Id : (int?)null;
+
+            return this.GridOperation(model, request);
         }
 
         [HttpPost]
-        public JsonResult CreateCourse([DataSourceRequest] DataSourceRequest request, CourseViewModel course)
+        public JsonResult Update([DataSourceRequest] DataSourceRequest request, CourseViewModel model)
         {
-            if (this.ModelState.IsValid)
-            {
-                var newCourse = new Course()
-                {
-                    Description = course.Description,
-                    Name = course.Name,
-                    FacultyId = course.Faculty.Id,
-                    Year = course.Year,
-                };
-                this.Data.Courses.Add(newCourse);
-                this.Data.SaveChanges();
-                course.Id = newCourse.Id;
-            }
+            base.Update<Course, CourseViewModel>(model, model.Id);
 
-            return this.Json(
-                             new[] { course }.ToDataSourceResult(request, this.ModelState),
-                             JsonRequestBehavior.AllowGet);
+            return this.GridOperation(model, request);
         }
 
         [HttpPost]
-        public JsonResult UpdateCourse([DataSourceRequest] DataSourceRequest request, CourseViewModel course)
+        public JsonResult DeleteFaculty([DataSourceRequest] DataSourceRequest request, CourseViewModel model)
         {
-            var courseExisting = this.Data.Courses.All().FirstOrDefault(x => x.Id == course.Id);
+            base.Delete<Course>(model.Id, true);
 
-            if (this.ModelState.IsValid)
-            {
-                courseExisting.Name = course.Name;
-                courseExisting.Description = course.Description;
-                courseExisting.FacultyId = course.Faculty.Id;
-                courseExisting.Year = course.Year;
-                this.Data.SaveChanges();
-            }
-
-            if (courseExisting == null)
-            {
-                this.ModelState.AddModelError(string.Empty, "No such course exists!");
-            }
-
-            return this.Json(
-                             new[] { course }.ToDataSourceResult(request, this.ModelState),
-                             JsonRequestBehavior.AllowGet);
+            return this.GridOperation(model, request);
         }
 
-        [HttpPost]
-        public JsonResult DeleteCourse([DataSourceRequest] DataSourceRequest request, CourseViewModel course)
+        protected override IEnumerable GetData()
         {
-            var courseExisting = this.Data.Courses.All().FirstOrDefault(x => x.Id == course.Id);
-            if (courseExisting != null)
-            {
-
-                foreach (var courseModule in courseExisting.CourseModules.ToList())
-                {
-                    foreach (var calendarEvent in courseModule.Events.ToList())
-                    {
-                        this.Data.CalendarEvents.Delete(calendarEvent);
-                    }
-
-                    this.Data.CourseModules.Delete(courseModule);
-                }
-
-                foreach (var calendarEvent in courseExisting.Events.ToList())
-                {
-                    this.Data.CalendarEvents.Delete(calendarEvent);
-                }
-
-                this.Data.Courses.Delete(courseExisting);
-
-                this.Data.SaveChanges();
-            }
-
-            return this.Json(new[] { course }, JsonRequestBehavior.AllowGet);
+            return this.Data.Courses.All().Project().To<CourseViewModel>();
         }
     }
 }
