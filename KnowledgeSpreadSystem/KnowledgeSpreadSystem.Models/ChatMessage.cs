@@ -27,9 +27,6 @@ namespace KnowledgeSpreadSystem.Models
 
         public virtual User Receiver { get; set; }
 
-        [Required]
-        public DateTime CreatedOn { get; set; }
-
         public bool IsDeleted { get; set; }
 
         public DateTime? DeletedOn { get; set; }

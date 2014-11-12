@@ -6,10 +6,16 @@ using System.Web.Mvc;
 
 namespace KnowledgeSpreadSystem.Web.Areas.Administration.Controllers
 {
-        [Authorize(Roles = "Administrator")]
-    public class ResourcesController : Controller
+    using KnowledgeSpreadSystem.Data;
+
+    public class ResourcesController : AdministratorController
     {
         // GET: Administration/Resources
+        public ResourcesController(IKSSData data)
+            : base(data)
+        {
+        }
+
         public ActionResult Index()
         {
             if (Request.IsAjaxRequest())

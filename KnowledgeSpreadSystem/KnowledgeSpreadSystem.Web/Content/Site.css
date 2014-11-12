@@ -95,3 +95,7 @@ textarea {
     padding-bottom: 12px;
   }
 }
+
+.bigger {
+    font-size: 1.4em;
+}

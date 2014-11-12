@@ -1,21 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.Mvc;
-
-namespace KnowledgeSpreadSystem.Web.Areas.Administration.Controllers
+﻿namespace KnowledgeSpreadSystem.Web.Areas.Administration.Controllers
 {
+    using System;
+    using System.Linq;
+    using System.Web.Mvc;
+
     using AutoMapper;
-    using AutoMapper.QueryableExtensions;
 
     using KnowledgeSpreadSystem.Data;
-    using KnowledgeSpreadSystem.Models;
     using KnowledgeSpreadSystem.Web.Areas.Administration.Models;
-    using KnowledgeSpreadSystem.Web.Infrastructure;
 
-        [Authorize(Roles = "Administrator")]
-    public class UsersController : BaseController
+    public class UsersController : AdministratorController
     {
         public UsersController(IKSSData data)
             : base(data)

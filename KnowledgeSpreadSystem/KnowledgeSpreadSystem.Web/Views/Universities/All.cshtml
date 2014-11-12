@@ -1,0 +1,40 @@
+﻿@using Kendo.Mvc.UI
+@using KnowledgeSpreadSystem.Web.ViewModels
+
+<div class="alert alert-info text-center ">
+    <h2>All Universities</h2>
+</div>
+
+@(Html.Kendo().Grid<UniversityViewModel>()
+      .Name("grid")
+      .Columns(cols =>
+                   {
+                       cols.Bound(x => x.Name).ClientTemplate("<strong class='lead'>"+@Html.ActionLink("#= Name #","Details",new {id="#= Id #"}).ToString()+"</strong>");
+                       cols.Bound(x => x.About).ClientTemplate(@"<p class='text-info bigger'>#=About #</p>");
+                    
+                   })
+      .ColumnMenu()
+      .Pageable(page =>
+                    {
+                        page.PreviousNext(true);
+                        page.Numeric(true);
+                    })
+      .Sortable(sort =>
+                    {
+                        sort.AllowUnsort(true);
+                        sort.SortMode(GridSortMode.SingleColumn);
+                    })
+      .Filterable(filter =>
+                      {
+                          filter.Mode(GridFilterMode.Row);
+                      })
+      .Navigatable()
+      .Resizable(resize => resize.Columns(true))
+      .DataSource(data =>
+                  data
+                      .Ajax()
+                      .PageSize(10)
+                      .Read(read=>read.Action("Read","Universities"))
+                      .ServerOperation(true)
+      ))
+

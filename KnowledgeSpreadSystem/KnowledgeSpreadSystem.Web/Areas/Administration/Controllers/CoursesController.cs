@@ -6,7 +6,6 @@ using System.Web.Mvc;
 
 namespace KnowledgeSpreadSystem.Web.Areas.Administration.Controllers
 {
-    using System.Data.Entity;
 
     using AutoMapper.QueryableExtensions;
 
@@ -16,13 +15,11 @@ namespace KnowledgeSpreadSystem.Web.Areas.Administration.Controllers
     using KnowledgeSpreadSystem.Data;
     using KnowledgeSpreadSystem.Models;
     using KnowledgeSpreadSystem.Web.Areas.Administration.Models;
+    using KnowledgeSpreadSystem.Web.Areas.Administration.ViewModels.Course;
     using KnowledgeSpreadSystem.Web.Infrastructure;
 
-    using Microsoft.AspNet.Identity;
-    using Microsoft.AspNet.Identity.EntityFramework;
 
-        [Authorize(Roles = "Administrator")]
-    public class CoursesController : BaseController
+    public class CoursesController : AdministratorController
     {
         // GET: Administration/Courses
         public CoursesController(IKSSData data)
@@ -42,6 +39,7 @@ namespace KnowledgeSpreadSystem.Web.Areas.Administration.Controllers
             return this.View();
         }
 
+        [HttpPost]
         public JsonResult AllCourses([DataSourceRequest] DataSourceRequest request)
         {
             var result = this.Data.Courses.All().Project().To<CourseViewModel>().ToList();
@@ -49,6 +47,7 @@ namespace KnowledgeSpreadSystem.Web.Areas.Administration.Controllers
             return this.Json(result.ToDataSourceResult(request), JsonRequestBehavior.AllowGet);
         }
 
+        [HttpPost]
         public JsonResult CreateCourse([DataSourceRequest] DataSourceRequest request, CourseViewModel course)
         {
             if (this.ModelState.IsValid)
@@ -70,6 +69,7 @@ namespace KnowledgeSpreadSystem.Web.Areas.Administration.Controllers
                              JsonRequestBehavior.AllowGet);
         }
 
+        [HttpPost]
         public JsonResult UpdateCourse([DataSourceRequest] DataSourceRequest request, CourseViewModel course)
         {
             var courseExisting = this.Data.Courses.All().FirstOrDefault(x => x.Id == course.Id);
@@ -93,28 +93,29 @@ namespace KnowledgeSpreadSystem.Web.Areas.Administration.Controllers
                              JsonRequestBehavior.AllowGet);
         }
 
+        [HttpPost]
         public JsonResult DeleteCourse([DataSourceRequest] DataSourceRequest request, CourseViewModel course)
         {
             var courseExisting = this.Data.Courses.All().FirstOrDefault(x => x.Id == course.Id);
             if (courseExisting != null)
             {
 
-                    foreach (var courseModule in courseExisting.CourseModules.ToList())
-                    {
-                        foreach (var calendarEvent in courseModule.Events.ToList())
-                        {
-                            this.Data.CalendarEvents.Delete(calendarEvent);
-                        }
-
-                        this.Data.CourseModules.Delete(courseModule);
-                    }
-
-                    foreach (var calendarEvent in courseExisting.Events.ToList())
+                foreach (var courseModule in courseExisting.CourseModules.ToList())
+                {
+                    foreach (var calendarEvent in courseModule.Events.ToList())
                     {
                         this.Data.CalendarEvents.Delete(calendarEvent);
                     }
 
-                    this.Data.Courses.Delete(courseExisting);
+                    this.Data.CourseModules.Delete(courseModule);
+                }
+
+                foreach (var calendarEvent in courseExisting.Events.ToList())
+                {
+                    this.Data.CalendarEvents.Delete(calendarEvent);
+                }
+
+                this.Data.Courses.Delete(courseExisting);
 
                 this.Data.SaveChanges();
             }

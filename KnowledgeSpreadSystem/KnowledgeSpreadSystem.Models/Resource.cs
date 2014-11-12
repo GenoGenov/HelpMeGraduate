@@ -38,6 +38,8 @@
         [Required]
         public byte[] Content { get; set; }
 
+        public int Rating { get; set; }
+
         public bool IsDeleted { get; set; }
 
         public DateTime? DeletedOn { get; set; }

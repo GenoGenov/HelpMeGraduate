@@ -13,8 +13,7 @@
     using KnowledgeSpreadSystem.Web.Areas.Administration.Models;
     using KnowledgeSpreadSystem.Web.Infrastructure;
 
-        [Authorize(Roles = "Administrator")]
-    public class FacultiesController : BaseController
+    public class FacultiesController : AdministratorController
     {
         public FacultiesController(IKSSData data)
             : base(data)
@@ -33,6 +32,7 @@
             return this.View();
         }
 
+        [HttpPost]
         public JsonResult AllFaculties([DataSourceRequest] DataSourceRequest request)
         {
             var result = this.Data.Faculties.All().Project().To<FacultyViewModel>();
@@ -40,14 +40,15 @@
             return this.Json(result.ToDataSourceResult(request), JsonRequestBehavior.AllowGet);
         }
 
+        [HttpPost]
         public JsonResult CreateFaculty([DataSourceRequest] DataSourceRequest request, FacultyViewModel faculty)
         {
             if (this.ModelState.IsValid)
             {
                 var newfaculty = new Faculty()
                                      {
-                                         Description = faculty.Description, 
-                                         Name = faculty.Name, 
+                                         Description = faculty.Description,
+                                         Name = faculty.Name,
                                          UniversityId = faculty.University.Id
                                      };
                 this.Data.Faculties.Add(newfaculty);
@@ -56,10 +57,11 @@
             }
 
             return this.Json(
-                             new[] { faculty }.ToDataSourceResult(request, this.ModelState), 
+                             new[] { faculty }.ToDataSourceResult(request, this.ModelState),
                              JsonRequestBehavior.AllowGet);
         }
 
+        [HttpPost]
         public JsonResult UpdateFaculty([DataSourceRequest] DataSourceRequest request, FacultyViewModel faculty)
         {
             var facultyExisting = this.Data.Faculties.All().FirstOrDefault(x => x.Id == faculty.Id);
@@ -78,10 +80,11 @@
             }
 
             return this.Json(
-                             new[] { faculty }.ToDataSourceResult(request, this.ModelState), 
+                             new[] { faculty }.ToDataSourceResult(request, this.ModelState),
                              JsonRequestBehavior.AllowGet);
         }
 
+        [HttpPost]
         public JsonResult DeleteFaculty([DataSourceRequest] DataSourceRequest request, FacultyViewModel faculty)
         {
             var facultyExisting = this.Data.Faculties.All().FirstOrDefault(x => x.Id == faculty.Id);

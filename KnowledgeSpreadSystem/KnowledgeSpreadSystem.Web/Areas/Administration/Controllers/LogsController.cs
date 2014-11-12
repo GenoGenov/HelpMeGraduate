@@ -1,10 +1,16 @@
-﻿namespace KnowledgeSpreadSystem.Web.Controllers
+﻿namespace KnowledgeSpreadSystem.Web.Areas.Administration.Controllers
 {
     using System.Web.Mvc;
 
-        [Authorize(Roles = "Administrator")]
-    public class LogsController : Controller
+    using KnowledgeSpreadSystem.Data;
+
+    public class LogsController : AdministratorController
     {
+        public LogsController(IKSSData data)
+            : base(data)
+        {
+        }
+
         public ActionResult Index()
         {
             throw new System.NotImplementedException();

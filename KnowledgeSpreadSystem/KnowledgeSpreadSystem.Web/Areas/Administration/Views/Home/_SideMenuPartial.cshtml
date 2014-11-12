@@ -1,0 +1,22 @@
+﻿@{
+    Layout = null;
+
+}
+
+@{
+    var controllers = ((IEnumerable<string>)ViewBag.Controllers);
+}
+
+@foreach (var controller in controllers)
+{
+    <li>
+        @Ajax.ActionLink(controller, "Index", controller, new AjaxOptions()
+                                                              {
+                                                                  AllowCache = false,
+                                                                  HttpMethod = "Get",
+                                                                  InsertionMode = InsertionMode.Replace,
+                                                                  LoadingElementId = "ajax-loading",
+                                                                  UpdateTargetId = "ajax-admin-content"
+                                                              })
+    </li>
+}

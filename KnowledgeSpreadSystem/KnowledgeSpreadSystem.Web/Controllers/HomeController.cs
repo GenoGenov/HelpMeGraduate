@@ -7,7 +7,6 @@
 
     using KnowledgeSpreadSystem.Data;
     using KnowledgeSpreadSystem.Web.Infrastructure;
-    using KnowledgeSpreadSystem.Web.Models;
 
     public class HomeController : BaseController
     {
@@ -16,9 +15,9 @@
         {
         }
 
-        public HomeController():base(new KSSData())
+        public HomeController()
+            : base(new KSSData())
         {
-            
         }
 
         public ActionResult Index()
@@ -26,6 +25,11 @@
             return this.View();
         }
 
-        
+        [Authorize(Roles = "Moderator")]
+        public ActionResult Moderator()
+        {
+            return this.View();
+        }
+
     }
 }

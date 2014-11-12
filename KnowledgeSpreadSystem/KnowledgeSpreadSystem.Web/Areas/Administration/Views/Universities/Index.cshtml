@@ -12,17 +12,20 @@
                        {
                            columns.Bound(model => model.Name);
                            columns.Bound(model => model.About);
+                           columns.Bound(model => model.CreatedOn);
+                           columns.Bound(model => model.ModifiedOn);
                            columns.Command(command =>
                                                {
                                                    command.Edit();
                                                    command.Destroy();
                                                });
                        })
-
+                       .ColumnMenu()
           .Pageable(page =>
                         {
                             page.PreviousNext(true);
                             page.Numeric(true);
+                            page.Refresh(true);
                         })
           .Sortable(sort =>
                         {

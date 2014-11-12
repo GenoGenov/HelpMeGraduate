@@ -1,0 +1,16 @@
+﻿@if (Request.IsAuthenticated)
+{
+    <li>@Html.ActionLink("Universities", "All", "Universities", new { area = "" }, null)</li>
+    <li>@Html.ActionLink("Calendar", "Index", "Calendar")</li>
+    <li>@Html.ActionLink("My Enrolment", "Index", "Modules", new { area = "" }, new {@class="bigger label label-default"})</li>
+}
+
+@if (HttpContext.Current.User.IsInRole("Administrator"))
+{
+    <li>@Html.ActionLink("Administration", "Index", "Home", new { area = "Administration" }, null)</li>
+}
+
+@if (HttpContext.Current.User.IsInRole("Moderator"))
+{
+    <li>@Html.ActionLink("Moderator", "Moderator", "Home")</li>
+}

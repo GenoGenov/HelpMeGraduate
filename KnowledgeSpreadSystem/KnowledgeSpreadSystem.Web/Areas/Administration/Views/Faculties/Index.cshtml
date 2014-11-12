@@ -1,6 +1,7 @@
 ﻿@using System.Collections
 @using Kendo.Mvc.UI
 @using KnowledgeSpreadSystem.Web.Areas.Administration.Models
+@using KnowledgeSpreadSystem.Web.Areas.Administration.ViewModels
 <div class="col-md-12">
     @(Html.Kendo()
           .Grid<FacultyViewModel>()
@@ -13,18 +14,21 @@
                        {
                            columns.Bound(model => model.Name);
                            columns.Bound(model => model.Description);
-                           columns.Bound(model => model.University).ClientTemplate("#= University.Name #");
+                           columns.Bound(model => model.University).ClientTemplate("#= University.Name #").ClientGroupHeaderTemplate("University:#= value.Name #");
+                           columns.Bound(model => model.CreatedOn).Hidden(true);
+                           columns.Bound(model => model.ModifiedOn).Hidden(true);
                            columns.Command(command =>
                                                {
                                                    command.Edit();
                                                    command.Destroy();
                                                });
                        })
-
+                       .ColumnMenu()
           .Pageable(page =>
                         {
                             page.PreviousNext(true);
                             page.Numeric(true);
+                            page.Refresh(true);
                         })
           .Sortable(sort =>
                         {
@@ -42,9 +46,9 @@
           .Selectable(select => select.Mode(GridSelectionMode.Multiple).Type(GridSelectionType.Cell))
           .DataSource(data => data.Ajax()
                                   .Model(m => { m.Id(b => b.Id);
-                                                  m.Field(x => x.University).DefaultValue(new UniversityViewModel());
+                                                  m.Field(x => x.University).DefaultValue(new SimpleViewModel());
+                                      
                                   })
-                                  
                                   .PageSize(10)
                                   .ServerOperation(true)
                                   .Create("CreateFaculty", "Faculties")

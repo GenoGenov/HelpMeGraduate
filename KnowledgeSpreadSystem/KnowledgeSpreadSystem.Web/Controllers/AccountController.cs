@@ -7,7 +7,7 @@
 
     using KnowledgeSpreadSystem.Models;
     using KnowledgeSpreadSystem.Web;
-    using KnowledgeSpreadSystem.Web.Models;
+    using KnowledgeSpreadSystem.Web.ViewModels;
 
     using Microsoft.AspNet.Identity;
     using Microsoft.AspNet.Identity.Owin;

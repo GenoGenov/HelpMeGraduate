@@ -1,5 +1,6 @@
 ﻿namespace KnowledgeSpreadSystem.Data.Common.Repositories
 {
+    using System;
     using System.Data.Entity;
     using System.Linq;
 
@@ -21,6 +22,19 @@
         public IQueryable<T> AllWithDeleted()
         {
             return base.All();
+        }
+
+        public override void Delete(T entity)
+        {
+            entity.DeletedOn=DateTime.Now;
+
+            entity.IsDeleted = true;
+
+            var entry = this.Context.Entry(entity);
+
+            entry.State = EntityState.Modified;
+
+
         }
     }
 }

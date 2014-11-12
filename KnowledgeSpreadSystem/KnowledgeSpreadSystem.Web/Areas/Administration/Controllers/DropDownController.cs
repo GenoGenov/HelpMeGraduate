@@ -11,10 +11,11 @@ namespace KnowledgeSpreadSystem.Web.Areas.Administration.Controllers
 
     using KnowledgeSpreadSystem.Data;
     using KnowledgeSpreadSystem.Web.Areas.Administration.Models;
+    using KnowledgeSpreadSystem.Web.Areas.Administration.ViewModels;
+    using KnowledgeSpreadSystem.Web.Areas.Administration.ViewModels.Course;
     using KnowledgeSpreadSystem.Web.Infrastructure;
 
-        [Authorize(Roles = "Administrator")]
-    public class DropDownController : BaseController
+    public class DropDownController : AdministratorController
     {
         public DropDownController(IKSSData data)
             : base(data)
@@ -23,7 +24,7 @@ namespace KnowledgeSpreadSystem.Web.Areas.Administration.Controllers
 
         public JsonResult GetCascadeUniversities()
         {
-            var result = this.Data.Universities.All().Project().To<UniversityViewModel>();
+            var result = this.Data.Universities.All().Project().To<SimpleViewModel>();
 
             return Json(result, JsonRequestBehavior.AllowGet);
         }

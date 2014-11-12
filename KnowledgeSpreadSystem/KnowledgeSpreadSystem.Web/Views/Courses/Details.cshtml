@@ -1,0 +1,78 @@
+﻿@using Kendo.Mvc.UI
+@using KnowledgeSpreadSystem.Web.ViewModels
+@model CourseViewModel
+
+<section class="jumbotron">
+    <div class="alert alert-success">
+        <h2 class="text-center">@Model.Name</h2>
+    </div>
+    <hr />
+    <p class="text-primary">
+        @Model.Description
+    </p>
+    <hr />
+    <span class="label label-info bigger">University:</span>
+    <strong class="text-info bigger">@Html.ActionLink((string)@ViewBag.UniversityName, "Details", "Universities", new { id = (int)@ViewBag.UniversityId }, null)</strong>
+    <hr />
+    <span class="label label-info bigger">Faculty:</span>
+    <strong class="text-info bigger">@Html.ActionLink((string)@ViewBag.FacultyName, "Details", "Faculties", new { id = (int)@ViewBag.FacultyId }, null)</strong>
+    <hr />
+    <span class="label label-info bigger">Year:</span>
+    <strong class="text-danger bigger">@Model.Year</strong>
+    <hr/>
+    
+    <div class="panel panel-primary">
+        <div class="panel-heading">
+            <h2>Resources</h2>
+        </div>
+        <div class="panel-body">
+            TODO
+        </div>
+    </div>
+
+    <div class="panel panel-success">
+        <div class="panel-heading">
+            <h2>Modules</h2>
+        </div>
+        <div class="panel-body">
+            @(Html.Kendo().Grid<ModuleViewModel>()
+                  .Name("grid")
+                  .Columns(cols =>
+                               {
+                                   cols.Bound(x => x.Name).ClientTemplate("<strong class='lead'>" + @Html.ActionLink("#= Name #", "Details", "Modules", new { id = "#= Id #" }, null).ToString() + "</strong>");
+                                   cols.Bound(x => x.Description).ClientTemplate(@"<p class='text-info bigger'>#=Description #</p>");
+                                   cols.Bound(x => x.Started).ClientTemplate("<strong>#=Started.toUTCString()#</strong>").ClientGroupHeaderTemplate("Started:<strong>#=value.toUTCString()#</strong>");
+                                   cols.Bound(x => x.End).ClientTemplate("<strong>#=End.toUTCString()#</strong>").ClientGroupHeaderTemplate("Ends:<strong>#=value.toUTCString()#</strong>");
+                                   cols.Bound(x => x.Lecturer);
+                               })
+                  .ColumnMenu()
+                  .Pageable(page =>
+                                {
+                                    page.PreviousNext(true);
+                                    page.Numeric(true);
+                                })
+                  .Sortable(sort =>
+                                {
+                                    sort.AllowUnsort(true);
+                                    sort.SortMode(GridSortMode.SingleColumn);
+                                })
+                  .Filterable(filter =>
+                                  {
+                                      filter.Mode(GridFilterMode.Row);
+                                  })
+                  .Navigatable()
+                  .Groupable()
+                  .Navigatable()
+                  .Reorderable(config => config.Columns(true))
+                  .Resizable(config => config.Columns(true))
+                  .DataSource(data =>
+                              data
+                                  .Ajax()
+                                  .PageSize(10)
+                                  .Read(read => read.Action("Read", "Modules", new { id = @Model.Id }))
+                                  .ServerOperation(true)
+                  ))
+        </div>
+    </div>
+</section>
+

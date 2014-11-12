@@ -1,0 +1,69 @@
+﻿@using Kendo.Mvc.UI
+@using KnowledgeSpreadSystem.Web.Areas.Administration.Models
+@using KnowledgeSpreadSystem.Web.Areas.Administration.ViewModels
+<div class="col-md-12">
+    @(Html.Kendo()
+          .Grid<CourseModuleViewModel>()
+          .Name("grid-courseModules")
+          .ToolBar(tool =>
+                       {
+                           tool.Create();
+                       })
+          .Columns(columns =>
+                       {
+                           columns.Bound(model => model.Name);
+                           columns.Bound(model => model.Description);
+                           columns.Bound(model => model.Started).Format("{0:dd-MM-yyyy}");
+                           columns.Bound(model => model.End).Format("{0:dd-MM-yyyy}");
+                           columns.Bound(model => model.Lecturer);
+                           columns.Bound(model => model.Course).ClientTemplate("#= Course.Name #").ClientGroupHeaderTemplate("Course:#= value.Name#");
+                           columns.Bound(model => model.Faculty).ClientTemplate("#= Faculty.Name #").ClientGroupHeaderTemplate("Faculty:#= value.Name#");
+                           columns.Bound(model => model.University).ClientTemplate("#= University.Name #").ClientGroupHeaderTemplate("University:#= value.Name#");
+                           columns.Bound(model => model.CreatedOn).Hidden(true);
+                           columns.Bound(model => model.ModifiedOn).Hidden(true);
+                           columns.Command(command =>
+                                               {
+                                                   command.Edit();
+                                                   command.Destroy();
+                                               });
+                       })
+                       .ColumnMenu()
+          .Pageable(page =>
+                        {
+                            page.PreviousNext(true);
+                            page.Numeric(true);
+                            page.Refresh(true);
+                        })
+          .Sortable(sort =>
+                        {
+                            sort.AllowUnsort(true);
+                            sort.SortMode(GridSortMode.SingleColumn);
+                        })
+          .Groupable()
+          .Filterable()
+          .Resizable(resize => { resize.Columns(true); })
+          .Navigatable()
+          .Editable(edit =>
+                        {
+                            edit.Mode(GridEditMode.PopUp);
+                        })
+          .DataSource(data => data.Ajax()
+                                  .Model(m => { m.Id(b => b.Id);
+                                                  m.Field(x => x.Course).DefaultValue(new SimpleViewModel());
+                                                  m.Field(x => x.Faculty).DefaultValue(new SimpleViewModel());
+                                                  m.Field(x => x.University).DefaultValue(new SimpleViewModel());
+                                  })
+                                  .PageSize(10)
+                                  .ServerOperation(true)
+                                  .Create("CreateCourseModule", "Modules")
+                                  .Read("AllCourseModules", "Modules")
+                                  .Update("UpdateCourseModule", "Modules")
+                                  .Destroy("DeleteCourseModule", "Modules")
+                                  .Events(events =>
+                                              {
+                                                  events.RequestEnd("onRequestEnd");
+                                                  events.Error("handleError");
+                                              }))
+
+          .Resizable(x => { x.Columns(true); }))
+</div>

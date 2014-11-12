@@ -17,16 +17,58 @@
 </div>
 
 @section kendoHelpers{
+    <script>
+        function filterFaculties() {
+            return {
+                universities: $("#University").val()
+            };
+        }
+        function filterCourses() {
+            return {
+                faculties: $("#Faculty").val()
+            };
+        }
+
+    </script>
+    
 <script>
-    function filterFaculties() {
-        return {
-            universities: $("#University").val()
-        };
+    function startChanged() {
+        var endPicker = $("#End").data("kendoDatePicker"),
+            startDate = this.value();
+
+        if (startDate) {
+            startDate = new Date(startDate);
+            startDate.setDate(startDate.getDate() + 1);
+            endPicker.min(startDate);
+        }
     }
-    function filterCourses() {
-        return {
-            faculties: $("#Faculty").val()
-        };
+
+    function endChanged() {
+        var startPicker = $("#Started").data("kendoDatePicker"),
+            endDate = this.value();
+
+        if (endDate) {
+            endDate = new Date(endDate);
+            endDate.setDate(endDate.getDate() - 1);
+            startPicker.max(endDate);
+        }
     }
+
 </script>
+
+}
+
+@section scripts
+{
+<script>
+    $(document).ready(function () {
+        $('#admin-menu').on('click', 'li', function (e) {
+            var $this = $(this);
+            $this.parent('ul').children('li').removeClass('active');
+            $this.addClass('active');
+        });
+    });
+
+</script>
+
 }

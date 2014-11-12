@@ -1,6 +1,8 @@
 ﻿namespace KnowledgeSpreadSystem.Web
 {
+    using System.Globalization;
     using System.Linq;
+    using System.Threading;
     using System.Web.Http;
     using System.Web.Mvc;
     using System.Web.Optimization;
@@ -17,6 +19,7 @@
     {
         protected void Application_Start()
         {
+
             var autoMapperConfig = new AutoMapperConfig();
             autoMapperConfig.Execute();
 
@@ -34,9 +37,8 @@
                 userManager.AddToRole(admin.Id, "Administrator");
                 db.SaveChanges();
 
-                db.Roles.Add(new IdentityRole("CourseModerator"));
-                db.Roles.Add(new IdentityRole("ModuleModerator"));
-                
+                db.Roles.Add(new IdentityRole("Moderator"));
+                db.SaveChanges();
             }
            
 

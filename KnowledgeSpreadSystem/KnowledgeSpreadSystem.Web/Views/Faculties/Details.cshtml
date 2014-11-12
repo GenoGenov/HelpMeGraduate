@@ -1,0 +1,63 @@
+﻿@using Kendo.Mvc.UI
+@using KnowledgeSpreadSystem.Web.ViewModels
+@model FacultyViewModel
+           
+<section class="jumbotron">
+    <h2 class="text-center">@Model.Name</h2>
+    <hr/>
+    <p class="text-primary">
+        @Model.Description
+    </p>
+    <hr/>
+        <span class="label label-info bigger">University:</span>
+    <strong class="text-info bigger">@Html.ActionLink((string)@ViewBag.Name, "Details", "Universities", new {id=(int)@ViewBag.Id}, null)</strong>
+    <hr/>
+    
+    <div class="panel panel-success">
+        <div class="panel-heading">
+            <h2>Courses</h2>
+        </div>
+        <div class="panel-body">
+            @(Html.Kendo().Grid<CourseViewModel>()
+      .Name("grid")
+      .Columns(cols =>
+                   {
+                       cols.Bound(x => x.Name).ClientTemplate("<strong class='lead'>" + @Html.ActionLink("#= Name #", "Details", "Courses", new { id = "#= Id #" }, null).ToString() + "</strong>");
+                       cols.Bound(x => x.Description).ClientTemplate(@"<p class='text-info bigger'>#=Description #</p>");
+                       cols.Bound(x => x.Year).ClientTemplate("<strong>#=Year#</strong>");
+                   })
+      .ColumnMenu()
+      .Pageable(page =>
+                    {
+                        page.PreviousNext(true);
+                        page.Numeric(true);
+                    })
+      .Sortable(sort =>
+                    {
+                        sort.AllowUnsort(true);
+                        sort.SortMode(GridSortMode.SingleColumn);
+                    })
+      .Filterable(filter =>
+                      {
+                          filter.Mode(GridFilterMode.Row);
+                      })
+      .Navigatable()
+      .Groupable()
+      .Navigatable()
+      .Reorderable(config => config.Columns(true))
+      .Resizable(config => config.Columns(true))
+      .DataSource(data =>
+                  data
+                      .Ajax()
+                      .PageSize(10)
+                      .Read(read => read.Action("Read", "Courses", new { id = @Model.Id }))
+                      .ServerOperation(true)
+      ))
+        </div>
+    </div>
+</section>
+
+
+
+
+

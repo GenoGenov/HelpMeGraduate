@@ -1,0 +1,103 @@
+﻿@using Kendo.Mvc.UI
+@using KnowledgeSpreadSystem.Web.ViewModels
+@model UniversityViewModel
+
+
+<section>
+    <div class="jumbotron text-center">
+        <h2>@Model.Name</h2>
+        <hr />
+        <p class="text-primary">
+            @Model.About
+        </p>
+    </div>
+    <div class="panel panel-info">
+        <div class="panel-heading">
+            <h3>Faculties</h3>
+        </div>
+        <div class="panel-body">
+            @*<div class="list-group"></div>
+            @foreach (var faculty in @Model)
+            {
+                <a href="@Url.Action("Details","Faculties",new {faculty.Id})" class="list-group-item">
+                    <h4 class="list-group-item-heading">@faculty.Name</h4>
+                    <p class="list-group-item-text">@faculty.Description.ToShortString(250)</p>
+                </a>
+            }*@
+            
+            @(Html.Kendo().Grid<FacultyViewModel>()
+      .Name("grid")
+      .Columns(cols =>
+                   {
+                       cols.Bound(x => x.Name).ClientTemplate("<strong class='lead'>" + @Html.ActionLink("#= Name #", "Details","Faculties", new { id = "#= Id #" },null).ToString() + "</strong>");
+                       cols.Bound(x => x.Description).ClientTemplate(@"<p class='text-info bigger'>#=Description #</p>");
+
+                   })
+      .ColumnMenu()
+      .Pageable(page =>
+                    {
+                        page.PreviousNext(true);
+                        page.Numeric(true);
+                    })
+      .Sortable(sort =>
+                    {
+                        sort.AllowUnsort(true);
+                        sort.SortMode(GridSortMode.SingleColumn);
+                    })
+      .Filterable(filter =>
+                      {
+                          filter.Mode(GridFilterMode.Row);
+                      })
+      .Navigatable()
+      .Resizable(resize => resize.Columns(true))
+      .DataSource(data =>
+                  data
+                      .Ajax()
+                      .PageSize(10)
+                      .Read(read => read.Action("Read", "Faculties",new {id=@Model.Id}))
+                      .ServerOperation(true)
+      ))
+
+
+
+
+        </div>
+    </div>
+</section>
+
+@*@(Html.Kendo().Grid<UniversityViewModel>()
+      .Name("grid")
+      .Columns(cols =>
+                   {
+                       cols.Bound(x => x.Name).ClientTemplate("<strong class='lead'>" + @Html.ActionLink("#= Name #", "Details", new { id = "#= Id #" }).ToString() + "</strong>");
+                       cols.Bound(x => x.About).ClientTemplate(@"<p class='text-info bigger'>#=About #</p>");
+
+                   })
+      .ColumnMenu()
+      .Pageable(page =>
+                    {
+                        page.PreviousNext(true);
+                        page.Numeric(true);
+                    })
+      .Sortable(sort =>
+                    {
+                        sort.AllowUnsort(true);
+                        sort.SortMode(GridSortMode.SingleColumn);
+                    })
+      .Filterable(filter =>
+                      {
+                          filter.Mode(GridFilterMode.Row);
+                      })
+      .Navigatable()
+      .Resizable(resize => resize.Columns(true))
+      .DataSource(data =>
+                  data
+                      .Ajax()
+                      .PageSize(10)
+                      .Read(read => read.Action("Read", "Universities"))
+                      .ServerOperation(true)
+      ))*@
+
+
+
+

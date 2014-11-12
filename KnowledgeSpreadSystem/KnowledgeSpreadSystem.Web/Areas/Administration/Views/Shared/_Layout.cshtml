@@ -1,160 +1,44 @@
-﻿<!DOCTYPE html>
-<html>
-<head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@ViewBag.Title - Help Me Graduate</title>
-    @Styles.Render("~/Content/css")
-    @Styles.Render("~/Content/kendo")
-    @Scripts.Render("~/bundles/jquery")
-    @Scripts.Render("~/bundles/kendo")
-    @Scripts.Render("~/bundles/modernizr")
-
+﻿@{
+    Layout = "~/Views/Shared/Base/_BaseLayout.cshtml";
+}
+@section styles{
     @RenderSection("styles", false)
+}
+
+@section scripts
+{
+
+    @RenderSection("scripts", false)
     @RenderSection("kendoHelpers", false)
+}
+<div class="container-fluid body-content">
+    <div class="notificator-admin" style="display: none"></div>
+    <div class="row">
+        <div class="col-md-2">
+            <div class="sidebar-nav">
+                <div class="navbar navbar-inverse" role="navigation">
+                    <div class="navbar-header">
+                        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".sidebar-navbar-collapse">
+                            <span class="sr-only">Toggle navigation</span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>
+                    </div>
+                    <div class="navbar-collapse collapse sidebar-navbar-collapse">
 
-</head>
-<body>
-    <div class="navbar navbar-default">
-        <div class="container">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                @Html.ActionLink("HelpMeGraduate", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
-            </div>
-            <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav">
-                    @{ Html.RenderAction("UniversityLinks", "Menu", new { area = "" }); }
-
-                </ul>
-                @Html.Partial("_LoginPartial")
-            </div>
-        </div>
-    </div>
-    <br />
-    <div class="container-fluid body-content">
-        <div class="notificator-admin" style="display: none"></div>
-        <div class="row">
-            <div class="col-md-2">
-                <div class="sidebar-nav">
-                    <div class="navbar navbar-inverse" role="navigation">
-                        <div class="navbar-header">
-                            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".sidebar-navbar-collapse">
-                                <span class="sr-only">Toggle navigation</span>
-                                <span class="icon-bar"></span>
-                                <span class="icon-bar"></span>
-                                <span class="icon-bar"></span>
-                            </button>
-                        </div>
-                        <div class="navbar-collapse collapse sidebar-navbar-collapse">
-                           
-                            <ul class=" nav navbar navbar-nav" id="admin-menu">
-                                <li class="navbar-brand">Categories</li>
-                                <li class="divider nav-divider"></li>
-                                <li>
-                                    @Ajax.ActionLink("Universities","Index","Universities",new AjaxOptions()
-                                                                                               {
-                                                                                                   AllowCache = false,
-                                                                                                   HttpMethod = "Get",
-                                                                                                   InsertionMode = InsertionMode.Replace,
-                                                                                                   LoadingElementId = "ajax-loading",
-                                                                                                   UpdateTargetId = "ajax-admin-content"
-                                                                                               })
-                                </li>
-                                <li>
-                                    @Ajax.ActionLink("Faculties", "Index", "Faculties", new AjaxOptions()
-                                                                                               {
-                                                                                                   AllowCache = false,
-                                                                                                   HttpMethod = "Get",
-                                                                                                   InsertionMode = InsertionMode.Replace,
-                                                                                                   LoadingElementId = "ajax-loading",
-                                                                                                   UpdateTargetId = "ajax-admin-content"
-                                                                                               })
-                                </li>
-                                <li>
-                                    @Ajax.ActionLink("Courses", "Index", "Courses", new AjaxOptions()
-                                                                                               {
-                                                                                                   AllowCache = false,
-                                                                                                   HttpMethod = "Get",
-                                                                                                   InsertionMode = InsertionMode.Replace,
-                                                                                                   LoadingElementId = "ajax-loading",
-                                                                                                   UpdateTargetId = "ajax-admin-content"
-                                                                                               })
-                                </li>
-                                <li>
-                                     @Ajax.ActionLink("Modules", "Index", "CourseModules", new AjaxOptions()
-                                                                                               {
-                                                                                                   AllowCache = false,
-                                                                                                   HttpMethod = "Get",
-                                                                                                   InsertionMode = InsertionMode.Replace,
-                                                                                                   LoadingElementId = "ajax-loading",
-                                                                                                   UpdateTargetId = "ajax-admin-content"
-                                                                                               })
-                                </li>
-                                <li>
-                                    @Ajax.ActionLink("Resources", "Index", "Resources", new AjaxOptions()
-                                                                                               {
-                                                                                                   AllowCache = false,
-                                                                                                   HttpMethod = "Get",
-                                                                                                   InsertionMode = InsertionMode.Replace,
-                                                                                                   LoadingElementId = "ajax-loading",
-                                                                                                   UpdateTargetId = "ajax-admin-content"
-                                                                                               })
-                                </li>
-                                <li>
-                                    @Ajax.ActionLink("Users", "Index", "Users", new AjaxOptions()
-                                                                                               {
-                                                                                                   AllowCache = false,
-                                                                                                   HttpMethod = "Get",
-                                                                                                   InsertionMode = InsertionMode.Replace,
-                                                                                                   LoadingElementId = "ajax-loading",
-                                                                                                   UpdateTargetId = "ajax-admin-content"
-                                                                                               })
-                                </li>
-                                <li>
-                                    @Ajax.ActionLink("Logs", "Index", "Logs", new AjaxOptions()
-                                                                                               {
-                                                                                                   AllowCache = false,
-                                                                                                   HttpMethod = "Get",
-                                                                                                   InsertionMode = InsertionMode.Replace,
-                                                                                                   LoadingElementId = "ajax-loading",
-                                                                                                   UpdateTargetId = "ajax-admin-content"
-                                                                                               })
-                                </li>
-                            </ul>
-                        </div>
+                        <ul class=" nav navbar navbar-nav" id="admin-menu">
+                            <li class="navbar-brand">@Html.ActionLink("Categories","Index","Home")</li>
+                            <li class="divider nav-divider"></li>
+                            @Html.Action("SideMenu","Home")
+                        </ul>
                     </div>
                 </div>
             </div>
-            <div class="col-md-10">
-                @RenderBody()
-            </div>
-            <script>
-                $(document).ready(function() {
-                    $('#admin-menu').on('click', 'li', function(e) {
-                        var $this = $(this);
-                        $this.parent('ul').children('li').removeClass('active');
-                        $this.addClass('active');
-                    });
-                });
-         
-            </script>
+        </div>
+        <div class="col-md-10">
+            @RenderBody()
         </div>
 
-        <hr />
-        <footer class="text-center" id="main-footer">
-            <strong>
-                &copy; @DateTime.Now.Year - <a href="http://telerikacademy.com">Telerik Academy</a>. Author: Geno Genov
-            </strong>
-        </footer>
     </div>
-
-    @Scripts.Render("~/bundles/bootstrap")
-    @Scripts.Render("~/bundles/noty")
-    @RenderSection("scripts", required: false)
-
-</body>
-</html>
+</div>

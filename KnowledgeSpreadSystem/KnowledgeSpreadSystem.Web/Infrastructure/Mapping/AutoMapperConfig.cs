@@ -20,6 +20,8 @@ namespace KnowledgeSpreadSystem.Web.Infrastructure.Mapping
 
             LoadStandardMappings(types);
 
+            LoadSimpleMappings(types);
+
             LoadCustomMappings(types);
         }
 
@@ -39,6 +41,27 @@ namespace KnowledgeSpreadSystem.Web.Infrastructure.Mapping
             foreach (var map in maps)
             {
                 Mapper.CreateMap(map.Source, map.Destination);
+            }
+        }
+
+        private static void LoadSimpleMappings(IEnumerable<Type> types)
+        {
+            var maps = (from t in types
+                        from i in t.GetInterfaces()
+                        where
+                            i.IsGenericType && i.GetGenericTypeDefinition() == typeof(ISimpleView<>) &&
+                            !t.IsAbstract && !t.IsInterface
+                            select new
+                                       {
+                                           Source = t.GetInterface("IMapFrom`1").GetGenericArguments()[0],
+                                           Destination = i.GetGenericArguments()[0]
+                                       })
+                .ToArray();
+
+            foreach (var map in maps)
+            {
+                Mapper.CreateMap(map.Source, map.Destination);
+
             }
         }
 

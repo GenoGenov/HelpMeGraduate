@@ -9,8 +9,7 @@ namespace KnowledgeSpreadSystem.Web.Areas.Administration.Controllers
     using KnowledgeSpreadSystem.Data;
     using KnowledgeSpreadSystem.Web.Infrastructure;
 
-        [Authorize(Roles = "Administrator")]
-    public class HomeController : BaseController
+    public class HomeController : AdministratorController
     {
         public HomeController(IKSSData data)
             : base(data)
@@ -20,6 +19,23 @@ namespace KnowledgeSpreadSystem.Web.Areas.Administration.Controllers
         public ActionResult Index()
         {
             return View();
+        }
+
+
+        [ChildActionOnly]
+        public ActionResult SideMenu()
+        {
+            ViewBag.Controllers = new[]
+                                      {
+                                          "Universities",
+                                          "Faculties",
+                                          "Courses",
+                                          "Modules", 
+                                          "Resources",
+                                          "Users",
+                                          "Logs"
+                                      };
+            return this.View("_SideMenuPartial");
         }
     }
 }

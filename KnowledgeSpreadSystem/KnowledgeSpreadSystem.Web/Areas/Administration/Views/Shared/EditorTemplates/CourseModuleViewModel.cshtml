@@ -20,13 +20,13 @@
 
 <div class="form-group">
     @Html.LabelFor(x => x.Started)
-    @Html.EditorFor(m => m.Started, new { @class = "form-control" ,name="Started"})
+    @Html.EditorFor(m => m.Started,"Date" ,new { @class = "form-control" ,name="Started", jsEvent="startChanged"})
     @Html.ValidationMessageFor(x => x.Started)
 </div>
 
 <div class="form-group">
     @Html.LabelFor(x => x.End)
-    @Html.EditorFor(m => m.End, new { @class = "form-control" ,name="End"})
+    @Html.EditorFor(m => m.End, "Date", new { @class = "form-control" ,name="End", jsEvent="endChanged"})
     @Html.ValidationMessageFor(x => x.End)
 </div>
 
@@ -46,11 +46,5 @@
     @Html.EditorFor(x=>x.Course)
     @Html.ValidationMessageFor(x => x.Course)
 </div>
-
-
-
-@section Scripts {
-    @Scripts.Render("~/bundles/jqueryval")
-}
 
 

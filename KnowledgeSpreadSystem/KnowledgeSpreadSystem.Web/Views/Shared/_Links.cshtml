@@ -1,5 +1,0 @@
-﻿@RenderBody()
-@if (HttpContext.Current.User.IsInRole("Administrator"))
-{
-    <li>@Html.ActionLink("Administration", "Index", "Home", new { area = "Administration" }, null)</li>
-}

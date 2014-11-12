@@ -14,8 +14,7 @@
     using KnowledgeSpreadSystem.Web.Areas.Administration.Models;
     using KnowledgeSpreadSystem.Web.Infrastructure;
 
-    [Authorize(Roles = "Administrator")]
-    public class UniversitiesController : BaseController
+    public class UniversitiesController : AdministratorController
     {
         public UniversitiesController(IKSSData data)
             : base(data)
@@ -32,6 +31,7 @@
             return this.View();
         }
 
+        [HttpPost]
         public JsonResult UpdateUniversity([DataSourceRequest] DataSourceRequest request, UniversityViewModel uni)
         {
             var uniExisting = this.Data.Universities.All().FirstOrDefault(x => x.Id == uni.Id);
@@ -52,6 +52,7 @@
             return this.Json(new[] { uni }.ToDataSourceResult(request, this.ModelState), JsonRequestBehavior.AllowGet);
         }
 
+        [HttpPost]
         public JsonResult DeleteUniversity([DataSourceRequest] DataSourceRequest request, UniversityViewModel uni)
         {
             var uniExisting = this.Data.Universities.All().FirstOrDefault(x => x.Id == uni.Id);
@@ -89,6 +90,7 @@
             return this.Json(new[] { uni }, JsonRequestBehavior.AllowGet);
         }
 
+        [HttpPost]
         public JsonResult CreateUniversity([DataSourceRequest] DataSourceRequest request, UniversityViewModel uni)
         {
             if (this.ModelState.IsValid)
@@ -102,6 +104,7 @@
             return this.Json(new[] { uni }.ToDataSourceResult(request, this.ModelState), JsonRequestBehavior.AllowGet);
         }
 
+        [HttpPost]
         public JsonResult AllUniversities([DataSourceRequest] DataSourceRequest request)
         {
             var result = this.Data.Universities.All().Project().To<UniversityViewModel>();

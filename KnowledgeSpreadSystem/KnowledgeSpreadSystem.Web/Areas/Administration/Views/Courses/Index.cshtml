@@ -1,5 +1,7 @@
 ﻿@using Kendo.Mvc.UI
 @using KnowledgeSpreadSystem.Web.Areas.Administration.Models
+@using KnowledgeSpreadSystem.Web.Areas.Administration.ViewModels
+@using KnowledgeSpreadSystem.Web.Areas.Administration.ViewModels.Course
 <div class="col-md-12">
     @(Html.Kendo()
           .Grid<CourseViewModel>()
@@ -13,19 +15,22 @@
                            columns.Bound(model => model.Name);
                            columns.Bound(model => model.Description);
                            columns.Bound(model => model.Year);
-                           columns.Bound(model => model.Faculty).ClientTemplate("#= Faculty.Name #");
-                           columns.Bound(model => model.Faculty.University).ClientTemplate("#= Faculty.University.Name #");
+                           columns.Bound(model => model.Faculty).Groupable(false).ClientTemplate("#= Faculty.Name #").ClientGroupHeaderTemplate("Faculty:#= value.Name #");
+                           columns.Bound(model => model.University).Groupable(false).ClientTemplate("#= University.Name #").ClientGroupHeaderTemplate("University:#= value.Name #");
+                           columns.Bound(model => model.CreatedOn).Hidden(true);
+                           columns.Bound(model => model.ModifiedOn).Hidden(true);
                            columns.Command(command =>
                                                {
                                                    command.Edit();
                                                    command.Destroy();
                                                });
                        })
-
+                       .ColumnMenu()
           .Pageable(page =>
                         {
                             page.PreviousNext(true);
                             page.Numeric(true);
+                            page.Refresh(true);
                         })
           .Sortable(sort =>
                         {
@@ -42,7 +47,9 @@
                         })
           .DataSource(data => data.Ajax()
                                   .Model(m => { m.Id(b => b.Id);
-                                                  m.Field(x => x.Faculty).DefaultValue(new FacultyViewModel(){University = new UniversityViewModel()});
+                                      
+                                                  m.Field(x => x.Faculty).DefaultValue(new SimpleViewModel());
+                                                  m.Field(x => x.University).DefaultValue(new SimpleViewModel());
                                   })
                                   .PageSize(10)
                                   .ServerOperation(true)
