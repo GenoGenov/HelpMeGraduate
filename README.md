@@ -1,7 +1,7 @@
 KnowledgeSpreadSystem (HelpMeGraduate)
 ==============
 
-WARNING!
+#WARNING!
 
 This project uses Kendo UI for ASP.NET MVC -> http://www.telerik.com/aspnet-mvc
 
