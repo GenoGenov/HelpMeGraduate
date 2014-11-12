@@ -3,6 +3,7 @@
 using Microsoft.Owin;
 
 [assembly: OwinStartup(typeof(Startup))]
+
 namespace KnowledgeSpreadSystem.Web
 {
     using Owin;

@@ -49,7 +49,7 @@
         }
 
         [HttpPost]
-        public JsonResult DeleteFaculty([DataSourceRequest] DataSourceRequest request, CourseViewModel model)
+        public JsonResult Delete([DataSourceRequest] DataSourceRequest request, CourseViewModel model)
         {
             base.Delete<Course>(model.Id, true);
 

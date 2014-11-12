@@ -48,7 +48,7 @@
         }
 
         [HttpPost]
-        public JsonResult DeleteFaculty([DataSourceRequest] DataSourceRequest request, UniversityViewModel model)
+        public JsonResult Delete([DataSourceRequest] DataSourceRequest request, UniversityViewModel model)
         {
             base.Delete<University>(model.Id, true);
 
@@ -57,7 +57,7 @@
 
         protected override IEnumerable GetData()
         {
-            return this.Data.Courses.All().Project().To<UniversityViewModel>();
+            return this.Data.Universities.All().Project().To<UniversityViewModel>();
         }
     }
 }
