@@ -1,12 +1,13 @@
 ﻿@using Kendo.Mvc.UI
 @using KnowledgeSpreadSystem.Web.ViewModels
+@using KnowledgeSpreadSystem.Web.ViewModels.Course
 @model FacultyViewModel
            
 <section class="jumbotron">
     <h2 class="text-center">@Model.Name</h2>
     <hr/>
     <p class="text-primary">
-        @Model.Description
+        @Html.DisplayFor(x=>x.Description)
     </p>
     <hr/>
         <span class="label label-info bigger">University:</span>

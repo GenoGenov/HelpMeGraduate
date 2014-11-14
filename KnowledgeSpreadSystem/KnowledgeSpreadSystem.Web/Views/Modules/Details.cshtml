@@ -1,0 +1,37 @@
+﻿@using Kendo.Mvc.UI
+@using KnowledgeSpreadSystem.Web.ViewModels
+@model ModuleViewModel
+
+<section class="jumbotron">
+    <div class="alert alert-success">
+        <h2 class="text-center">@Model.Name</h2>
+    </div>
+    <hr />
+        @Html.DisplayFor(x=>x.Description);
+    <hr />
+    <span class="label label-info bigger">University:</span>
+    <strong class="text-info bigger">@Html.ActionLink((string)@ViewBag.UniversityName, "Details", "Universities", new { id = (int)@ViewBag.UniversityId }, null)</strong>
+    <hr />
+    <span class="label label-info bigger">Faculty:</span>
+    <strong class="text-info bigger">@Html.ActionLink((string)@ViewBag.FacultyName, "Details", "Faculties", new { id = (int)@ViewBag.FacultyId }, null)</strong>
+    <hr />
+    <span class="label label-info bigger">Course:</span>
+    <strong class="text-info bigger">
+        @Html.ActionLink((string)@ViewBag.CourseName, "Details", "Courses", new { id = (int)@ViewBag.CourseId }, null)
+        @if (ViewBag.Enrolled)
+        {
+            <span class="label label-warning">(Enrolled!)</span>
+            @Html.ActionLink("To module resources","Module","Enrolment",new {id=@Model.Id},new {@class="btn btn-primary"})
+        }
+    </strong>
+    <hr />
+    <span class="label label-info bigger">Starts:</span>
+    <strong class="text-primary bigger">@Html.DisplayFor(x => x.Started)</strong>
+    <hr />
+    <span class="label label-info bigger">Ends:</span>
+    <strong class="text-primary bigger">@Html.DisplayFor(x => x.End)</strong>
+    
+</section>
+
+
+

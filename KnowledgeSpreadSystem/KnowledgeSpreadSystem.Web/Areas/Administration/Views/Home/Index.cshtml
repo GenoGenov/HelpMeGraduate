@@ -3,10 +3,12 @@
         HelpMeGraduate Administration Area
     </h2>
 </div>
+<div class="row" id="ajax-loading" style="display: none">
+    <div class="col-md-4 col-md-offset-4">
+        <img src="~/Content/images/ajax-loader.gif" style="width: 250px" />
+    </div>
+</div>
 
-        <div class="col-md-4 col-md-offset-4" id="ajax-loading" style="display: none">
-            <img src="~/Content/images/ajax-loader.gif" style="width: 250px" />
-        </div>
 <div class="row" id="ajax-admin-content">
     <div class="alert alert-info">
         <h2 class="lead text-center">
@@ -16,47 +18,7 @@
  
 </div>
 
-@section kendoHelpers{
-    <script>
-        function filterFaculties() {
-            return {
-                universities: $("#University").val()
-            };
-        }
-        function filterCourses() {
-            return {
-                faculties: $("#Faculty").val()
-            };
-        }
 
-    </script>
-    
-<script>
-    function startChanged() {
-        var endPicker = $("#End").data("kendoDatePicker"),
-            startDate = this.value();
-
-        if (startDate) {
-            startDate = new Date(startDate);
-            startDate.setDate(startDate.getDate() + 1);
-            endPicker.min(startDate);
-        }
-    }
-
-    function endChanged() {
-        var startPicker = $("#Started").data("kendoDatePicker"),
-            endDate = this.value();
-
-        if (endDate) {
-            endDate = new Date(endDate);
-            endDate.setDate(endDate.getDate() - 1);
-            startPicker.max(endDate);
-        }
-    }
-
-</script>
-
-}
 
 @section scripts
 {

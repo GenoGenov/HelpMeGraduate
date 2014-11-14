@@ -1,4 +1,5 @@
 ﻿@using Kendo.Mvc.UI
+@using Kendo.Mvc.UI.Fluent
 @using KnowledgeSpreadSystem.Web.Areas.Administration.ViewModels.Base
 @using KnowledgeSpreadSystem.Web.Areas.Administration.ViewModels.Course
 <div class="col-md-12">
@@ -9,21 +10,28 @@
                        {
                            tool.Create();
                        })
-          .Columns(columns =>
-                       {
-                           columns.Bound(model => model.Name);
-                           columns.Bound(model => model.Description);
-                           columns.Bound(model => model.Year);
-                           columns.Bound(model => model.Faculty).Groupable(false).ClientTemplate("#= Faculty.Name #").ClientGroupHeaderTemplate("Faculty:#= value.Name #");
-                           columns.Bound(model => model.University).Groupable(false).ClientTemplate("#= University.Name #").ClientGroupHeaderTemplate("University:#= value.Name #");
-                           columns.Bound(model => model.CreatedOn).Hidden(true);
-                           columns.Bound(model => model.ModifiedOn).Hidden(true);
-                           columns.Command(command =>
-                                               {
-                                                   command.Edit();
-                                                   command.Destroy();
-                                               });
-                       })
+                  .Columns(cols =>
+                                  {
+                                      cols.Bound(model => model.Name);
+                                      cols.Bound(model => model.Description);
+                                      cols.Bound(model => model.Year);
+                                      cols.Bound(model => model.Faculty)
+                                          .Groupable(false)
+                                          .ClientTemplate("#= Faculty.Name #")
+                                          .ClientGroupHeaderTemplate("Faculty:#= value.Name #");
+                                      cols.Bound(model => model.University)
+                                          .Groupable(false)
+                                          .ClientTemplate("#= University.Name #")
+                                          .ClientGroupHeaderTemplate("University:#= value.Name #");
+                                      cols.Bound(model => model.CreatedOn).Hidden(true);
+                                      cols.Bound(model => model.ModifiedOn).Hidden(true);
+                                      cols.Command(
+                                                   command =>
+                                                   {
+                                                       command.Edit();
+                                                       command.Destroy();
+                                                   });
+                                  })
                        .ColumnMenu()
           .Pageable(page =>
                         {

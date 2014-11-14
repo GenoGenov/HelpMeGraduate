@@ -59,8 +59,8 @@
     <Compile Include="Course.cs" />
     <Compile Include="CourseModule.cs" />
     <Compile Include="Enums\EventType.cs" />
-    <Compile Include="Enums\ResourceType.cs" />
     <Compile Include="Facoulty.cs" />
+    <Compile Include="Insight.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Resource.cs" />
     <Compile Include="University.cs" />

@@ -14,6 +14,8 @@
     using KnowledgeSpreadSystem.Web.Infrastructure.Extensions;
     using KnowledgeSpreadSystem.Web.ViewModels;
 
+    using WebGrease.Css.Extensions;
+
     [Authorize]
     public class UniversitiesController : BaseController
     {
@@ -30,21 +32,19 @@
 
         public ActionResult Read([DataSourceRequest] DataSourceRequest request)
         {
-            var universities = this.Data.Universities.All().Project().To<UniversityViewModel>();
-            var universitiesShortenedDescription = universities.ForEach(
-                                                                        x =>
-                                                                            {
-                                                                                x.About = x.About.ToShortString(200);
-                                                                                return x;
-                                                                            });
-            return this.Json(universitiesShortenedDescription.ToDataSourceResult(request), JsonRequestBehavior.AllowGet);
+            var universities = this.Data.Universities.All().Project().To<UniversityViewModel>()
+                .ForEach(x => 
+            {
+                x.About = x.About.ToShortString(250);
+                return x;
+            });
+            return this.Json(universities.ToDataSourceResult(request), JsonRequestBehavior.AllowGet);
         }
 
         public ActionResult Details(int id)
         {
             var uni = this.Data.Universities.All().FirstOrDefault(u => u.Id == id);
             var university = Mapper.Map<UniversityViewModel>(uni);
-
             return this.View(university);
         }
 

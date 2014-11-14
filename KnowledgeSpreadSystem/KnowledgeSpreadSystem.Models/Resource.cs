@@ -2,16 +2,26 @@
 {
     using System;
     using System.ComponentModel.DataAnnotations;
+    using System.ComponentModel.DataAnnotations.Schema;
 
     using KnowledgeSpreadSystem.Data.Common.Models;
     using KnowledgeSpreadSystem.Models.Enums;
 
     public class Resource : AuditInfo, IDeletableEntity
     {
+        public Resource()
+        {
+            this.Id = Guid.NewGuid();
+        }
+
         public Guid Id { get; set; }
 
         [Required]
         public string Name { get; set; }
+
+        [Required]
+        [MinLength(10)]
+        public string Description { get; set; }
 
         [Required]
         public string FileName { get; set; }
@@ -27,13 +37,13 @@
         [Required]
         public int ModuleId { get; set; }
 
-        public virtual Course Course { get; set; }
+        [Required]
+        public string UploaderId { get; set; }
+
+        public virtual User Uploader { get; set; }
 
         [Required]
-        public int CourseId { get; set; }
-
-        [Required]
-        public ResourceType ResourceType { get; set; }
+        public int ContentSize { get; set; }
 
         [Required]
         public byte[] Content { get; set; }

@@ -12,7 +12,7 @@
     using KnowledgeSpreadSystem.Web.Areas.Administration.Controllers.Base;
     using KnowledgeSpreadSystem.Web.Areas.Administration.ViewModels.Course;
 
-    public class CoursesController : AdministratorController
+    public class CoursesController : AdministrationKendoGridController
     {
         // GET: Administration/Courses
         public CoursesController(IKSSData data)

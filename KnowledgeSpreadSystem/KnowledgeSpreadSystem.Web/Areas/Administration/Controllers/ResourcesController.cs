@@ -38,10 +38,5 @@
         {
             throw new NotImplementedException();
         }
-
-        protected override IEnumerable GetData()
-        {
-            throw new NotImplementedException();
-        }
     }
 }

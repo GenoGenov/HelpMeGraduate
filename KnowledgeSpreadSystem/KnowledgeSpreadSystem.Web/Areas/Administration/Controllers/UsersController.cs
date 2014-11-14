@@ -1,15 +1,10 @@
 ﻿namespace KnowledgeSpreadSystem.Web.Areas.Administration.Controllers
 {
-    using System;
-    using System.Collections;
     using System.Linq;
     using System.Web.Mvc;
 
-    using AutoMapper;
-
     using KnowledgeSpreadSystem.Data;
     using KnowledgeSpreadSystem.Web.Areas.Administration.Controllers.Base;
-    using KnowledgeSpreadSystem.Web.Areas.Administration.ViewModels.User;
 
     public class UsersController : AdministratorController
     {
@@ -29,22 +24,61 @@
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult SearchByUsername(UserViewModel user)
+        public ActionResult AddToModerators(string User)
         {
-            var userFound =
-                this.Data.Users.All().FirstOrDefault(x => x.UserName.ToLower().Contains(user.Username.ToLower()));
-            var mappedUser = Mapper.Map<UserViewModel>(userFound);
-            return this.View(mappedUser);
+            var courseId = HttpContext.Session["courseId"];
+            var course = this.Data.Courses.Find(courseId);
+            if (course == null)
+            {
+                this.AddNotification("No such course exists!", "error");
+                return this.RedirectToAction("Index");
+            }
+            var userExists = this.Data.Users.Find(User);
+            if (userExists == null || course.Moderators.Any(m => m.Id == User))
+            {
+                this.AddNotification("No such user exists or the user is not eligible for that operation!", "error");
+                return this.RedirectToAction("Index");
+            }
+            course.Moderators.Add(userExists);
+            if (userExists.Courses.All(c => c.Id != course.Id))
+            {
+                userExists.Courses.Add(course);
+            }
+            this.Data.SaveChanges();
+            this.AddNotification(
+                                 "Successfully added " + userExists.UserName + " to moderators for course " + course.Name,
+                                 "success");
+            return RedirectToAction("Index");
         }
 
-        public ActionResult AllUsers()
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult RemoveFromModerators(string Moderator)
         {
-            throw new NotImplementedException();
+            var courseId = HttpContext.Session["courseId"];
+            var course = this.Data.Courses.Find(courseId);
+            if (course == null)
+            {
+                this.AddNotification("No such course exists!", "error");
+                return this.RedirectToAction("Index");
+            }
+            var userExists = this.Data.Users.Find(Moderator);
+            if (Moderator == null || course.Moderators.All(m => m.Id != Moderator))
+            {
+                this.AddNotification("No such user exists or the user is not eligible for that operation!", "error");
+                return this.RedirectToAction("Index");
+            }
+            course.Moderators.Remove(userExists);
+            if (userExists.Courses.Any(c => c.Id == course.Id))
+            {
+                userExists.Courses.Remove(course);
+            }
+            this.Data.SaveChanges();
+            this.AddNotification(
+                                 "Successfully removed " + userExists.UserName + " from moderators for course " + course.Name,
+                                 "success");
+            return RedirectToAction("Index");
         }
 
-        protected override IEnumerable GetData()
-        {
-            throw new NotImplementedException();
-        }
     }
 }

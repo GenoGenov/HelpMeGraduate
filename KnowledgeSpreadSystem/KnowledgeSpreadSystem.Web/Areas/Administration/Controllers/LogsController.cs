@@ -18,9 +18,5 @@
             throw new System.NotImplementedException();
         }
 
-        protected override IEnumerable GetData()
-        {
-            throw new System.NotImplementedException();
-        }
     }
 }

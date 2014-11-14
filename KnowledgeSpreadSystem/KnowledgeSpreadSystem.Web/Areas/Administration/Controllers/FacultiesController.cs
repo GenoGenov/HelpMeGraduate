@@ -13,7 +13,7 @@
     using KnowledgeSpreadSystem.Web.Areas.Administration.ViewModels.Faculty;
     using KnowledgeSpreadSystem.Web.Areas.Administration.ViewModels.University;
 
-    public class FacultiesController : AdministratorController
+    public class FacultiesController : AdministrationKendoGridController
     {
         public FacultiesController(IKSSData data)
             : base(data)

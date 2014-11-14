@@ -26,6 +26,8 @@
  
         IDeletableEntityRepository<University> Universities { get; }
 
+        IDeletableEntityRepository<Insight> Insigths { get; }
+
         IDeletableEntityRepository<T> GetDeletableGenericRepository<T>() where T : class, IDeletableEntity;
 
         int SaveChanges();

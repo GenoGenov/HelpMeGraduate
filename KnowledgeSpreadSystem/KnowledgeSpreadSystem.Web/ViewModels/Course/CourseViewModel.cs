@@ -1,4 +1,4 @@
-﻿namespace KnowledgeSpreadSystem.Web.ViewModels
+﻿namespace KnowledgeSpreadSystem.Web.ViewModels.Course
 {
     using KnowledgeSpreadSystem.Models;
     using KnowledgeSpreadSystem.Web.Infrastructure.Mapping;

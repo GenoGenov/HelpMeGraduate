@@ -1,0 +1,33 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@using Kendo.Mvc.UI
+<div class="row">
+    <div class="col-md-2 widgets">
+        @(Html.Kendo().TreeView()
+              .Name("treeview-left")
+              .DataTextField("Name")
+
+                      .Template("#if(!item.hasChildren) {#"
+                      + @Html.ActionLink("#= item.Name #", "Module", new { id = "selectedID" }).ToHtmlString().Replace("selectedID", "#: item.id#")
+                      + "#}"
+                      + "else{#"
+                      + @Html.ActionLink("#= item.Name #", "Course", new { id = "selectedID" }).ToHtmlString().Replace("selectedID", "#: item.id#") +
+                      " #} #")
+              .DataSource(dataSource => dataSource
+
+                                            .Read(read => read
+                                            .Action("SideMenu", "Enrolment")
+
+                                            )))
+
+    </div>
+    <div class="col-md-10">
+        @RenderBody()
+    </div>
+</div>
+
+
+
+

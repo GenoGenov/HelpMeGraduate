@@ -9,19 +9,34 @@
 
     using AutoMapper;
 
+    using Kendo.Mvc.Extensions;
+    using Kendo.Mvc.UI;
+
     using KnowledgeSpreadSystem.Data;
     using KnowledgeSpreadSystem.Data.Common.Models;
     using KnowledgeSpreadSystem.Web.Areas.Administration.ViewModels.Base;
-    using KnowledgeSpreadSystem.Web.Controllers;
-    using KnowledgeSpreadSystem.Web.Controllers.Base;
 
-    public abstract class AdministrationKendoGridController : BaseKendoGridController
+    public abstract class AdministrationKendoGridController : AdministratorController
     {
         public AdministrationKendoGridController(IKSSData data)
             : base(data)
         {
         }
 
+        [HttpPost]
+        public ActionResult Read([DataSourceRequest] DataSourceRequest request)
+        {
+            var data = this.GetData().ToDataSourceResult(request);
+
+            return this.Json(data);
+        }
+
+        protected JsonResult GridOperation<T>(T model, [DataSourceRequest] DataSourceRequest request)
+        {
+            return this.Json(new[] { model }.ToDataSourceResult(request, this.ModelState), JsonRequestBehavior.AllowGet);
+        }
+
+        protected abstract IEnumerable GetData();
 
 
         [NonAction]

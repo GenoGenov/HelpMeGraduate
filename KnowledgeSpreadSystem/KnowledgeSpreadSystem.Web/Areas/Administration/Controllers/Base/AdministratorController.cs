@@ -3,9 +3,10 @@
     using System.Web.Mvc;
 
     using KnowledgeSpreadSystem.Data;
+    using KnowledgeSpreadSystem.Web.Controllers.Base;
 
     [Authorize(Roles = "Administrator")]
-    public abstract class AdministratorController : AdministrationKendoGridController
+    public abstract class AdministratorController : BaseController
     {
         public AdministratorController(IKSSData data)
             : base(data)

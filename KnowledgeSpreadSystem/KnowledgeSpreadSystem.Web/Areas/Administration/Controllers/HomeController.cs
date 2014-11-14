@@ -23,7 +23,7 @@
         [ChildActionOnly]
         public ActionResult SideMenu()
         {
-            ViewBag.Controllers = new[]
+            var controllers = new[]
                                       {
                                           "Universities",
                                           "Faculties",
@@ -33,12 +33,8 @@
                                           "Users",
                                           "Logs"
                                       };
-            return this.View("_SideMenuPartial");
+            return this.View("_SideMenuPartial", controllers);
         }
 
-        protected override IEnumerable GetData()
-        {
-            throw new NotImplementedException();
-        }
     }
 }

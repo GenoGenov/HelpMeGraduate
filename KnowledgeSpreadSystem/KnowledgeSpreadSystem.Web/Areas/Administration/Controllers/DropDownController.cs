@@ -2,6 +2,7 @@
 {
     using System;
     using System.Collections;
+    using System.Data.Entity;
     using System.Linq;
     using System.Web.Mvc;
 
@@ -13,6 +14,7 @@
     using KnowledgeSpreadSystem.Web.Areas.Administration.ViewModels.Base;
     using KnowledgeSpreadSystem.Web.Areas.Administration.ViewModels.Course;
     using KnowledgeSpreadSystem.Web.Areas.Administration.ViewModels.Faculty;
+    using KnowledgeSpreadSystem.Web.Areas.Administration.ViewModels.User;
 
     public class DropDownController : AdministratorController
     {
@@ -31,24 +33,57 @@
         public JsonResult GetCascadeFaculties(int? universities)
         {
             var result = this.Data.Faculties.All().Project().To<FacultyViewModel>();
+            if (universities.HasValue)
+            {
+                result = result.Where(x => x.University.Id == universities);
+            }
 
-            var filtered = result.Where(x => x.University.Id == universities);
 
-            return Json(filtered, JsonRequestBehavior.AllowGet);
+            return Json(result, JsonRequestBehavior.AllowGet);
         }
 
         public JsonResult GetCascadeCourses(int? faculties)
         {
             var result = this.Data.Courses.All().Project().To<CourseViewModel>();
 
-            var filtered = result.Where(x => x.Faculty.Id == faculties);
+            if (faculties.HasValue)
+            {
+                result = result.Where(x => x.Faculty.Id == faculties);
+            }
 
-            return Json(filtered, JsonRequestBehavior.AllowGet);
+            return Json(result, JsonRequestBehavior.AllowGet);
         }
 
-        protected override IEnumerable GetData()
+        public JsonResult GetCascadeUsers(int? courses)
         {
-            throw new NotImplementedException();
+
+
+            if (courses.HasValue)
+            {
+                HttpContext.Session["courseId"] = courses;
+                var course = this.Data.Courses.All().Include("Moderators").FirstOrDefault(x => x.Id == courses.Value);
+
+                var result = this.Data.Users.All().Project().To<ModeratorViewModel>().ToList();
+                result = result.Where(x => course.Moderators.All(m => m.Id != x.Id)).ToList();
+                return Json(result, JsonRequestBehavior.AllowGet);
+            }
+            return null;
+
+        }
+
+        public JsonResult GetCascadeModerators(int? courses)
+        {
+            var result = this.Data.Users.All().Project().To<ModeratorViewModel>().ToList();
+
+            if (courses.HasValue)
+            {
+                HttpContext.Session["courseId"] = courses;
+                var course = this.Data.Courses.All().Include("Moderators").FirstOrDefault(x => x.Id == courses.Value);
+
+                result = result.Where(x => course.Moderators.Any(m => m.Id == x.Id)).ToList();
+            }
+
+            return Json(result, JsonRequestBehavior.AllowGet);
         }
     }
 }

@@ -242,12 +242,13 @@
     <Compile Include="Areas\Administration\ViewModels\Faculty\FacultyViewModel.cs" />
     <Compile Include="Areas\Administration\ViewModels\Base\SimpleViewModel.cs" />
     <Compile Include="Areas\Administration\ViewModels\University\UniversityViewModel.cs" />
+    <Compile Include="Areas\Administration\ViewModels\User\ModeratorViewModel.cs" />
     <Compile Include="Areas\Administration\ViewModels\User\UserViewModel.cs" />
     <Compile Include="Controllers\AccountController.cs" />
-    <Compile Include="Controllers\Base\BaseKendoGridController.cs" />
     <Compile Include="Controllers\CalendarController.cs" />
     <Compile Include="Areas\Administration\Controllers\LogsController.cs" />
     <Compile Include="Controllers\CoursesController.cs" />
+    <Compile Include="Controllers\EnrolmentController.cs" />
     <Compile Include="Controllers\FacultiesController.cs" />
     <Compile Include="Controllers\ModulesController.cs" />
     <Compile Include="Controllers\Base\BaseController.cs" />
@@ -258,6 +259,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Helpers\UrlHelpers.cs" />
     <Compile Include="Infrastructure\Extensions\EnumerableExtensions.cs" />
     <Compile Include="Infrastructure\Extensions\StringExtensions.cs" />
     <Compile Include="Infrastructure\Mapping\AutoMapperConfig.cs" />
@@ -266,11 +268,14 @@
     <Compile Include="Infrastructure\Mapping\ISimpleView.cs" />
     <Compile Include="ViewModels\AccountViewModels.cs" />
     <Compile Include="ViewModels\Base\BaseViewModel.cs" />
-    <Compile Include="ViewModels\CourseViewModel.cs" />
-    <Compile Include="ViewModels\FacultyViewModel.cs" />
+    <Compile Include="ViewModels\Course\CourseViewModel.cs" />
+    <Compile Include="ViewModels\Course\DetailedCourseViewModel.cs" />
+    <Compile Include="ViewModels\Faculty\FacultyViewModel.cs" />
+    <Compile Include="ViewModels\Insight\InsightViewModel.cs" />
     <Compile Include="ViewModels\ManageViewModels.cs" />
-    <Compile Include="ViewModels\ModuleViewModel.cs" />
-    <Compile Include="ViewModels\UniversityViewModel.cs" />
+    <Compile Include="ViewModels\Module\ModuleViewModel.cs" />
+    <Compile Include="ViewModels\Resource\ResourceViewModel.cs" />
+    <Compile Include="ViewModels\University\UniversityViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
@@ -561,7 +566,7 @@
     <Content Include="Areas\Administration\Views\Shared\EditorTemplates\CourseViewModel.cshtml" />
     <Content Include="Areas\Administration\Views\Modules\Index.cshtml" />
     <Content Include="Areas\Administration\Views\Shared\EditorTemplates\CourseModuleViewModel.cshtml" />
-    <Content Include="Areas\Administration\Views\Shared\DisplayTemplates\DateTime.cshtml" />
+    <Content Include="Views\Shared\DisplayTemplates\DateTime.cshtml" />
     <Content Include="Areas\Administration\Views\Shared\EditorTemplates\UniversitiesEditor.cshtml" />
     <Content Include="Areas\Administration\Views\Shared\EditorTemplates\UsersEditor.cshtml" />
     <Content Include="Areas\Administration\Views\Shared\EditorTemplates\FacultiesEditor.cshtml" />
@@ -582,6 +587,7 @@
     <Content Include="Areas\Administration\Views\Shared\EditorTemplates\String.cshtml" />
     <Content Include="Areas\Administration\Views\Shared\EditorTemplates\Time.cshtml" />
     <Content Include="Areas\Administration\Views\Shared\EditorTemplates\Url.cshtml" />
+    <Content Include="Areas\Administration\Views\Shared\EditorTemplates\ModeratorEditor.cshtml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <None Include="Scripts\jquery-2.1.1.intellisense.js" />
     <Content Include="Content\fonts\flexslider-icon.svg" />
@@ -1263,13 +1269,18 @@
     <Content Include="Scripts\Kendo\kendo.window.min.js.map" />
     <Content Include="Views\Shared\Base\_BaseLayout.cshtml" />
     <Content Include="Views\Calendar\Index.cshtml" />
-    <Content Include="Views\Modules\Index.cshtml" />
+    <Content Include="Views\Modules\Details.cshtml" />
     <Content Include="Views\Shared\_ChatPartial.cshtml" />
-    <Content Include="Views\Home\Moderator.cshtml" />
     <Content Include="Views\Universities\Details.cshtml" />
     <Content Include="Views\Universities\All.cshtml" />
     <Content Include="Views\Faculties\Details.cshtml" />
     <Content Include="Views\Courses\Details.cshtml" />
+    <Content Include="Views\Enrolment\Index.cshtml" />
+    <Content Include="Views\Enrolment\Module.cshtml" />
+    <Content Include="Views\Enrolment\_Layout.cshtml" />
+    <Content Include="Views\Shared\DisplayTemplates\String.cshtml" />
+    <Content Include="Views\Enrolment\Course.cshtml" />
+    <Content Include="Views\Modules\UploadResource.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -32,6 +32,8 @@
 
         public virtual IDbSet<University> Universities { get; set; }
 
+        public IDbSet<Insight> Insights { get; set; }
+
         public static KSSDBContext Create()
         {
             return new KSSDBContext();
@@ -42,6 +44,24 @@
             this.ApplyAuditInfoRules();
             this.ApplyDeletableEntityRules();
             return base.SaveChanges();
+        }
+
+        protected override void OnModelCreating(DbModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<Faculty>()
+                        .HasRequired(f => f.University)
+                        .WithMany(n => n.Faculties).WillCascadeOnDelete(false);
+
+            modelBuilder.Entity<CourseModule>()
+                        .HasRequired(f => f.Course)
+                        .WithMany(n => n.CourseModules)
+                        .WillCascadeOnDelete(false);
+
+            modelBuilder.Entity<Course>().HasMany(c => c.Participants).WithMany(u => u.Courses);
+
+            modelBuilder.Entity<ChatMessage>().HasRequired(m => m.Receiver).WithMany().WillCascadeOnDelete(false);
+
+            base.OnModelCreating(modelBuilder);
         }
 
         private void ApplyAuditInfoRules()
@@ -85,20 +105,6 @@
             }
         }
 
-        protected override void OnModelCreating(DbModelBuilder modelBuilder)
-        {
-            modelBuilder.Entity<Faculty>()
-                        .HasRequired(f => f.University)
-                        .WithMany(n => n.Faculties).WillCascadeOnDelete(false);
 
-            modelBuilder.Entity<CourseModule>()
-                        .HasRequired(f => f.Course)
-                        .WithMany(n => n.CourseModules)
-                        .WillCascadeOnDelete(false);
-
-            modelBuilder.Entity<ChatMessage>().HasRequired(m => m.Receiver).WithMany().WillCascadeOnDelete(false);
-
-            base.OnModelCreating(modelBuilder);
-        }
     }
 }

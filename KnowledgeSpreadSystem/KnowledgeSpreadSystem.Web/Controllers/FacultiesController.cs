@@ -39,14 +39,13 @@
             var data = this.Data.Faculties.All();
             data = id == null ? data : data.Where(x => x.UniversityId == id);
 
-            var faculties = data.Project().To<FacultyViewModel>();
-            var facultiesShortenedDescription = faculties.ForEach(
-                                                                  x =>
-                                                                       {
-                                                                           x.Description = x.Description.ToShortString(200);
-                                                                           return x;
-                                                                       });
-            return this.Json(facultiesShortenedDescription.ToDataSourceResult(request), JsonRequestBehavior.AllowGet);
+            var faculties = data.Project().To<FacultyViewModel>()
+                 .ForEach(x =>
+                 {
+                     x.Description = x.Description.ToShortString(250);
+                     return x;
+                 });
+            return this.Json(faculties.ToDataSourceResult(request), JsonRequestBehavior.AllowGet);
         }
     }
 }

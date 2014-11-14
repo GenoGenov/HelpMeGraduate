@@ -10,12 +10,12 @@
     {
         private ICollection<CalendarEvent> events;
 
-        private ICollection<User> moderators;
+        private ICollection<Insight> insights;
  
         public CourseModule()
         {
+            this.insights = new HashSet<Insight>();
             this.events = new HashSet<CalendarEvent>();
-            this.moderators = new HashSet<User>();
         }
 
         public int Id { get; set; }
@@ -57,16 +57,15 @@
             }
         }
 
-
-        public ICollection<User> Moderators
+        public ICollection<Insight> Insights
         {
             get
             {
-                return this.moderators;
+                return this.insights;
             }
             set
             {
-                this.moderators = value;
+                this.insights = value;
             }
         }
 

@@ -1,5 +1,7 @@
 ﻿namespace KnowledgeSpreadSystem.Web.ViewModels
 {
+    using AutoMapper;
+
     using KnowledgeSpreadSystem.Models;
     using KnowledgeSpreadSystem.Web.Infrastructure.Mapping;
     using KnowledgeSpreadSystem.Web.ViewModels.Base;

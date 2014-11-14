@@ -5,7 +5,7 @@
 
     public static class EnumerableExtensions
     {
-        public static IEnumerable<T> ForEach<T>(this IEnumerable<T> source, Func<T,T> action)
+        public static IEnumerable<T> ForEach<T>(this IEnumerable<T> source, Func<T, T> action)
         {
             var result = new List<T>();
             foreach (var item in source)

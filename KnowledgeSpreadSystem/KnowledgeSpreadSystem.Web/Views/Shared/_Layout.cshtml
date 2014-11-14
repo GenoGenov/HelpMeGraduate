@@ -13,10 +13,6 @@
 }
 
 <div class="container-fluid body-content">
-    @if (TempData["notification"] != null)
-    {
-        <div class="notificator" data-msg="@TempData["notification"]" data-type="@TempData["type"]"></div>
-    }
     
    @if (Request.IsAuthenticated)
    {

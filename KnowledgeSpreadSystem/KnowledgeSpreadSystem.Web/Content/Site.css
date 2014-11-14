@@ -99,3 +99,9 @@ textarea {
 .bigger {
     font-size: 1.4em;
 }
+
+.info-box {
+    border: 1px solid rgba(43, 39, 39, 0.22);
+    -ms-border-radius: 3px;
+    border-radius: 3px;
+}

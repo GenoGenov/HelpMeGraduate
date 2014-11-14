@@ -93,6 +93,14 @@
             }
         }
 
+        public IDeletableEntityRepository<Insight> Insigths
+        {
+            get
+            {
+                return this.GetDeletableEntityRepository<Insight>();
+            }
+        }
+
         public IDeletableEntityRepository<T> GetDeletableGenericRepository<T>() where T : class, IDeletableEntity
         {
             return this.GetDeletableEntityRepository<T>();

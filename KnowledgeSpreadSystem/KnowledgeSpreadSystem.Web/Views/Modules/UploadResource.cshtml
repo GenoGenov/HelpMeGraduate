@@ -1,0 +1,44 @@
+﻿@using Kendo.Mvc.UI
+@using KnowledgeSpreadSystem.Web.Areas.Administration.ViewModels.Course
+@using KnowledgeSpreadSystem.Web.ViewModels
+@model KnowledgeSpreadSystem.Web.ViewModels.Resource.ResourceInputViewModel
+@{
+    var course = (ModuleViewModel)ViewBag.Module;
+}
+
+<div class="well">
+    @using (Html.BeginForm("UploadResource", "Modules", FormMethod.Post, new { @class = "form-horizontal" }))
+    {
+        <fieldset>
+            <legend>Upload resource for module @course.Name</legend>
+            @Html.AntiForgeryToken()
+            @Html.ValidationSummary(true)
+            <div class="form-group">
+                @Html.LabelFor(x => x.Name)
+                @Html.EditorFor(x => x.Name, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(x => x.Name)
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(x => x.Description)
+                @Html.TextAreaFor(x => x.Description, new { @class = "form-control" })
+                @Html.ValidationMessageFor(x => x.Description)
+            </div>
+            <div class="form-group">
+                @(Html.Kendo()
+                      .Upload()
+                      .Name("file")
+                      .HtmlAttributes(new { @class = "form-control", accept=".zip,.rar,.pdf,.png,.jpeg,.doc,.docx"}).Multiple(false))
+                <span>Allowed file formats: +@ViewBag.FileTypes</span>
+            </div>
+            <input type="submit" value="Submit" class="btn btn-success"/>
+        </fieldset>
+
+
+    }
+</div>
+   
+
+
+
+
+

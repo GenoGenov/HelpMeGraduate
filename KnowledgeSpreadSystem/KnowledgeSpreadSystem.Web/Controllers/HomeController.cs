@@ -22,11 +22,5 @@
             return this.View();
         }
 
-        [Authorize(Roles = "Moderator")]
-        public ActionResult Moderator()
-        {
-            return this.View();
-        }
-
     }
 }

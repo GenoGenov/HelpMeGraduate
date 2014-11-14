@@ -14,11 +14,14 @@
 
         private ICollection<User> moderators;
 
+        private ICollection<User> participants;
+
         public Course()
         {
             this.events = new HashSet<CalendarEvent>();
             this.courseModules = new HashSet<CourseModule>();
             this.moderators = new HashSet<User>();
+            this.participants = new HashSet<User>();
         }
 
         public int Id { get; set; }
@@ -75,6 +78,19 @@
             set
             {
                 this.moderators = value;
+            }
+        }
+
+        public ICollection<User> Participants
+        {
+            get
+            {
+                return this.participants;
+            }
+
+            set
+            {
+                this.participants = value;
             }
         }
 

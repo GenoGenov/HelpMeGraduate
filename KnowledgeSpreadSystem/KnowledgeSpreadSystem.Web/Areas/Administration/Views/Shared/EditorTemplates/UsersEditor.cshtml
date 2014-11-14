@@ -1,9 +1,25 @@
 ﻿@using System.Collections
 @using Kendo.Mvc.UI
-@(Html.Kendo().DropDownList()
-    .Name("Moderator")
-    .DataValueField("Id")
-    .DataTextField("Username")
-        .OptionLabel("--Please Select--")
-        .BindTo((IEnumerable)ViewData["users"])
-)
+
+
+<div class="form-group">
+    <label for="Course">User:</label>
+    @(Html.Kendo().DropDownList()
+              .Name("User")
+                  .OptionLabel("--Please Select--")
+              .DataTextField("Username")
+              .DataValueField("Id")
+              .DataSource(source =>
+              {
+                  source.Read(read =>
+                  {
+                      read.Action("GetCascadeUsers", "DropDown")
+                          .Data("filterUsers");
+                  })
+                  .ServerFiltering(true);
+              })
+              .Enable(false)
+              .AutoBind(false)
+              .CascadeFrom("Course")
+    )
+</div>

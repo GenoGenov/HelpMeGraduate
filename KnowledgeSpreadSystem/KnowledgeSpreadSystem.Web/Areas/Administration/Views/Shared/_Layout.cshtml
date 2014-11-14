@@ -11,6 +11,55 @@
     @RenderSection("scripts", false)
     @RenderSection("kendoHelpers", false)
 }
+
+@section kendoHelpers{
+    <script>
+        function filterFaculties() {
+            return {
+                universities: $("#University").val()
+            };
+        }
+        function filterCourses() {
+            return {
+                faculties: $("#Faculty").val()
+            };
+        }
+
+        function filterUsers() {
+            return {
+                courses: $("#Course").val()
+            };
+        }
+
+    </script>
+
+    <script>
+    function startChanged() {
+        var endPicker = $("#End").data("kendoDatePicker"),
+            startDate = this.value();
+
+        if (startDate) {
+            startDate = new Date(startDate);
+            startDate.setDate(startDate.getDate() + 1);
+            endPicker.min(startDate);
+        }
+    }
+
+    function endChanged() {
+        var startPicker = $("#Started").data("kendoDatePicker"),
+            endDate = this.value();
+
+        if (endDate) {
+            endDate = new Date(endDate);
+            endDate.setDate(endDate.getDate() - 1);
+            startPicker.max(endDate);
+        }
+    }
+
+    </script>
+
+}
+
 <div class="container-fluid body-content">
     <div class="notificator-admin" style="display: none"></div>
     <div class="row">

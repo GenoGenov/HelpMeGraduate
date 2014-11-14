@@ -34,9 +34,6 @@
                 db.SaveChanges();
                 userManager.AddToRole(admin.Id, "Administrator");
                 db.SaveChanges();
-
-                db.Roles.Add(new IdentityRole("Moderator"));
-                db.SaveChanges();
             }
            
 

@@ -12,6 +12,7 @@
     @Scripts.Render("~/bundles/jqueryval")
     @Scripts.Render("~/bundles/kendo")
     @RenderSection("styles", false)
+    @RenderSection("kendoHelpers",false)
 
 </head>
 <body>
@@ -34,7 +35,10 @@
             </div>
         </div>
     </div>
-    
+    @if (TempData["notification"] != null)
+    {
+        <div class="notificator" data-msg="@TempData["notification"]" data-type="@TempData["type"]"></div>
+    }
     @RenderBody()
 
     <hr />

@@ -1,6 +1,6 @@
 ﻿@using Kendo.Mvc.UI
 @using KnowledgeSpreadSystem.Web.ViewModels
-@model CourseViewModel
+@model KnowledgeSpreadSystem.Web.ViewModels.Course.CourseViewModel
 
 <section class="jumbotron">
     <div class="alert alert-success">
@@ -20,15 +20,18 @@
     <span class="label label-info bigger">Year:</span>
     <strong class="text-danger bigger">@Model.Year</strong>
     <hr/>
-    
-    <div class="panel panel-primary">
-        <div class="panel-heading">
-            <h2>Resources</h2>
-        </div>
-        <div class="panel-body">
-            TODO
-        </div>
-    </div>
+    @if (!ViewBag.Enrolled)
+    {
+        @Html.ActionLink("Enroll for that course", "Enroll", null, new { @class = "btn btn-block btn-success" })
+      
+    }
+    else
+    {
+        @Html.ActionLink("Unenroll me for that course!", "Unenroll", null, new { @class = "btn btn-block btn-danger" })
+        <hr/>
+        @Html.ActionLink("To course resources", "Course", "Enrolment", new { id = @Model.Id }, new { @class = "btn btn-primary" })
+    }
+    <hr />
 
     <div class="panel panel-success">
         <div class="panel-heading">

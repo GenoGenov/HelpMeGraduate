@@ -24,6 +24,12 @@
             return base.All();
         }
 
+        public T Find(object id)
+        {
+            var found = base.Find(id);
+            return found == null ? null : found.IsDeleted ? null : found;
+        }
+
         public override void Delete(T entity)
         {
             entity.DeletedOn=DateTime.Now;

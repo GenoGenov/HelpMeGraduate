@@ -1,0 +1,28 @@
+﻿@{
+    Layout = "_Layout.cshtml";
+}
+
+@model IEnumerable<KnowledgeSpreadSystem.Web.ViewModels.Course.CourseViewModel>
+
+
+<h4 class="text-center">
+    Courses overview
+</h4>
+<hr />
+@foreach (var course in @Model)
+{
+    <div class="well">
+        <h3 class="text-center">@Html.ActionLink(@course.Name, "Course", "Enrolment", new { id = @course.Id }, null)</h3>
+        <div class="row">
+            <div class="col-md-6 info-box">
+                <h5 class="text-center">Resources</h5>
+            </div>
+            <div class="col-md-6  info-box">
+                <h5 class="text-center">Insights</h5>
+
+            </div>
+        </div>
+    </div>
+}
+
+
