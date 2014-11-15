@@ -56,16 +56,9 @@
 
         public JsonResult GetCascadeUsers(int? courses)
         {
-
-
             if (courses.HasValue)
             {
-                HttpContext.Session["courseId"] = courses;
-                var course = this.Data.Courses.All().Include("Moderators").FirstOrDefault(x => x.Id == courses.Value);
-
-                var result = this.Data.Users.All().Project().To<ModeratorViewModel>().ToList();
-                result = result.Where(x => course.Moderators.All(m => m.Id != x.Id)).ToList();
-                return Json(result, JsonRequestBehavior.AllowGet);
+                return Json(this.GetUsers(courses.Value, false), JsonRequestBehavior.AllowGet);
             }
             return null;
 
@@ -73,17 +66,23 @@
 
         public JsonResult GetCascadeModerators(int? courses)
         {
-            var result = this.Data.Users.All().Project().To<ModeratorViewModel>().ToList();
-
             if (courses.HasValue)
             {
-                HttpContext.Session["courseId"] = courses;
-                var course = this.Data.Courses.All().Include("Moderators").FirstOrDefault(x => x.Id == courses.Value);
-
-                result = result.Where(x => course.Moderators.Any(m => m.Id == x.Id)).ToList();
+                return Json(this.GetUsers(courses.Value, true), JsonRequestBehavior.AllowGet);
             }
-
-            return Json(result, JsonRequestBehavior.AllowGet);
+            return null;
         }
+
+        private IQueryable<ModeratorViewModel> GetUsers(int courseId, bool isModerator)
+        {
+            HttpContext.Session["courseId"] = courseId;
+            var moderatorIds = this.Data.Courses.Find(courseId).Moderators.Select(u => u.Id);
+            var result = this.Data.Users.All().Project().To<ModeratorViewModel>();
+
+            result = isModerator
+                         ? result.Where(x => moderatorIds.Contains(x.Id))
+                         : result.Where(x => !moderatorIds.Contains(x.Id));
+            return result;
+        } 
     }
 }

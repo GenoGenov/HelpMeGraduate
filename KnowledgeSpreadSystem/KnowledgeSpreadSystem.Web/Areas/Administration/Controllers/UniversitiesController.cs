@@ -11,22 +11,13 @@
     using KnowledgeSpreadSystem.Models;
     using KnowledgeSpreadSystem.Web.Areas.Administration.Controllers.Base;
     using KnowledgeSpreadSystem.Web.Areas.Administration.ViewModels.University;
+    using KnowledgeSpreadSystem.Web.Filters;
 
     public class UniversitiesController : AdministrationKendoGridController
     {
         public UniversitiesController(IKSSData data)
             : base(data)
         {
-        }
-
-        public ActionResult Index()
-        {
-            if (this.Request.IsAjaxRequest())
-            {
-                return this.PartialView();
-            }
-
-            return this.View();
         }
 
         [HttpPost]

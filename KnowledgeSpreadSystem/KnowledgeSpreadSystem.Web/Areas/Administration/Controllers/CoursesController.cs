@@ -11,6 +11,7 @@
     using KnowledgeSpreadSystem.Models;
     using KnowledgeSpreadSystem.Web.Areas.Administration.Controllers.Base;
     using KnowledgeSpreadSystem.Web.Areas.Administration.ViewModels.Course;
+    using KnowledgeSpreadSystem.Web.Filters;
 
     public class CoursesController : AdministrationKendoGridController
     {
@@ -18,16 +19,6 @@
         public CoursesController(IKSSData data)
             : base(data)
         {
-        }
-
-        public ActionResult Index()
-        {
-            if (Request.IsAjaxRequest())
-            {
-                return this.PartialView();
-            }
-
-            return this.View();
         }
 
         [HttpPost]

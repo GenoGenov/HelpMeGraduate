@@ -15,12 +15,20 @@
     using KnowledgeSpreadSystem.Data;
     using KnowledgeSpreadSystem.Data.Common.Models;
     using KnowledgeSpreadSystem.Web.Areas.Administration.ViewModels.Base;
+    using KnowledgeSpreadSystem.Web.Filters;
 
     public abstract class AdministrationKendoGridController : AdministratorController
     {
         public AdministrationKendoGridController(IKSSData data)
             : base(data)
         {
+        }
+
+        [AjaxOnly]
+        public virtual ActionResult Index()
+        {
+
+            return this.PartialView();
         }
 
         [HttpPost]

@@ -1,0 +1,29 @@
+﻿@model KnowledgeSpreadSystem.Web.ViewModels.Insight.InsightViewModel
+
+<div class="col-md-4 col-md-offset-4">
+    <div class="well">
+        @using (Html.BeginForm())
+        {
+            <input type="hidden" name="Target.Name" value="@Model.Target.Name" />
+            <input type="hidden" name="Target.Id" value="@Model.Target.Id" />
+            <div class="form-horizontal">
+                <fieldset>
+                    <legend>Create insight for @Model.Target.Name</legend>
+                    @Html.AntiForgeryToken()
+                    @Html.ValidationSummary(true)
+                    <div class="form-group">
+                        @Html.LabelFor(x => x.Content)
+                        @Html.TextAreaFor(x => x.Content, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(x => x.Content)
+                    </div>
+                    <input type="submit" value="Submit" class="btn btn-success" />
+                </fieldset>
+
+            </div>
+
+
+        }
+    </div>
+</div>
+
+

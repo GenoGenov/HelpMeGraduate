@@ -12,6 +12,7 @@
     using KnowledgeSpreadSystem.Web.Areas.Administration.Controllers.Base;
     using KnowledgeSpreadSystem.Web.Areas.Administration.ViewModels.Faculty;
     using KnowledgeSpreadSystem.Web.Areas.Administration.ViewModels.University;
+    using KnowledgeSpreadSystem.Web.Filters;
 
     public class FacultiesController : AdministrationKendoGridController
     {
@@ -20,16 +21,10 @@
         {
         }
 
-        public ActionResult Index()
+        public override ActionResult Index()
         {
             this.ViewData["universities"] = this.Data.Universities.All().Project().To<UniversityViewModel>();
-
-            if (this.Request.IsAjaxRequest())
-            {
-                return this.PartialView();
-            }
-
-            return this.View();
+            return base.Index();
         }
 
         [HttpPost]

@@ -4,8 +4,9 @@
     using System.ComponentModel.DataAnnotations;
 
     using KnowledgeSpreadSystem.Data.Common.Models;
+    using KnowledgeSpreadSystem.Models.Base.ResourceEntity;
 
-    public class CalendarEvent : AuditInfo, IDeletableEntity
+    public class CalendarEvent : ResourceEntity, IDeletableEntity
     {
         public int Id { get; set; }
 
@@ -20,21 +21,6 @@
 
         [Required]
         public DateTime DateCreated { get; set; }
-
-        public virtual User Creator { get; set; }
-
-        [Required]
-        public string CreatorId { get; set; }
-
-        [Required]
-        public int CourseId { get; set; }
-
-        public virtual Course Course { get; set; }
-
-        [Required]
-        public int ModuleId { get; set; }
-
-        public virtual CourseModule Module { get; set; }
 
         [Required]
         public int UniversityId { get; set; }

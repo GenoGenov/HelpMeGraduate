@@ -36,7 +36,10 @@
                             sort.SortMode(GridSortMode.SingleColumn);
                         })
           .Groupable()
-          .Filterable()
+          .Filterable(filter =>
+                      {
+                          filter.Mode(GridFilterMode.Row);
+                      })
           .Resizable(resize => resize.Columns(true))
           .Navigatable()
           .Editable(edit =>

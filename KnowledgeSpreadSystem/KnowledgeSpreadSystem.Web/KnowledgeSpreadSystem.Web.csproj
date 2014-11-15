@@ -227,6 +227,7 @@
     <Compile Include="Areas\Administration\AdministrationAreaRegistration.cs" />
     <Compile Include="Areas\Administration\Controllers\Base\AdministratorController.cs" />
     <Compile Include="Areas\Administration\Controllers\Base\AdministrationKendoGridController.cs" />
+    <Compile Include="Areas\Administration\Controllers\InsightsController.cs" />
     <Compile Include="Areas\Administration\Controllers\ModulesController.cs" />
     <Compile Include="Areas\Administration\Controllers\CoursesController.cs" />
     <Compile Include="Areas\Administration\Controllers\DropDownController.cs" />
@@ -236,6 +237,7 @@
     <Compile Include="Areas\Administration\Controllers\UniversitiesController.cs" />
     <Compile Include="Areas\Administration\Controllers\UsersController.cs" />
     <Compile Include="Areas\Administration\ViewModels\Base\AdminViewModel.cs" />
+    <Compile Include="Areas\Administration\ViewModels\Insight\InsightViewModel.cs" />
     <Compile Include="Areas\Administration\ViewModels\Module\CourseModuleViewModel.cs" />
     <Compile Include="Areas\Administration\ViewModels\Course\CourseViewModel.cs" />
     <Compile Include="Areas\Administration\ViewModels\Event\EventViewModel.cs" />
@@ -250,11 +252,14 @@
     <Compile Include="Controllers\CoursesController.cs" />
     <Compile Include="Controllers\EnrolmentController.cs" />
     <Compile Include="Controllers\FacultiesController.cs" />
+    <Compile Include="Controllers\InsightsController.cs" />
     <Compile Include="Controllers\ModulesController.cs" />
     <Compile Include="Controllers\Base\BaseController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\ResourcesController.cs" />
     <Compile Include="Controllers\UniversitiesController.cs" />
+    <Compile Include="Filters\AjaxOnlyAttribute.cs" />
     <Compile Include="GlimpseSecurityPolicy.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -269,12 +274,12 @@
     <Compile Include="ViewModels\AccountViewModels.cs" />
     <Compile Include="ViewModels\Base\BaseViewModel.cs" />
     <Compile Include="ViewModels\Course\CourseViewModel.cs" />
-    <Compile Include="ViewModels\Course\DetailedCourseViewModel.cs" />
     <Compile Include="ViewModels\Faculty\FacultyViewModel.cs" />
     <Compile Include="ViewModels\Insight\InsightViewModel.cs" />
     <Compile Include="ViewModels\ManageViewModels.cs" />
     <Compile Include="ViewModels\Module\ModuleViewModel.cs" />
-    <Compile Include="ViewModels\Resource\ResourceViewModel.cs" />
+    <Compile Include="ViewModels\Resource\ResourceInputViewModel.cs" />
+    <Compile Include="Areas\Administration\ViewModels\Resource\ResourceViewModel.cs" />
     <Compile Include="ViewModels\University\UniversityViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
@@ -575,19 +580,20 @@
     <Content Include="Content\Kendo\images\kendoui.ttf" />
     <Content Include="Content\Kendo\images\kendoui.woff" />
     <Content Include="Areas\Administration\Views\Home\_SideMenuPartial.cshtml" />
-    <Content Include="Areas\Administration\Views\Shared\EditorTemplates\Currency.cshtml" />
-    <Content Include="Areas\Administration\Views\Shared\EditorTemplates\Date.cshtml" />
-    <Content Include="Areas\Administration\Views\Shared\EditorTemplates\DateTime.cshtml" />
-    <Content Include="Areas\Administration\Views\Shared\EditorTemplates\Email.cshtml" />
-    <Content Include="Areas\Administration\Views\Shared\EditorTemplates\EmailAddress.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\Currency.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\Date.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\DateTime.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\Email.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\EmailAddress.cshtml" />
     <Content Include="Areas\Administration\Views\Shared\EditorTemplates\GridForeignKey.cshtml" />
-    <Content Include="Areas\Administration\Views\Shared\EditorTemplates\Integer.cshtml" />
-    <Content Include="Areas\Administration\Views\Shared\EditorTemplates\Number.cshtml" />
-    <Content Include="Areas\Administration\Views\Shared\EditorTemplates\Password.cshtml" />
-    <Content Include="Areas\Administration\Views\Shared\EditorTemplates\String.cshtml" />
-    <Content Include="Areas\Administration\Views\Shared\EditorTemplates\Time.cshtml" />
-    <Content Include="Areas\Administration\Views\Shared\EditorTemplates\Url.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\Integer.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\Number.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\Password.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\String.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\Time.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\Url.cshtml" />
     <Content Include="Areas\Administration\Views\Shared\EditorTemplates\ModeratorEditor.cshtml" />
+    <Content Include="Areas\Administration\Views\Insights\Index.cshtml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <None Include="Scripts\jquery-2.1.1.intellisense.js" />
     <Content Include="Content\fonts\flexslider-icon.svg" />
@@ -1280,7 +1286,8 @@
     <Content Include="Views\Enrolment\_Layout.cshtml" />
     <Content Include="Views\Shared\DisplayTemplates\String.cshtml" />
     <Content Include="Views\Enrolment\Course.cshtml" />
-    <Content Include="Views\Modules\UploadResource.cshtml" />
+    <Content Include="Views\Resources\UploadResource.cshtml" />
+    <Content Include="Views\Insights\CreateInsight.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

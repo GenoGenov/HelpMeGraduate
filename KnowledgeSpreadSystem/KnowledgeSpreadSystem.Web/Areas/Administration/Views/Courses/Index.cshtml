@@ -16,11 +16,11 @@
                                       cols.Bound(model => model.Description);
                                       cols.Bound(model => model.Year);
                                       cols.Bound(model => model.Faculty)
-                                          .Groupable(false)
+                                          
                                           .ClientTemplate("#= Faculty.Name #")
                                           .ClientGroupHeaderTemplate("Faculty:#= value.Name #");
                                       cols.Bound(model => model.University)
-                                          .Groupable(false)
+                                          
                                           .ClientTemplate("#= University.Name #")
                                           .ClientGroupHeaderTemplate("University:#= value.Name #");
                                       cols.Bound(model => model.CreatedOn).Hidden(true);
@@ -45,7 +45,10 @@
                             sort.SortMode(GridSortMode.SingleColumn);
                         })
           .Groupable()
-          .Filterable()
+          .Filterable(filter =>
+                      {
+                          filter.Mode(GridFilterMode.Row);
+                      })
           .Resizable(resize => resize.Columns(true))
           .Navigatable()
           .Editable(edit =>

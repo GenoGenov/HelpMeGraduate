@@ -2,12 +2,11 @@
 {
     using System;
     using System.ComponentModel.DataAnnotations;
-    using System.ComponentModel.DataAnnotations.Schema;
 
     using KnowledgeSpreadSystem.Data.Common.Models;
-    using KnowledgeSpreadSystem.Models.Enums;
+    using KnowledgeSpreadSystem.Models.Base.ResourceEntity;
 
-    public class Resource : AuditInfo, IDeletableEntity
+    public class Resource : ResourceEntity, IDeletableEntity
     {
         public Resource()
         {
@@ -31,16 +30,6 @@
 
         [Required]
         public string MIMEType { get; set; }
-
-        public virtual CourseModule Module { get; set; }
-
-        [Required]
-        public int ModuleId { get; set; }
-
-        [Required]
-        public string UploaderId { get; set; }
-
-        public virtual User Uploader { get; set; }
 
         [Required]
         public int ContentSize { get; set; }

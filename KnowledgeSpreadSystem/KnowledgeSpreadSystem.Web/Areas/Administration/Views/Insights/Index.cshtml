@@ -1,23 +1,15 @@
 ﻿@using Kendo.Mvc.UI
-@using KnowledgeSpreadSystem.Web.ViewModels.Resource
-    @(Html.Kendo()
-          .Grid<ResourceViewModel>()
-          .Name("grid-resources")
-          .ToolBar(tool =>
-                       {
-                           tool.Create();
-                       })
+@using KnowledgeSpreadSystem.Web.Areas.Administration.ViewModels.Insight
+@(Html.Kendo()
+          .Grid<InsightViewModel>()
+          .Name("grid-insights")
           .Columns(columns =>
                        {
-                           columns.Bound(model => model.Name);
-                           columns.Bound(model => model.Description);
                            columns.Bound(model => model.Author);
+                           columns.Bound(model => model.Content);
                            columns.Bound(model => model.Target);
-                           columns.Bound(model => model.FileExtension);
-                           columns.Bound(model => model.MIMEType);
-                           columns.Bound(model => model.Rating);
-                           columns.Bound(model => model.CreatedOn).Hidden(true);
-                           columns.Bound(model => model.ModifiedOn).Hidden(true);
+                           columns.Bound(model => model.CreatedOn);
+                           columns.Bound(model => model.ModifiedOn);
                            columns.Command(command =>
                                                {
                                                    command.Destroy();
@@ -38,7 +30,7 @@
           .Groupable()
           .Filterable(filter =>
                       {
-                          filter.Mode(GridFilterMode.Menu);
+                          filter.Mode(GridFilterMode.Row);
                       })
           .Resizable(resize => resize.Columns(true))
           .Navigatable()
@@ -57,6 +49,8 @@
                                                   events.RequestEnd("onRequestEnd");
                                                   events.Error("handleError");
                                               })
-                                          .Read("Read", "Resources")
-                                          .Destroy("Delete", "Resources"))
+                                          .Read("Read", "Insights")
+                                          .Destroy("Delete", "Insights"))
           .Resizable(x => { x.Columns(true); }))
+
+

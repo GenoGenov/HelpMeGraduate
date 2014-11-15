@@ -5,6 +5,7 @@
 
     using KnowledgeSpreadSystem.Data;
     using KnowledgeSpreadSystem.Web.Areas.Administration.Controllers.Base;
+    using KnowledgeSpreadSystem.Web.Filters;
 
     public class UsersController : AdministratorController
     {
@@ -13,13 +14,10 @@
         {
         }
 
+        [AjaxOnly]
         public ActionResult Index()
         {
-            if (Request.IsAjaxRequest())
-            {
-                return this.PartialView();
-            }
-            return View();
+            return this.PartialView();
         }
 
         [HttpPost]
@@ -77,7 +75,7 @@
             this.AddNotification(
                                  "Successfully removed " + userExists.UserName + " from moderators for course " + course.Name,
                                  "success");
-            return RedirectToAction("Index");
+            return this.RedirectToAction("Index");
         }
 
     }

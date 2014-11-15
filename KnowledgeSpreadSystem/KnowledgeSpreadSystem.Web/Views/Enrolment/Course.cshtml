@@ -1,9 +1,25 @@
-﻿@model KnowledgeSpreadSystem.Web.ViewModels.Course.DetailedCourseViewModel
+﻿@model KnowledgeSpreadSystem.Web.ViewModels.Course.CourseViewModel
 
 @{
     Layout = "_Layout.cshtml";
 }
 
+@Model.Name
+<hr/>
+@foreach (var resource in @Model.Resources)
+{
+    @resource.Name
+}
+<hr/>
+@foreach (var resource in @Model.Insights)
+{
+    @resource.Content
+}
+
+@if (ViewBag.IsModerator)
+{
+    
+}
 
 
 

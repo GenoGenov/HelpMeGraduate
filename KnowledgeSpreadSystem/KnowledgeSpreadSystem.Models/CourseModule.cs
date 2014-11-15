@@ -5,19 +5,10 @@
     using System.ComponentModel.DataAnnotations;
 
     using KnowledgeSpreadSystem.Data.Common.Models;
+    using KnowledgeSpreadSystem.Models.Base.ResourcefulEntity;
 
-    public class CourseModule : AuditInfo, IDeletableEntity
+    public class CourseModule : ResourcefulEntity, IDeletableEntity
     {
-        private ICollection<CalendarEvent> events;
-
-        private ICollection<Insight> insights;
- 
-        public CourseModule()
-        {
-            this.insights = new HashSet<Insight>();
-            this.events = new HashSet<CalendarEvent>();
-        }
-
         public int Id { get; set; }
 
         [Required]
@@ -44,30 +35,6 @@
         public int CourseId { get; set; }
 
         public virtual Course Course { get; set; }
-
-        public virtual ICollection<CalendarEvent> Events
-        {
-            get
-            {
-                return this.events;
-            }
-            set
-            {
-                this.events = value;
-            }
-        }
-
-        public ICollection<Insight> Insights
-        {
-            get
-            {
-                return this.insights;
-            }
-            set
-            {
-                this.insights = value;
-            }
-        }
 
         public bool IsDeleted { get; set; }
 

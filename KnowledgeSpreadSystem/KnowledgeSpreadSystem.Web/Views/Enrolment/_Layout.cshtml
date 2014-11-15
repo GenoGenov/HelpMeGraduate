@@ -4,26 +4,25 @@
 
 @using Kendo.Mvc.UI
 <div class="row">
-    <div class="col-md-2 widgets">
-        @(Html.Kendo().TreeView()
+    <div class="col-md-3 widgets">
+        <div class="well">
+            @(Html.Kendo().TreeView()
               .Name("treeview-left")
               .DataTextField("Name")
 
-                      .Template("#if(!item.hasChildren) {#"
-                      + @Html.ActionLink("#= item.Name #", "Module", new { id = "selectedID" }).ToHtmlString().Replace("selectedID", "#: item.id#")
-                      + "#}"
-                      + "else{#"
-                      + @Html.ActionLink("#= item.Name #", "Course", new { id = "selectedID" }).ToHtmlString().Replace("selectedID", "#: item.id#") +
-                      " #} #")
+              .Template("#if(!item.hasChildren) {#"
+                        + @Html.ActionLink("#= item.Name #", "Module", new { id = "selectedID" }).ToHtmlString().Replace("selectedID", "#: item.id#")
+                        + "#}"
+                        + "else{#"
+                        + @Html.ActionLink("#= item.Name #", "Course", new { courseId = "selectedID" }).ToHtmlString().Replace("selectedID", "#: item.id#") +
+                        " #} #")
               .DataSource(dataSource => dataSource
 
-                                            .Read(read => read
-                                            .Action("SideMenu", "Enrolment")
-
-                                            )))
-
+                                            .Read(read => read.Action("SideMenu", "Enrolment"))
+             ))
+        </div>
     </div>
-    <div class="col-md-10">
+    <div class="col-md-9">
         @RenderBody()
     </div>
 </div>

@@ -61,6 +61,8 @@
 
             modelBuilder.Entity<ChatMessage>().HasRequired(m => m.Receiver).WithMany().WillCascadeOnDelete(false);
 
+
+
             base.OnModelCreating(modelBuilder);
         }
 

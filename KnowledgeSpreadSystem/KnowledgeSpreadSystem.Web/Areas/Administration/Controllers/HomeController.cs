@@ -30,6 +30,7 @@
                                           "Courses",
                                           "Modules", 
                                           "Resources",
+                                          "Insights",
                                           "Users",
                                           "Logs"
                                       };

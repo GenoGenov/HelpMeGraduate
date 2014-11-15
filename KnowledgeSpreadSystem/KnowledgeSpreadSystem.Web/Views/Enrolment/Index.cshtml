@@ -2,14 +2,14 @@
     Layout = "_Layout.cshtml";
 }
 
-@model IEnumerable<KnowledgeSpreadSystem.Web.ViewModels.Course.CourseViewModel>
+@model IEnumerable<KnowledgeSpreadSystem.Web.ViewModels.Module.ModuleViewModel>
 
 
 <h4 class="text-center">
     Courses overview
 </h4>
 <hr />
-@foreach (var course in @Model)
+@*@foreach (var course in @Model)
 {
     <div class="well">
         <h3 class="text-center">@Html.ActionLink(@course.Name, "Course", "Enrolment", new { id = @course.Id }, null)</h3>
@@ -23,6 +23,6 @@
             </div>
         </div>
     </div>
-}
+}*@
 
 

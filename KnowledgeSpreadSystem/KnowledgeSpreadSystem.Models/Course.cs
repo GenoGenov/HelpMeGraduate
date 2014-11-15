@@ -5,10 +5,10 @@
     using System.ComponentModel.DataAnnotations;
 
     using KnowledgeSpreadSystem.Data.Common.Models;
+    using KnowledgeSpreadSystem.Models.Base.ResourcefulEntity;
 
-    public class Course : AuditInfo, IDeletableEntity
+    public class Course : ResourcefulEntity, IDeletableEntity
     {
-        private ICollection<CalendarEvent> events;
 
         private ICollection<CourseModule> courseModules;
 
@@ -18,10 +18,10 @@
 
         public Course()
         {
-            this.events = new HashSet<CalendarEvent>();
             this.courseModules = new HashSet<CourseModule>();
             this.moderators = new HashSet<User>();
             this.participants = new HashSet<User>();
+
         }
 
         public int Id { get; set; }
@@ -35,18 +35,6 @@
         [MinLength(5)]
         [MaxLength(400)]
         public string Description { get; set; }
-
-        public virtual ICollection<CalendarEvent> Events
-        {
-            get
-            {
-                return this.events;
-            }
-            set
-            {
-                this.events = value;
-            }
-        }
 
         [Required]
         [Range(2000, 2100)]
@@ -69,7 +57,7 @@
             }
         }
 
-        public ICollection<User> Moderators
+        public virtual ICollection<User> Moderators
         {
             get
             {
@@ -81,7 +69,7 @@
             }
         }
 
-        public ICollection<User> Participants
+        public virtual ICollection<User> Participants
         {
             get
             {
@@ -94,8 +82,11 @@
             }
         }
 
+
         public bool IsDeleted { get; set; }
 
         public DateTime? DeletedOn { get; set; }
+
+
     }
 }

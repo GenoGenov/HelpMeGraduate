@@ -54,6 +54,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Base\ResourceEntity\IResourceEntity.cs" />
+    <Compile Include="Base\ResourceEntity\ResourceEntity.cs" />
     <Compile Include="CalendarEvent.cs" />
     <Compile Include="ChatMessage.cs" />
     <Compile Include="Course.cs" />
@@ -61,8 +63,10 @@
     <Compile Include="Enums\EventType.cs" />
     <Compile Include="Facoulty.cs" />
     <Compile Include="Insight.cs" />
+    <Compile Include="Base\ResourcefulEntity\IResourcefulEntity.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Resource.cs" />
+    <Compile Include="Base\ResourcefulEntity\ResourcefulEntity.cs" />
     <Compile Include="University.cs" />
     <Compile Include="User.cs" />
   </ItemGroup>

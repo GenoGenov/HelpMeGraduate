@@ -4,15 +4,11 @@
     using System.ComponentModel.DataAnnotations;
 
     using KnowledgeSpreadSystem.Data.Common.Models;
+    using KnowledgeSpreadSystem.Models.Base.ResourceEntity;
 
-    public class Insight : AuditInfo, IDeletableEntity
+    public class Insight : ResourceEntity, IDeletableEntity
     {
         public int Id { get; set; }
-
-        [Required]
-        public string AuthorId { get; set; }
-
-        public virtual User Author { get; set; }
 
         [Required]
         [MinLength(20)]

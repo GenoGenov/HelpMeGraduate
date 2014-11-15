@@ -3,14 +3,14 @@
     using System.Linq;
     using System.Web.Mvc;
 
+    using AutoMapper;
     using AutoMapper.QueryableExtensions;
-
-    using Kendo.Mvc.UI;
 
     using KnowledgeSpreadSystem.Data;
     using KnowledgeSpreadSystem.Web.Controllers.Base;
-    using KnowledgeSpreadSystem.Web.ViewModels;
     using KnowledgeSpreadSystem.Web.ViewModels.Course;
+    using KnowledgeSpreadSystem.Web.ViewModels.Insight;
+    using KnowledgeSpreadSystem.Web.ViewModels.Resource;
 
     [Authorize]
     public class EnrolmentController : BaseController
@@ -31,25 +31,31 @@
             return this.View();
         }
 
-        public ActionResult Course(int id)
+        public ActionResult Course(int courseId)
         {
-            return Content(id.ToString());
+            var course = this.CurrentUser.Courses.AsQueryable().FirstOrDefault(c => c.Id == courseId);
+            if (course != null)
+            {
+
+                var result = Mapper.Map<CourseViewModel>(course);
+
+                ViewBag.IsModerator = course.Moderators.Any(u => u.Id == this.CurrentUser.Id);
+                return this.View(result);
+            }
+
+            this.AddNotification("No such course exists in your enrolled courses!", "error");
+            return this.RedirectToAction("Index");
         }
 
-        public ActionResult Index(int? page)
+        public ActionResult Index(int? courseId, string moduleName)
         {
-            var currentPage = page ?? 1;
-            ViewBag.Page = currentPage;
-            var courses =
-                this.CurrentUser.Courses.AsQueryable()
-                    .OrderBy(c => c.Name)
-                    .Skip(10 * (currentPage - 1))
-                    .Take(10)
-                    .Project()
-                    .To<CourseViewModel>();
 
-            ViewBag.Total = this.CurrentUser.Courses.Count();
-            return View(courses);
+            if (courseId.HasValue)
+            {
+               
+            }
+
+            return View();
         }
 
         public JsonResult SideMenu(int? id)

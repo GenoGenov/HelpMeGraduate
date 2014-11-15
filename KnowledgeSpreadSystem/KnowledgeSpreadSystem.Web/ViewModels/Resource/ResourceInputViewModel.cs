@@ -2,6 +2,8 @@
 {
     using System.ComponentModel.DataAnnotations;
 
+    using KnowledgeSpreadSystem.Web.Areas.Administration.ViewModels.Base;
+
     public class ResourceInputViewModel
     {     
 
@@ -11,5 +13,9 @@
         [Required]
         [MinLength(10)]
         public string Description { get; set; }
+
+        public SimpleViewModel Target { get; set; }
+
+        public string AllowedFileFormats { get; set; }
     }
 }

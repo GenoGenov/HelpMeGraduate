@@ -1,0 +1,44 @@
+﻿@using Kendo.Mvc.UI
+@model KnowledgeSpreadSystem.Web.ViewModels.Resource.ResourceInputViewModel
+
+<div class="well">
+    @using (Html.BeginForm())
+    {
+        <input type="hidden" name="Target.Name" value="@Model.Target.Name"/>
+    <input type="hidden" name="Target.Id" value="@Model.Target.Id" />
+        <div class="form-horizontal">
+            <fieldset>
+                <legend>Upload resource for @Model.Target.Name</legend>
+                @Html.AntiForgeryToken()
+                @Html.ValidationSummary(true)
+                <div class="form-group">
+                    @Html.LabelFor(x => x.Name)
+                    @Html.EditorFor(x => x.Name, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(x => x.Name)
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(x => x.Description)
+                    @Html.TextAreaFor(x => x.Description, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(x => x.Description)
+                </div>
+                <div class="form-group">
+                    @(Html.Kendo()
+                      .Upload()
+                      .Name("file")
+                      .HtmlAttributes(new { @class = "form-control", accept = @Model.AllowedFileFormats }).Multiple(false))
+                    <span>Allowed file formats: @Model.AllowedFileFormats</span>
+                </div>
+                <input type="submit" value="Submit" class="btn btn-success" />
+            </fieldset>
+
+        </div>
+       
+
+    }
+</div>
+   
+
+
+
+
+
