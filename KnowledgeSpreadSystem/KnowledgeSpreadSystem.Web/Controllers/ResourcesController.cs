@@ -9,6 +9,7 @@
     using AutoMapper;
     using AutoMapper.QueryableExtensions;
 
+    using Kendo.Mvc;
     using Kendo.Mvc.Extensions;
     using Kendo.Mvc.UI;
 
@@ -196,6 +197,23 @@
             }
 
             return File(resource.Content, resource.MIMEType, resource.FileName);
+        }
+
+        public ActionResult Details(string id)
+        {
+            var idAsGuid = new Guid();
+            if (!Guid.TryParse(id, out idAsGuid))
+            {
+                this.AddNotification("Invalid resource ID !", "error");
+                return this.RedirectToAction("Index", "Enrolment");
+            }
+            var resource = this.Data.Resources.Find(idAsGuid);
+            if (!this.IsEligible(resource.CourseId))
+            {
+                this.AddNotification("You are not enroled for that course!", "error");
+                return this.RedirectToAction("Index", "Enrolment");
+            }
+            return this.View(Mapper.Map<ResourceViewModel>(resource));
         }
 
         private string GetImagePath(string extension)

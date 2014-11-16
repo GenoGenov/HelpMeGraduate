@@ -9,8 +9,8 @@
                            columns.Bound(model => model.Author);
                            columns.Bound(model => model.Content);
                            columns.Bound(model => model.Target);
-                           columns.Bound(model => model.CreatedOn);
-                           columns.Bound(model => model.ModifiedOn);
+                           columns.Bound(model => model.CreatedOn).ClientTemplate("<strong>#=kendo.toString(CreatedOn,'G')#</strong>");
+                           columns.Bound(model => model.ModifiedOn).ClientTemplate("<strong>#=kendo.toString(ModifiedOn,'G')#</strong>");
                            columns.Command(command =>
                                                {
                                                    command.Destroy();
@@ -30,10 +30,7 @@
                             sort.SortMode(GridSortMode.SingleColumn);
                         })
           .Groupable()
-          .Filterable(filter =>
-                      {
-                          filter.Mode(GridFilterMode.Row);
-                      })
+          .Filterable()
           .Resizable(resize => resize.Columns(true))
           .Navigatable()
           .Editable(edit =>

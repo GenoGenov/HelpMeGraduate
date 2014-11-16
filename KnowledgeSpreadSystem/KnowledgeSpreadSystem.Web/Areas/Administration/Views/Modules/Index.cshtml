@@ -20,8 +20,8 @@
                            columns.Bound(model => model.Course).ClientTemplate("#= Course.Name #").ClientGroupHeaderTemplate("Course:#= value.Name#");
                            columns.Bound(model => model.Faculty).ClientTemplate("#= Faculty.Name #").ClientGroupHeaderTemplate("Faculty:#= value.Name#");
                            columns.Bound(model => model.University).ClientTemplate("#= University.Name #").ClientGroupHeaderTemplate("University:#= value.Name#");
-                           columns.Bound(model => model.CreatedOn).Hidden(true);
-                           columns.Bound(model => model.ModifiedOn).Hidden(true);
+                           columns.Bound(model => model.CreatedOn).Hidden(true).ClientTemplate("<strong>#=kendo.toString(CreatedOn,'G')#</strong>");
+                           columns.Bound(model => model.ModifiedOn).Hidden(true).ClientTemplate("<strong>#=kendo.toString(ModifiedOn,'G')#</strong>");
                            columns.Command(command =>
                                                {
                                                    command.Edit();
@@ -41,10 +41,7 @@
                             sort.SortMode(GridSortMode.SingleColumn);
                         })
           .Groupable()
-          .Filterable(filter =>
-                      {
-                          filter.Mode(GridFilterMode.Row);
-                      })
+          .Filterable()
           .Resizable(resize => { resize.Columns(true); })
           .Navigatable()
           .Editable(edit =>

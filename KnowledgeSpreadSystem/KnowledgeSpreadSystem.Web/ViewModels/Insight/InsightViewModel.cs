@@ -13,7 +13,7 @@
     public class InsightViewModel : AuditInfo, IMapFrom<Insight>, IHaveCustomMappings
     {
         [HiddenInput(DisplayValue = false)]
-        public int Id { get; set; }
+        public string Id { get; set; }
 
         [Required]
         [MinLength(20)]
@@ -33,6 +33,9 @@
         {
             configuration.CreateMap<Insight, InsightViewModel>()
                          .ForMember(x => x.PreserveCreatedOn, opt => opt.Ignore());
+
+            configuration.CreateMap<Insight, InsightViewModel>()
+                         .ForMember(x => x.Id, opt => opt.MapFrom(y => y.Id.ToString()));
 
             configuration.CreateMap<Insight, InsightViewModel>()
                          .ForMember(x => x.Author, opt => opt.MapFrom(y => y.Author.UserName));

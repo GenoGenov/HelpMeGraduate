@@ -23,8 +23,8 @@
                                           
                                           .ClientTemplate("#= University.Name #")
                                           .ClientGroupHeaderTemplate("University:#= value.Name #");
-                                      cols.Bound(model => model.CreatedOn).Hidden(true);
-                                      cols.Bound(model => model.ModifiedOn).Hidden(true);
+                                      cols.Bound(model => model.CreatedOn).Hidden(true).ClientTemplate("<strong>#=kendo.toString(CreatedOn,'G')#</strong>");
+                                      cols.Bound(model => model.ModifiedOn).Hidden(true).ClientTemplate("<strong>#=kendo.toString(ModifiedOn,'G')#</strong>");
                                       cols.Command(
                                                    command =>
                                                    {
@@ -45,10 +45,7 @@
                             sort.SortMode(GridSortMode.SingleColumn);
                         })
           .Groupable()
-          .Filterable(filter =>
-                      {
-                          filter.Mode(GridFilterMode.Row);
-                      })
+          .Filterable()
           .Resizable(resize => resize.Columns(true))
           .Navigatable()
           .Editable(edit =>

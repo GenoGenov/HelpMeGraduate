@@ -1,11 +1,11 @@
 ﻿@using Kendo.Mvc.UI
-@using KnowledgeSpreadSystem.Web.ViewModels.Resource
+@using KnowledgeSpreadSystem.Web.Areas.Administration.ViewModels.Resource
     @(Html.Kendo()
           .Grid<ResourceViewModel>()
           .Name("grid-resources")
           .ToolBar(tool =>
                        {
-                           tool.Create();
+                          // tool.Create();
                        })
           .Columns(columns =>
                        {
@@ -16,8 +16,8 @@
                            columns.Bound(model => model.FileExtension);
                            columns.Bound(model => model.MIMEType);
                            columns.Bound(model => model.Rating);
-                           columns.Bound(model => model.CreatedOn).Hidden(true);
-                           columns.Bound(model => model.ModifiedOn).Hidden(true);
+                           columns.Bound(model => model.CreatedOn).Hidden(true).ClientTemplate("<strong>#=kendo.toString(CreatedOn,'G')#</strong>");
+                           columns.Bound(model => model.ModifiedOn).Hidden(true).ClientTemplate("<strong>#=kendo.toString(ModifiedOn,'G')#</strong>");
                            columns.Command(command =>
                                                {
                                                    command.Destroy();
@@ -36,10 +36,7 @@
                             sort.SortMode(GridSortMode.SingleColumn);
                         })
           .Groupable()
-          .Filterable(filter =>
-                      {
-                          filter.Mode(GridFilterMode.Menu);
-                      })
+          .Filterable()
           .Resizable(resize => resize.Columns(true))
           .Navigatable()
           .Editable(edit =>

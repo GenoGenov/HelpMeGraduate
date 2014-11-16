@@ -1,5 +1,5 @@
-﻿@model KnowledgeSpreadSystem.Web.ViewModels.Course.CourseViewModel
-
+﻿@using KnowledgeSpreadSystem.Web.Helpers
+@model KnowledgeSpreadSystem.Web.ViewModels.Course.CourseViewModel
 <div class="well">
     <h2 class="text-center">@Html.DisplayFor(x => x.Name)</h2>
     <hr />
@@ -11,7 +11,7 @@
         </div>
     }
     <hr />
-@Html.Partial("_ResourcesAndInsightsTemplate",new {ReadAction="ReadForCourse", Id=@Model.Id})
+    @Html.Partial("_ResourcesAndInsightsTemplate",new {ReadAction="ReadForCourse", Id=@Model.Id})
 </div>
 
 

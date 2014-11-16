@@ -1,0 +1,47 @@
+﻿@using KnowledgeSpreadSystem.Web.Helpers
+@model KnowledgeSpreadSystem.Web.ViewModels.Resource.ResourceViewModel
+           
+<script src="~/Scripts/rater/rater.js"></script>
+<div class="jumbotron">
+    <h2 class="text-center">@Model.Name</h2>
+    <hr/>
+    <div class="alert alert-info text-center">Detailed Information</div>
+    <hr/>
+    <span class="label label-primary bigger">Name:</span>
+    <strong class="bigger">@Model.Name</strong>
+    <br/>
+    <br/>
+    <span class="label label-primary bigger">Filename:</span>
+    <strong class="bigger">@Model.FileName</strong>
+    <br/>
+    <br/>
+    <span class="label label-primary bigger">Description:</span>
+    <p class="bigger text-info">@Model.Description</p>
+    <span class="label label-primary bigger">Size:</span>
+    <strong class="bigger">@(string.Format("{0:F}", Model.ContentSize / 1024.0f / 1024.0f)) MB</strong>
+    <br />
+    <br />
+    <span class="label label-primary bigger">Rating:</span>
+    @* TODO: FIX rating ! *@
+    <strong class="bigger">@Html.Rating("rating",@Model.Rating.ToString()) </strong><small> @Model.Rating of 10 total ratings</small>
+    <br />
+    <br />
+    <span class="label label-primary bigger">Uploaded On:</span>
+    <strong class="bigger">@Model.CreatedOn</strong>
+    <br />
+    <br />
+    <span class="label label-primary bigger">Author:</span>
+    <strong class="bigger">@Model.Author</strong>
+    <br />
+    <br />
+    <span class="label label-primary bigger">Rate</span>
+    @Html.Rater("Rater",Url.Action("RateResource","Rating",new {id=@Model.Id}))
+    <br />
+    <br />
+    <span class="label label-primary bigger">Download</span>
+    <a style='display: inline-block; width: 50px; height: 50px;' href="@Url.Action("Download", "Resources", new { id = @Model.Id })">
+        <img src="@Url.Content("~/Content/images/icons/Download-icon.png")" alt='Download' style='width: 100%; height: 100%' />
+    </a>
+    <br />
+    <br />
+</div>

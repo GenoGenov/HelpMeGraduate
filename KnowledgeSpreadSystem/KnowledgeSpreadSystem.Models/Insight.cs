@@ -8,7 +8,12 @@
 
     public class Insight : ResourceEntity, IDeletableEntity
     {
-        public int Id { get; set; }
+        public Insight()
+        {
+            this.Id = Guid.NewGuid();
+        }
+
+        public Guid Id { get; set; }
 
         [Required]
         [MinLength(20)]
@@ -18,5 +23,7 @@
         public bool IsDeleted { get; set; }
 
         public DateTime? DeletedOn { get; set; }
+
+        public int Rating { get; set; }
     }
 }

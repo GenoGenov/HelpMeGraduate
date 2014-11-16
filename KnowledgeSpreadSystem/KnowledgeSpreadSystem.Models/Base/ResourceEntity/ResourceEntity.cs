@@ -7,6 +7,7 @@
 
     public abstract class ResourceEntity : AuditInfo, IResourceEntity
     {
+
         public virtual CourseModule Module { get; set; }
 
         public int? ModuleId { get; set; }

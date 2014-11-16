@@ -37,7 +37,7 @@
             model.AuthorId = this.CurrentUser.Id;
             var dbModel = base.Create<Insight>(model);
 
-            model.Id = dbModel != null ? dbModel.Id : (int?)null;
+            model.Id = dbModel != null ? dbModel.Id.ToString() : null;
 
             return this.GridOperation(model, request);
         }
@@ -45,7 +45,7 @@
         [HttpPost]
         public JsonResult Update([DataSourceRequest] DataSourceRequest request, InsightViewModel model)
         {
-            base.Update<Insight, InsightViewModel>(model, model.Id);
+            base.Update<Insight, InsightViewModel>(model, Guid.Parse(model.Id));
 
             return this.GridOperation(model, request);
         }

@@ -12,8 +12,8 @@
                        {
                            columns.Bound(model => model.Name);
                            columns.Bound(model => model.About);
-                           columns.Bound(model => model.CreatedOn);
-                           columns.Bound(model => model.ModifiedOn);
+                           columns.Bound(model => model.CreatedOn).ClientTemplate("<strong>#=kendo.toString(CreatedOn,'G')#</strong>");
+                           columns.Bound(model => model.ModifiedOn).ClientTemplate("<strong>#=kendo.toString(ModifiedOn,'G')#</strong>");
                            columns.Command(command =>
                                                {
                                                    command.Edit();

@@ -13,7 +13,7 @@
     public class InsightViewModel : AdminViewModel, IMapFrom<Insight>, IHaveCustomMappings
     {
         [HiddenInput(DisplayValue = false)]
-        public int? Id { get; set; }
+        public string Id { get; set; }
 
         [Required]
         [MinLength(20)]
@@ -40,6 +40,9 @@
             configuration.CreateMap<Insight, InsightViewModel>()
                         .ForMember(x => x.Author, opt => opt.MapFrom(y => y.Author.UserName));
 
+            configuration.CreateMap<Insight, InsightViewModel>()
+                        .ForMember(x => x.Id, opt => opt.MapFrom(y => y.Id.ToString()));
+
             configuration.CreateMap<InsightViewModel, Insight>()
                         .ForMember(
                                    x => x.CourseId,
@@ -51,6 +54,7 @@
 
             configuration.CreateMap<InsightViewModel, Insight>().ForMember(x => x.Course, opt => opt.Ignore());
             configuration.CreateMap<InsightViewModel, Insight>().ForMember(x => x.Module, opt => opt.Ignore());
+            configuration.CreateMap<InsightViewModel, Insight>().ForMember(x => x.Author, opt => opt.Ignore());
         }
     }
 }
