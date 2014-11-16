@@ -37,5 +37,25 @@
 
             return null;
         }
+
+        public static string GetImagePath(this UrlHelper urlHelper, string fileExtension)
+        {
+            switch (fileExtension.ToLower())
+            {
+                case ".pdf":
+                    return urlHelper.Content("~/Content/images/icons/PDF-icon.png");
+                case ".doc":
+                case ".docx":
+                    return urlHelper.Content("~/Content/images/icons/Doc-File-icon.png");
+                case ".png":
+                case ".jpeg":
+                    return urlHelper.Content("~/Content/images/icons/Graphics-icon.png");
+                case ".zip":
+                case ".rar":
+                    return urlHelper.Content("~/Content/images/icons/Archive-icon.png");
+            }
+
+            return urlHelper.Content("~/Content/images/icons/file-icon.png");
+        }
     }
 }

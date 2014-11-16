@@ -1,25 +1,20 @@
 ﻿@model KnowledgeSpreadSystem.Web.ViewModels.Course.CourseViewModel
 
-@{
-    Layout = "_Layout.cshtml";
-}
+<div class="well">
+    <h2 class="text-center">@Html.DisplayFor(x => x.Name)</h2>
+    <hr />
+    @if (ViewBag.IsModerator)
+    {
+        <div class="row">
+            @Html.ActionLink("Add resource", "UploadForCourse", "Resources", new { @Model.Id }, new { @class = "btn btn-success" })
+            @Html.ActionLink("Add Insight", "CreateForCourse", "Insights", new { @Model.Id }, new { @class = "btn btn-success" })
+        </div>
+    }
+    <hr />
+@Html.Partial("_ResourcesAndInsightsTemplate",new {ReadAction="ReadForCourse", Id=@Model.Id})
+</div>
 
-@Model.Name
-<hr/>
-@foreach (var resource in @Model.Resources)
-{
-    @resource.Name
-}
-<hr/>
-@foreach (var resource in @Model.Insights)
-{
-    @resource.Content
-}
 
-@if (ViewBag.IsModerator)
-{
-    
-}
 
 
 

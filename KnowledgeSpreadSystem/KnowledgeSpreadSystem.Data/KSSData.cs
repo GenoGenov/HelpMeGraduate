@@ -77,7 +77,7 @@
             }
         }
 
-        public IDeletableEntityRepository<Resource> Recourses
+        public IDeletableEntityRepository<Resource> Resources
         {
             get
             {

@@ -75,6 +75,7 @@
                                   .PageSize(10)
                                   .Read(read => read.Action("Read", "Modules", new { id = @Model.Id }))
                                   .ServerOperation(true)
+                                  .PageSize(5)
                   ))
         </div>
     </div>

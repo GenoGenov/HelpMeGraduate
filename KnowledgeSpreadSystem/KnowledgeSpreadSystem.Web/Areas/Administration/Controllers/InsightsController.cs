@@ -1,5 +1,6 @@
 ﻿namespace KnowledgeSpreadSystem.Web.Areas.Administration.Controllers
 {
+    using System;
     using System.Collections;
     using System.Web.Mvc;
 
@@ -30,6 +31,25 @@
             return this.GridOperation(model, request);
         }
 
+        [HttpPost]
+        public ActionResult Create([DataSourceRequest] DataSourceRequest request, InsightViewModel model)
+        {
+            model.AuthorId = this.CurrentUser.Id;
+            var dbModel = base.Create<Insight>(model);
+
+            model.Id = dbModel != null ? dbModel.Id : (int?)null;
+
+            return this.GridOperation(model, request);
+        }
+
+        [HttpPost]
+        public JsonResult Update([DataSourceRequest] DataSourceRequest request, InsightViewModel model)
+        {
+            base.Update<Insight, InsightViewModel>(model, model.Id);
+
+            return this.GridOperation(model, request);
+        }
+
         protected override IEnumerable GetData()
         {
             return this.Data.Insigths
@@ -41,7 +61,7 @@
                          {
                              x.Target = x.ModuleId.HasValue
                                             ? this.Data.CourseModules.Find(x.ModuleId.Value).Name + "(module)"
-                                            : this.Data.CourseModules.Find(x.CourseId.Value).Name + "(course)";
+                                            : this.Data.Courses.Find(x.CourseId.Value).Name + "(course)";
                              return x;
                          });
         }

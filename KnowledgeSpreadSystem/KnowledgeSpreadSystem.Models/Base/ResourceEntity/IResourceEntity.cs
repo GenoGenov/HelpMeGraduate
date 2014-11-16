@@ -8,7 +8,7 @@
 
         Course Course { get; set; }
 
-        int? CourseId { get; set; }
+        int CourseId { get; set; }
 
         string AuthorId { get; set; }
 

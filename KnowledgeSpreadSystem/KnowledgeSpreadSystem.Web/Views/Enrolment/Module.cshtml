@@ -1,4 +1,13 @@
-﻿@{
-    Layout = "_Layout.cshtml";
-}
+﻿@model KnowledgeSpreadSystem.Web.ViewModels.Module.ModuleViewModel
+
+<div class="well">
+    <h2 class="text-center">@Html.DisplayFor(x => x.Name)</h2>
+    <hr />
+        <div class="row">
+            @Html.ActionLink("Add resource", "UploadForModule", "Resources", new { @Model.Id }, new { @class = "btn btn-success" })
+            @Html.ActionLink("Add Insight", "CreateForModule", "Insights", new { @Model.Id }, new { @class = "btn btn-success" })
+        </div>
+    <hr />
+    @Html.Partial("_ResourcesAndInsightsTemplate", new { ReadAction = "ReadForModule", Id=@Model.Id })
+</div>
 

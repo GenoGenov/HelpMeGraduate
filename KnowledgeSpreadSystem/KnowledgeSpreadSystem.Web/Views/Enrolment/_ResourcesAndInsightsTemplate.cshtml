@@ -1,0 +1,63 @@
+﻿@using Kendo.Mvc.UI
+@using KnowledgeSpreadSystem.Web.ViewModels.Insight
+@using KnowledgeSpreadSystem.Web.ViewModels.Resource
+<div>
+
+    <div class="alert alert-info text-center">
+        Resources
+    </div>
+
+    @(Html.Kendo()
+              .Grid<ResourceViewModel>()
+              .Name("grid-resources")
+              .Columns(cols =>
+                           {
+                               cols.Template(@<text></text>).ClientTemplate("<div class='resource-type-image' style='display: inline-block; width: 30px; height: 30px;'><img src=\" #= ImagePath # \" alt=\"#=FileExtension#\" style='width: 100%; height: 100%' /></div>");
+                               cols.Bound(x => x.Name);
+                               cols.Bound(x => x.Description);
+                               cols.Bound(x => x.Rating);
+                               cols.Bound(x => x.Author);
+                               cols.Bound(x => x.CreatedOn).ClientTemplate("<strong>#=CreatedOn.toUTCString()#</strong>");
+                               cols.Bound(x => x.ContentSize).HeaderTemplate("Size").Template(x => string.Format("{0:F} MB", x.ContentSize / 1024.0f / 1024.0f)).ClientTemplate("#=(ContentSize/1024/1024).toFixed(2)# MB");
+                               cols.Template(@<text>
+                                <div class="download-image" style="display: inline-block; width: 30px; height: 30px;">
+                                    <img src="@Url.Content("~/Content/images/icons/Download-icon.png")"
+                                         alt="Download" style="width: 100%; height: 100%" />
+                                </div>
+                            </text>).ClientTemplate("<a style='display: inline-block; width: 30px; height: 30px;' href='" + @Url.Action("Download", "Resources", new { id = "itemIDdownld" }).Replace("itemIDdownld", "#=Id#") + "'>" + "<img src=\"" + @Url.Content("~/Content/images/icons/Download-icon.png") + "\" alt='Download' style='width: 100%; height: 100%' /></a>");
+                           })
+              .Filterable()
+              .Sortable()
+              .Pageable()
+              .DataSource(data => data
+                                      .Ajax()
+                                      .Read(read => read.Action((string)@Model.ReadAction, "Resources", new { id = (int)@Model.Id }))
+                                      .ServerOperation(true))
+    )
+
+
+</div>
+<hr />
+<div>
+    <div class="alert alert-info text-center">
+        Insights
+    </div>
+    @(Html.Kendo()
+              .Grid<InsightViewModel>()
+              .Name("grid-insights")
+              .Columns(cols =>
+                           {
+                               cols.Bound(x => x.Author);
+                               cols.Bound(x => x.Rating);
+                               cols.Bound(x => x.Content).ClientTemplate("<strong class='text-primary'>#=Content#</strong>"); ;
+                               cols.Bound(x => x.CreatedOn).ClientTemplate("<strong>#=CreatedOn.toUTCString()#</strong>"); ;
+                            })
+              .Filterable()
+              .Sortable()
+              .Pageable()
+              .DataSource(data => data
+                                      .Ajax()
+                                              .Read(read => read.Action((string)@Model.ReadAction, "Insights", new { id = (int)@Model.Id }))
+                                      .ServerOperation(true))
+    )
+</div>

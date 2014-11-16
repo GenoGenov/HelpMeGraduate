@@ -10,7 +10,10 @@
     using KnowledgeSpreadSystem.Web.Controllers.Base;
     using KnowledgeSpreadSystem.Web.ViewModels.Course;
     using KnowledgeSpreadSystem.Web.ViewModels.Insight;
+    using KnowledgeSpreadSystem.Web.ViewModels.Module;
     using KnowledgeSpreadSystem.Web.ViewModels.Resource;
+
+    using WebGrease.Css.Extensions;
 
     [Authorize]
     public class EnrolmentController : BaseController
@@ -26,9 +29,11 @@
             var module = this.Data.CourseModules.Find(id);
             if (module != null && this.CurrentUser.Courses.Any(c => c.Id == module.CourseId))
             {
-                
+                return this.PartialView(Mapper.Map<ModuleViewModel>(module));
             }
-            return this.View();
+
+            this.AddNotification("No such course exists in your enrolled courses!", "error");
+            return this.RedirectToAction("Index");
         }
 
         public ActionResult Course(int courseId)
@@ -36,11 +41,10 @@
             var course = this.CurrentUser.Courses.AsQueryable().FirstOrDefault(c => c.Id == courseId);
             if (course != null)
             {
-
                 var result = Mapper.Map<CourseViewModel>(course);
-
-                ViewBag.IsModerator = course.Moderators.Any(u => u.Id == this.CurrentUser.Id);
-                return this.View(result);
+                ViewBag.IsModerator = course.Moderators.Any(u => u.Id == this.CurrentUser.Id)
+                                      || this.User.IsInRole("Administrator");
+                return this.PartialView(result);
             }
 
             this.AddNotification("No such course exists in your enrolled courses!", "error");
@@ -86,5 +90,7 @@
                      JsonRequestBehavior.AllowGet);
 
         }
+
+
     }
 }

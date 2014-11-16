@@ -22,7 +22,7 @@
 
         IDeletableEntityRepository<Faculty> Faculties { get; }
 
-        IDeletableEntityRepository<Resource> Recourses { get; }
+        IDeletableEntityRepository<Resource> Resources { get; }
  
         IDeletableEntityRepository<University> Universities { get; }
 

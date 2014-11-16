@@ -1,5 +1,6 @@
 ﻿namespace KnowledgeSpreadSystem.Web.Areas.Administration.ViewModels.Insight
 {
+    using System;
     using System.ComponentModel.DataAnnotations;
     using System.Web.Mvc;
 
@@ -12,13 +13,23 @@
     public class InsightViewModel : AdminViewModel, IMapFrom<Insight>, IHaveCustomMappings
     {
         [HiddenInput(DisplayValue = false)]
-        public int Id { get; set; }
+        public int? Id { get; set; }
 
+        [Required]
+        [MinLength(20)]
         public string Content { get; set; }
 
         public string Target { get; set; }
 
         public string Author { get; set; }
+
+        [UIHint("CourseEditor")]
+        public SimpleViewModel Course { get; set; }
+
+        [UIHint("_ModulesEditor")]
+        public SimpleViewModel Module { get; set; }
+
+        public string AuthorId { get; set; }
 
         public int? CourseId { get; set; }
 
@@ -28,6 +39,18 @@
         {
             configuration.CreateMap<Insight, InsightViewModel>()
                         .ForMember(x => x.Author, opt => opt.MapFrom(y => y.Author.UserName));
+
+            configuration.CreateMap<InsightViewModel, Insight>()
+                        .ForMember(
+                                   x => x.CourseId,
+                                   opt => opt.MapFrom(y => y.Course.Id));
+            configuration.CreateMap<InsightViewModel, Insight>()
+                        .ForMember(
+                                   x => x.ModuleId,
+                                   opt => opt.MapFrom(y => y.Module.Id));
+
+            configuration.CreateMap<InsightViewModel, Insight>().ForMember(x => x.Course, opt => opt.Ignore());
+            configuration.CreateMap<InsightViewModel, Insight>().ForMember(x => x.Module, opt => opt.Ignore());
         }
     }
 }

@@ -14,7 +14,9 @@
     using KnowledgeSpreadSystem.Web.Areas.Administration.ViewModels.Base;
     using KnowledgeSpreadSystem.Web.Areas.Administration.ViewModels.Course;
     using KnowledgeSpreadSystem.Web.Areas.Administration.ViewModels.Faculty;
+    using KnowledgeSpreadSystem.Web.Areas.Administration.ViewModels.Module;
     using KnowledgeSpreadSystem.Web.Areas.Administration.ViewModels.User;
+    using KnowledgeSpreadSystem.Web.ViewModels.Module;
 
     public class DropDownController : AdministratorController
     {
@@ -49,6 +51,18 @@
             if (faculties.HasValue)
             {
                 result = result.Where(x => x.Faculty.Id == faculties);
+            }
+
+            return Json(result, JsonRequestBehavior.AllowGet);
+        }
+
+        public JsonResult GetCascadeModules(int? courses)
+        {
+            var result = this.Data.CourseModules.All().Project().To<CourseModuleViewModel>();
+
+            if (courses.HasValue)
+            {
+                result = result.Where(x => x.Course.Id == courses);
             }
 
             return Json(result, JsonRequestBehavior.AllowGet);

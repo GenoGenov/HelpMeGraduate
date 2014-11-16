@@ -1,28 +1,58 @@
-﻿@{
-    Layout = "_Layout.cshtml";
-}
+﻿@using Kendo.Mvc.UI
+<div class="row">
+    <div class="col-md-3 widgets">
+        <div class="well">
+            @(Html.Kendo().TreeView()
+                  .Name("treeview-left")
+                  .DataTextField("Name")
 
-@model IEnumerable<KnowledgeSpreadSystem.Web.ViewModels.Module.ModuleViewModel>
+                  .Template("#if(!item.hasChildren) {#"
+                            + @Ajax.ActionLink("#= item.Name #", "Module", new { id = "selectedID" }, new AjaxOptions()
+                                                                                                          {
+                                                                                                              InsertionMode = InsertionMode.Replace,
+                                                                                                              LoadingElementId = "ajax-loading",
+                                                                                                              UpdateTargetId = "ajax-content",
+                                                                                                          }).ToHtmlString()
+                                   .Replace("selectedID", "#: item.id#")
+                                   .Replace("#ajax-loading", "\\#ajax-loading")
+                                   .Replace("#ajax-content", "\\#ajax-content")
+                            + "#}"
+                            + "else{#"
+                            + @Ajax.ActionLink("#= item.Name #", "Course", new { courseId = "selectedID" }, new AjaxOptions()
+                                                                                                                {
+                                                                                                                    InsertionMode = InsertionMode.Replace,
+                                                                                                                    LoadingElementId = "ajax-loading",
+                                                                                                                    UpdateTargetId = "ajax-content",
+                                                                                                                }).ToHtmlString()
+                                   .Replace("selectedID", "#: item.id#")
+                                   .Replace("#ajax-loading", "\\#ajax-loading")
+                                   .Replace("#ajax-content", "\\#ajax-content")
+                            +" #} #")
+                  .DataSource(dataSource => dataSource
 
-
-<h4 class="text-center">
-    Courses overview
-</h4>
-<hr />
-@*@foreach (var course in @Model)
-{
-    <div class="well">
-        <h3 class="text-center">@Html.ActionLink(@course.Name, "Course", "Enrolment", new { id = @course.Id }, null)</h3>
-        <div class="row">
-            <div class="col-md-6 info-box">
-                <h5 class="text-center">Resources</h5>
-            </div>
-            <div class="col-md-6  info-box">
-                <h5 class="text-center">Insights</h5>
-
-            </div>
+                                                .Read(read => read.Action("SideMenu", "Enrolment"))
+                  ))
         </div>
     </div>
-}*@
+    <div class="col-md-9 text-center">
+        <h2>Welcome to your enrolment area</h2>
+        <p>Here you can find information for all of your enrolled courses and their modules</p>
+    </div>
+</div>
+    <div class="row" id="ajax-loading" style="display: none">
+        <div class="col-md-4 col-md-offset-4">
+            <img src="~/Content/images/ajax-loader.gif" style="width: 250px" />
+        </div>
+    </div>
+
+    <div class="row" id="ajax-content">
+        <div class="alert alert-info">
+            <h2 class="lead text-center">
+                Choose a category
+            </h2>
+        </div>
+
+    </div>
+
 
 

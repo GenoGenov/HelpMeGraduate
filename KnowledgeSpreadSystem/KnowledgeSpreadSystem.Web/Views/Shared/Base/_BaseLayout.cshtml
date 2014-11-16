@@ -42,12 +42,15 @@
     @RenderBody()
 
     <hr />
-    <footer class="text-center" id="main-footer">
-        <strong>
-            &copy; @DateTime.Now.Year - <a href="http://telerikacademy.com">Telerik Academy</a>.<br/>
-            Author: Geno Genov
-        </strong>
-    </footer>
+    <div class="row">
+        <footer class="text-center" id="main-footer">
+            <strong>
+                &copy; @DateTime.Now.Year - <a href="http://telerikacademy.com">Telerik Academy</a>.<br />
+                Author: Geno Genov
+            </strong>
+        </footer>
+    </div>
+
 
     @Scripts.Render("~/bundles/bootstrap")
     @Scripts.Render("~/bundles/noty")

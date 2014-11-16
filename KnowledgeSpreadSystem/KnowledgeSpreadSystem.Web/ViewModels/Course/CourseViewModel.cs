@@ -13,9 +13,5 @@
         public string Description { get; set; }
 
         public int Year { get; set; }
-
-        public ICollection<ResourceViewModel> Resources { get; set; }
-
-        public ICollection<InsightViewModel> Insights { get; set; }
     }
 }

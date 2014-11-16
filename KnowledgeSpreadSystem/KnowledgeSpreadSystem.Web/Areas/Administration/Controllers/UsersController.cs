@@ -46,7 +46,7 @@
             this.AddNotification(
                                  "Successfully added " + userExists.UserName + " to moderators for course " + course.Name,
                                  "success");
-            return RedirectToAction("Index");
+            return RedirectToAction("Index", "Home");
         }
 
         [HttpPost]
@@ -75,7 +75,7 @@
             this.AddNotification(
                                  "Successfully removed " + userExists.UserName + " from moderators for course " + course.Name,
                                  "success");
-            return this.RedirectToAction("Index");
+            return this.RedirectToAction("Index", "Home");
         }
 
     }

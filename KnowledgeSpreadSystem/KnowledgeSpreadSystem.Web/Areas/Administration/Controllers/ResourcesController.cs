@@ -12,11 +12,8 @@
     using KnowledgeSpreadSystem.Data;
     using KnowledgeSpreadSystem.Models;
     using KnowledgeSpreadSystem.Web.Areas.Administration.Controllers.Base;
-    using KnowledgeSpreadSystem.Web.Areas.Administration.ViewModels.Base;
-    using KnowledgeSpreadSystem.Web.Areas.Administration.ViewModels.University;
-    using KnowledgeSpreadSystem.Web.Filters;
+    using KnowledgeSpreadSystem.Web.Areas.Administration.ViewModels.Resource;
     using KnowledgeSpreadSystem.Web.Infrastructure.Extensions;
-    using KnowledgeSpreadSystem.Web.ViewModels.Resource;
 
     public class ResourcesController : AdministrationKendoGridController
     {
@@ -44,7 +41,7 @@
 
         protected override IEnumerable GetData()
         {
-            return this.Data.Recourses
+            return this.Data.Resources
                 .All()
                 .Project()
                 .To<ResourceViewModel>()
@@ -53,7 +50,7 @@
                              {
                                  x.Target = x.ModuleId.HasValue
                                                 ? this.Data.CourseModules.Find(x.ModuleId.Value).Name + "(module)"
-                                                : this.Data.CourseModules.Find(x.CourseId.Value).Name + "(course)";
+                                                : this.Data.Courses.Find(x.CourseId.Value).Name + "(course)";
                                  return x;
                              });
         }

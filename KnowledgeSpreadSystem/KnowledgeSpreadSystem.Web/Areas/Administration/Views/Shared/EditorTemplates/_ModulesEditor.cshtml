@@ -1,0 +1,14 @@
+﻿@using Kendo.Mvc.UI
+
+<label for="Module">Module:</label>
+@(Html.Kendo().DropDownList()
+    .Name("Module")
+    .DataValueField("Id")
+    .DataTextField("Name")
+        .OptionLabel("--Please Select--")
+    .DataSource(data =>
+                    { data.Read("GetCascadeModules", "DropDown"); })
+    .Enable(false)
+    .AutoBind(false)
+    .CascadeFrom("Course")
+)

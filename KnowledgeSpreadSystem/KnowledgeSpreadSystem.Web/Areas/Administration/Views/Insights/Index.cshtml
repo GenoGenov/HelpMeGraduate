@@ -3,6 +3,7 @@
 @(Html.Kendo()
           .Grid<InsightViewModel>()
           .Name("grid-insights")
+          .ToolBar(tools => tools.Create())
           .Columns(columns =>
                        {
                            columns.Bound(model => model.Author);
@@ -13,6 +14,7 @@
                            columns.Command(command =>
                                                {
                                                    command.Destroy();
+                                                   command.Edit();
                                                });
                        })
                        .ColumnMenu()
@@ -50,7 +52,9 @@
                                                   events.Error("handleError");
                                               })
                                           .Read("Read", "Insights")
-                                          .Destroy("Delete", "Insights"))
+                                          .Destroy("Delete", "Insights")
+                                          .Create("Create","Insights")
+                                          .Update("Update","Insights"))
           .Resizable(x => { x.Columns(true); }))
 
 

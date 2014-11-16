@@ -13,7 +13,7 @@
 
         public virtual Course Course { get; set; }
 
-        public int? CourseId { get; set; }
+        public int CourseId { get; set; }
 
         [Required]
         public string AuthorId { get; set; }

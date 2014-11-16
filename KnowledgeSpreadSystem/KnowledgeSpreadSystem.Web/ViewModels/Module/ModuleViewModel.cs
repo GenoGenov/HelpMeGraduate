@@ -19,9 +19,5 @@
         public DateTime End { get; set; }
 
         public string Lecturer { get; set; }
-
-        public ICollection<InsightViewModel> Insights { get; set; }
-
-        public ICollection<ResourceViewModel> Resources { get; set; }
     }
 }

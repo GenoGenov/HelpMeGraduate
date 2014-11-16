@@ -12,15 +12,15 @@
     @RenderSection("scripts", false)
 }
 
-<div class="container-fluid body-content">
+<div class="container-fluid body-content" style="height: 100%;">
     
    @if (Request.IsAuthenticated)
    {
-    <div class="row">
+    <div class="row" style="height: 100%;">
         <div class="col-md-10">
             @RenderBody()
         </div>
-        <div class="col-md-2" id="chat">
+        <div class="col-md-2" style="height: 100%;" id="chat">
             @Html.Partial("_ChatPartial")
         </div>
     </div>
