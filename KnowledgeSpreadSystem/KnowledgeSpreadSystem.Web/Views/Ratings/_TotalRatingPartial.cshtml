@@ -1,0 +1,4 @@
+﻿@using KnowledgeSpreadSystem.Web.Helpers
+@model KnowledgeSpreadSystem.Web.ViewModels.Rating.TotalRatingViewModel
+           
+@Html.Rating(@Model.TargetId, @Model.Rating.ToString()) <small> @Model.Rating.ToString("F") of @Model.RatingsCount total ratings</small>

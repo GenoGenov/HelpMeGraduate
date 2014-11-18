@@ -28,6 +28,8 @@
 
         IDeletableEntityRepository<Insight> Insigths { get; }
 
+        IDeletableEntityRepository<Rating> Ratings { get; }
+
         IDeletableEntityRepository<T> GetDeletableGenericRepository<T>() where T : class, IDeletableEntity;
 
         int SaveChanges();

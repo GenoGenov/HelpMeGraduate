@@ -1,8 +1,11 @@
 ﻿$(document).ready(function () {
     var $rating = $('.star-rating[data-rating]');
-    var rating = Math.round(parseFloat($rating.attr('data-rating')));
-    $rating.find('input:nth-of-type(' + rating + ')').prop('checked', 'checked');
-    $rating.find('input').prop('disabled', 'disabled');
+    $rating.each(function(index, element) {
+        var rating = Math.round(parseFloat($(element).attr('data-rating')));
+        $(element).find('input:nth-of-type(' + rating + ')').prop('checked', 'checked');
+        $(element).find('input').prop('disabled', 'disabled');
+    });
+   
 
       $('.star-rating[data-url] input').change(
         function () {

@@ -1,5 +1,6 @@
 ﻿namespace KnowledgeSpreadSystem.Web.Controllers
 {
+    using System;
     using System.Linq;
     using System.Web;
     using System.Web.Mvc;
@@ -25,6 +26,24 @@
             : base(data)
         {
         }
+
+        public ActionResult Details(string id)
+        {
+            var idAsGuid = new Guid();
+            if (!Guid.TryParse(id, out idAsGuid))
+            {
+                this.AddNotification("Invalid insight ID !", "error");
+                return this.RedirectToAction("Index", "Enrolment");
+            }
+            var insight = this.Data.Insigths.Find(idAsGuid);
+            if (!this.IsEligible(insight.CourseId))
+            {
+                this.AddNotification("You are not enroled for that course!", "error");
+                return this.RedirectToAction("Index", "Enrolment");
+            }
+            return this.View(Mapper.Map<InsightViewModel>(insight));
+        }
+
 
         [HttpGet]
         public ActionResult CreateForModule(int id)

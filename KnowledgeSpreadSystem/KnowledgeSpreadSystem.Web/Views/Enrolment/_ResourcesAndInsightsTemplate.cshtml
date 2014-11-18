@@ -9,13 +9,25 @@
     </div>
 
     <script>
-        function populateRatings(parameters) {
+        function ratify() {
             var $rating = $('.star-rating[data-rating]');
-            var rating = Math.round(parseFloat($rating.attr('data-rating')));
-            $rating.find('input:nth-of-type(' + rating + ')').prop('checked', 'checked');
-            $rating.find('input').prop('disabled', 'disabled');
+            $rating.each(function (index, element) {
+                var rating = Math.round(parseFloat($(element).attr('data-rating')));
+                $(element).find('input:nth-of-type(' + rating + ')').prop('checked', 'checked');
+                $(element).find('input').prop('disabled', 'disabled');
+            });
+        }
+
+        function populateRating(id) {
+            var url = '/Ratings/GetTotalRating/' + id;
+            $.get(url)
+                .done(function(data) {
+                    $('#' + id).html(data);
+                    ratify();
+            });
         }
     </script>
+    
 
     @(Html.Kendo()
               .Grid<ResourceViewModel>()
@@ -25,7 +37,7 @@
                                cols.Template(@<text></text>).ClientTemplate("<div class='resource-type-image' style='display: inline-block; width: 30px; height: 30px;'><img src=\" #= ImagePath # \" alt=\"#=FileExtension#\" style='width: 100%; height: 100%' /></div>");
                                cols.Bound(x => x.Name).ClientTemplate(@Html.ActionLink("#=Name#","Details","Resources",new {id="#=Id#"},null).ToHtmlString());
                                cols.Bound(x => x.Description);
-                               cols.Bound(x => x.Rating).ClientTemplate(@Html.Rating("#=Name#-#=Id#-#=ContentSize#", "#=Rating#").ToHtmlString());
+                               cols.Bound(x => x.Rating).ClientTemplate("<div id='#=Id#'>#=populateRating(Id)#</div>");
                                cols.Bound(x => x.Author);
                                cols.Bound(x => x.CreatedOn).ClientTemplate("<strong>#=kendo.toString(CreatedOn,'G')#</strong>");
                                cols.Bound(x => x.ContentSize).HeaderTemplate("Size").Template(x => string.Format("{0:F} MB", x.ContentSize / 1024.0f / 1024.0f)).ClientTemplate("#=(ContentSize/1024/1024).toFixed(2)# MB");
@@ -39,7 +51,6 @@
                       .Filterable()
                       .Sortable()
                       .Pageable()
-                      .Events(events=>events.DataBound("populateRatings"))
                       .DataSource(data => data
                                               .Ajax()
                                               .Read(read => read.Action((string)@Model.ReadAction, "Resources", new { id = (int)@Model.Id }))
@@ -58,15 +69,14 @@
           .Name("grid-insights")
           .Columns(cols =>
                        {
+                           cols.Bound(x => x.Content).ClientTemplate("<strong class='text-primary'>"+@Html.ActionLink("#=Content#","Details","Insights",new {id="#=Id#"},null).ToHtmlString()+"</strong>");
+                           cols.Bound(x => x.Rating).ClientTemplate("<div id='#=Id#'>#=populateRating(Id)#</div>");
                            cols.Bound(x => x.Author);
-                           cols.Bound(x => x.Rating);
-                           cols.Bound(x => x.Content).ClientTemplate("<strong class='text-primary'>#=Content#</strong>"); ;
-                           cols.Bound(x => x.CreatedOn).ClientTemplate("<strong>#=kendo.toString(CreatedOn,'G')#</strong>"); ;
+                           cols.Bound(x => x.CreatedOn).ClientTemplate("<strong>#=kendo.toString(CreatedOn,'G')#</strong>");
                        })
           .Filterable()
           .Sortable()
           .Pageable()
-          .Events(events => events.DataBound("populateRatings"))
           .DataSource(data => data
                                   .Ajax()
                                   .Read(read => read.Action((string)@Model.ReadAction, "Insights", new { id = (int)@Model.Id }))

@@ -22,8 +22,7 @@
     <br />
     <br />
     <span class="label label-primary bigger">Rating:</span>
-    @* TODO: FIX rating ! *@
-    <strong class="bigger">@Html.Rating("rating",@Model.Rating.ToString()) </strong><small> @Model.Rating of 10 total ratings</small>
+    <strong class="bigger">@Html.Action("GetTotalRating", "Ratings", new { id = @Model.Id })</strong>
     <br />
     <br />
     <span class="label label-primary bigger">Uploaded On:</span>
@@ -35,7 +34,7 @@
     <br />
     <br />
     <span class="label label-primary bigger">Rate</span>
-    @Html.Rater("Rater",Url.Action("RateResource","Rating",new {id=@Model.Id}))
+    @Html.Action("GetRateResource", "Ratings", new { id = @Model.Id })
     <br />
     <br />
     <span class="label label-primary bigger">Download</span>

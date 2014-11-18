@@ -45,6 +45,14 @@
             }
         }
 
+        public IDeletableEntityRepository<Rating> Ratings
+        {
+            get
+            {
+                return this.GetDeletableEntityRepository<Rating>();
+            }
+        }
+
         public IDeletableEntityRepository<ChatMessage> ChatMessages
         {
             get

@@ -25,5 +25,7 @@
         public DateTime? DeletedOn { get; set; }
 
         public int Rating { get; set; }
+
+
     }
 }

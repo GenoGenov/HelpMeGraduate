@@ -12,7 +12,6 @@
     using KnowledgeSpreadSystem.Models;
     using KnowledgeSpreadSystem.Web.Areas.Administration.Controllers.Base;
     using KnowledgeSpreadSystem.Web.Areas.Administration.ViewModels.Insight;
-    using KnowledgeSpreadSystem.Web.Filters;
     using KnowledgeSpreadSystem.Web.Infrastructure.Extensions;
 
     public class InsightsController : AdministrationKendoGridController

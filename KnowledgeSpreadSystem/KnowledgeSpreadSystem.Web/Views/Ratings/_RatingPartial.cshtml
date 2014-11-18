@@ -1,0 +1,10 @@
+﻿@using KnowledgeSpreadSystem.Web.Helpers
+@model KnowledgeSpreadSystem.Web.ViewModels.Rating.RatingViewModel
+@if (@Model.Value.HasValue)
+{
+    <strong class="text-warning">You already rated this! (@Html.Rating(@Model.Id.ToString(), @Model.Value.Value.ToString()))</strong>
+}
+else
+{
+    @Html.Rater(@Model.Id.ToString(), @Model.RouteToAction)
+}

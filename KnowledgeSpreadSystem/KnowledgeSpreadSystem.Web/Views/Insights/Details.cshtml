@@ -1,0 +1,25 @@
+﻿@using KnowledgeSpreadSystem.Web.Helpers
+@model KnowledgeSpreadSystem.Web.ViewModels.Insight.InsightViewModel
+
+<script src="~/Scripts/rater/rater.js"></script>
+<div class="jumbotron">
+    <p class="text-center">@Model.Content</p>
+    <hr />
+    <div class="alert alert-info text-center">Detailed Information</div>
+    <hr />
+    <span class="label label-primary bigger">Author:</span>
+    <strong class="bigger">@Model.Author</strong>
+    <br />
+    <br />
+    <span class="label label-primary bigger">Created On:</span>
+    <strong class="bigger">@Model.CreatedOn</strong>
+    <br />
+    <br />
+    <span class="label label-primary bigger">Rating:</span>
+    <strong class="bigger">@Html.Action("GetTotalRating", "Ratings", new { id = @Model.Id })</strong>
+    <br />
+    <br />
+    <span class="label label-primary bigger">Rate</span>
+    @Html.Action("GetRateInsight","Ratings",new {id=@Model.Id})
+    <br />
+</div>

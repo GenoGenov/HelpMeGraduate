@@ -34,6 +34,8 @@
 
         public IDbSet<Insight> Insights { get; set; }
 
+        public IDbSet<Rating> Ratings { get; set; }
+
         public static KSSDBContext Create()
         {
             return new KSSDBContext();
@@ -58,6 +60,16 @@
                         .WillCascadeOnDelete(false);
 
             modelBuilder.Entity<Course>().HasMany(c => c.Participants).WithMany(u => u.Courses);
+
+            modelBuilder.Entity<Rating>()
+                        .HasOptional(x => x.Resource)
+                        .WithOptionalDependent()
+                        .WillCascadeOnDelete(false);
+
+            modelBuilder.Entity<Rating>()
+                        .HasOptional(x => x.Insight)
+                        .WithOptionalDependent()
+                        .WillCascadeOnDelete(false);
 
             modelBuilder.Entity<ChatMessage>().HasRequired(m => m.Receiver).WithMany().WillCascadeOnDelete(false);
 
