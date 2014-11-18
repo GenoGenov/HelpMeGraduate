@@ -2,8 +2,15 @@
 @if (Request.IsAuthenticated)
 {
     <li>@Html.ActionLink("Universities", "All", "Universities", new { area = "" }, new { @class=@Url.MakeActive("Universities")})</li>
-    <li>@Html.ActionLink("Calendar", "Index", "Calendar", null, new { @class = @Url.MakeActive("Calendar") })</li>
     <li>@Html.ActionLink("My Enrolment", "Index", "Enrolment", new { area = "" }, new { @class = @Url.MakeActive("Enrolment") })</li>
+    <li>
+        <div class="navbar-form">
+            <form method="Get" action="/Home/SearchCourse/">
+                <input name="filter" type="text" class="form-control" placeholder="Search Course" />
+                <input type="submit" value="Search" class="btn btn-info" />
+            </form>
+        </div>
+    </li>
 }
 
 @if (HttpContext.Current.User.IsInRole("Administrator"))

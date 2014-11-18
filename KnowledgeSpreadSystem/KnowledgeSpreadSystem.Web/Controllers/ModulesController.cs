@@ -18,6 +18,7 @@
     using KnowledgeSpreadSystem.Web.ViewModels.Module;
     using KnowledgeSpreadSystem.Web.ViewModels.Resource;
 
+    [Authorize]
     public class ModulesController : BaseController
     {
 

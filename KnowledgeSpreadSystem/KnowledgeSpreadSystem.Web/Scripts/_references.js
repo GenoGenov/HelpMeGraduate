@@ -520,3 +520,5 @@
 /// <reference path="Kendo/messages/kendo.messages.zh-HK.min.js" />
 /// <reference path="Kendo/messages/kendo.messages.zh-TW.min.js" />
 /// <reference path="rater/rater.js" />
+/// <reference path="jquery.signalr-2.1.2.min.js" />
+/// <reference path="chat/chat.js" />

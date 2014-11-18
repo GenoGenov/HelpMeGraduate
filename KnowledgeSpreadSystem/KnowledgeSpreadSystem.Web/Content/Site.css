@@ -17,44 +17,6 @@ textarea {
     max-width: 280px;
 }
 
-.slides li img {
-    width: 100%;
-    height: 100%;
-}
-
-.flexslider {
-    position: relative;
-    height: 100%;
-}
-
-    .flexslider .slides {
-        height: 100% !important;
-    }
-
-        .flexslider .slides li {
-            position: relative;
-            height: 100%;
-        }
-
-.flex-viewport {
-    position: relative;
-    height: 100%;
-}
-
-#flex-container {
-    height: 500px;
-}
-
-.equal, .equal > div[class*='col-'] {
-    display: -webkit-box;
-    display: -moz-box;
-    display: -ms-flexbox;
-    display: -webkit-flex;
-    display: flex;
-    flex: 1 1 auto;
-    background: transparent;
-}
-
     #chat, #chat div.panel {
         height: 97%;
     }

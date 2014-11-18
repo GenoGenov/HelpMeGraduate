@@ -39,6 +39,11 @@
                                                                         "~/Scripts/respond.js"));
 
             bundles.Add(
+                     new ScriptBundle("~/bundles/chat").Include(
+                                                                     "~/Scripts/jquery.signalR-{version}.js",
+                                                                     "~/Scripts/chat/chat.js"));
+
+            bundles.Add(
                         new StyleBundle("~/Content/bootstrap")
                         .Include("~/Content/bootstrap.min.css"));
 

@@ -36,7 +36,6 @@
                 db.SaveChanges();
             }
            
-
             ViewEngines.Engines.Clear();
             ViewEngines.Engines.Add(new RazorViewEngine());
             AreaRegistration.RegisterAllAreas();

@@ -32,7 +32,7 @@
         [Display(Name = "File Extension")]
         public string FileExtension { get; set; }
 
-        public int Rating { get; set; }
+        public double Rating { get; set; }
 
         public SimpleViewModel Target { get; set; }
 

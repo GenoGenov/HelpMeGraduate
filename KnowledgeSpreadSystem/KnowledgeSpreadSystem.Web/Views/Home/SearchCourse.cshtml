@@ -1,0 +1,37 @@
+﻿@using KnowledgeSpreadSystem.Web.Infrastructure.Extensions
+@model IList<KnowledgeSpreadSystem.Web.ViewModels.Course.CourseViewModel>
+
+<h2 class="text-center">
+    Results for search "@ViewBag.Filter"
+</h2>
+
+@if (@Model.Count == 0)
+{
+    <div class="alert alert-warning text-center">
+        No results to display ;(
+    </div>
+}
+else
+{
+    <table class="table table-bordered table-condensed table-hover table-responsive">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Decription</th>
+                <th>Year</th>
+                <th>Created On</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var course in @Model)
+            {
+                <tr>
+                    <td class="bigger">@Html.ActionLink(course.Name, "Details", "Courses", new { id = course.Id }, null)</td>
+                    <td>@course.Description.ToShortString(250)</td>
+                    <td>@course.Year</td>
+                    <td>@course.CreatedOn</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}

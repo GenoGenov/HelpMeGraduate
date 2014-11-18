@@ -29,6 +29,8 @@
         [UIHint("_ModulesEditor")]
         public SimpleViewModel Module { get; set; }
 
+        public double Rating { get; set; }
+
         public string AuthorId { get; set; }
 
         public int? CourseId { get; set; }

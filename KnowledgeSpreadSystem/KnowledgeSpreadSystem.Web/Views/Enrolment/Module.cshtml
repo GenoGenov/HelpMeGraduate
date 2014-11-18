@@ -2,6 +2,16 @@
 
 <div class="well">
     <h2 class="text-center">@Html.DisplayFor(x => x.Name)</h2>
+    <div class="row">
+        <div class="col-md-6 text-center">
+            <strong>Lecturer: </strong> @Html.DisplayFor(x => x.Lecturer)
+        </div>
+        <div class="col-md-6 text-center">
+            <strong>Starts: </strong>@Html.DisplayFor(x=>x.Started)
+            <br/>
+            <strong>Ends: </strong>@Html.DisplayFor(x=>x.End)
+        </div>
+    </div>
     <hr />
         <div class="row">
             @Html.ActionLink("Add resource", "UploadForModule", "Resources", new { @Model.Id }, new { @class = "btn btn-success" })

@@ -1,6 +1,7 @@
 ﻿namespace KnowledgeSpreadSystem.Models
 {
     using System;
+    using System.ComponentModel;
     using System.ComponentModel.DataAnnotations;
 
     using KnowledgeSpreadSystem.Data.Common.Models;
@@ -24,8 +25,8 @@
 
         public DateTime? DeletedOn { get; set; }
 
-        public int Rating { get; set; }
-
+        [DefaultValue(0)]
+        public double Rating { get; set; }
 
     }
 }

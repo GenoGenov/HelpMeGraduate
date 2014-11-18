@@ -34,7 +34,7 @@
                                           "Users",
                                           "Logs"
                                       };
-            return this.View("_SideMenuPartial", controllers);
+            return this.PartialView("_SideMenuPartial", controllers);
         }
 
     }

@@ -9,6 +9,7 @@
                            columns.Bound(model => model.Author);
                            columns.Bound(model => model.Content);
                            columns.Bound(model => model.Target);
+                           columns.Bound(model => model.Rating);
                            columns.Bound(model => model.CreatedOn).ClientTemplate("<strong>#=kendo.toString(CreatedOn,'G')#</strong>");
                            columns.Bound(model => model.ModifiedOn).ClientTemplate("<strong>#=kendo.toString(ModifiedOn,'G')#</strong>");
                            columns.Command(command =>

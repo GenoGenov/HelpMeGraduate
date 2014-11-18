@@ -92,10 +92,26 @@
             return this.RedirectToAction("Details", new { id = id });
         }
 
-        public ActionResult Read([DataSourceRequest] DataSourceRequest request, int? id)
+        [AllowAnonymous]
+        [OutputCache(Duration = 60 * 15)]
+        public ActionResult Latest([DataSourceRequest] DataSourceRequest request)
         {
-            var data = this.Data.Courses.All();
-            data = id == null ? data : data.Where(x => x.FacultyId == id);
+            var data = this.Data.Courses
+                .All()
+                .OrderByDescending(x => x.CreatedOn);
+
+            var courses = data.Project().To<CourseViewModel>()
+                 .ForEach(x =>
+                 {
+                     x.Description = x.Description.ToShortString(250);
+                     return x;
+                 });
+            return this.Json(courses.ToDataSourceResult(request), JsonRequestBehavior.AllowGet);
+        }
+
+        public ActionResult Read([DataSourceRequest] DataSourceRequest request, int id)
+        {
+            var data = this.Data.Courses.All().Where(x => x.FacultyId == id);
 
             var courses = data.Project().To<CourseViewModel>()
                  .ForEach(x =>

@@ -2,6 +2,7 @@
 @model KnowledgeSpreadSystem.Web.ViewModels.Course.CourseViewModel
 <div class="well">
     <h2 class="text-center">@Html.DisplayFor(x => x.Name)</h2>
+    <h3 class="text-center"><strong>Year: </strong> @Html.DisplayFor(x=>x.Year)</h3>
     <hr />
     @if (ViewBag.IsModerator)
     {

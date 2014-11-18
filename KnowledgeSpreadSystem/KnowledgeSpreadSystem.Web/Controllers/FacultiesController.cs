@@ -14,6 +14,7 @@
     using KnowledgeSpreadSystem.Web.Infrastructure.Extensions;
     using KnowledgeSpreadSystem.Web.ViewModels;
 
+    [Authorize]
     public class FacultiesController : BaseController
     {
         // GET: Faculties

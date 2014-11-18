@@ -32,7 +32,7 @@
         [Display(Name = "Size(in bytes)")]
         public int ContentSize { get; set; }
 
-        public int Rating { get; set; }
+        public double Rating { get; set; }
 
         public string Target { get; set; }
 

@@ -23,6 +23,7 @@
 
     using WebGrease.Css.Extensions;
 
+    [Authorize]
     public class ResourcesController : BaseController
     {
         private static readonly string[] AllowedFileFormats =

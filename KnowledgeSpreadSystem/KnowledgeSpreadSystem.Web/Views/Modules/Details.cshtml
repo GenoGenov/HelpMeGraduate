@@ -7,7 +7,7 @@
         <h2 class="text-center">@Model.Name</h2>
     </div>
     <hr />
-        @Html.DisplayFor(x=>x.Description);
+        @Html.DisplayFor(x=>x.Description)
     <hr />
     <span class="label label-info bigger">University:</span>
     <strong class="text-info bigger">@Html.ActionLink((string)@ViewBag.UniversityName, "Details", "Universities", new { id = (int)@ViewBag.UniversityId }, null)</strong>
@@ -21,7 +21,6 @@
         @if (ViewBag.Enrolled)
         {
             <span class="label label-warning">(Enrolled!)</span>
-            @Html.ActionLink("To module resources","Module","Enrolment",new {id=@Model.Id},new {@class="btn btn-primary"})
         }
     </strong>
     <hr />

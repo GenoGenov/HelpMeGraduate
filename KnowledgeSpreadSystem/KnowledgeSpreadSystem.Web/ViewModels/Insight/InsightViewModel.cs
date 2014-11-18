@@ -20,14 +20,11 @@
         [MaxLength(500)]
         public string Content { get; set; }
 
-        //[HiddenInput(DisplayValue = false)]
-        //public string AuthorId { get; set; }
-
         public string Author { get; set; }
 
         public SimpleViewModel Target { get; set; }
 
-        public int Rating { get; set; }
+        public double Rating { get; set; }
 
         public void CreateMappings(IConfiguration configuration)
         {

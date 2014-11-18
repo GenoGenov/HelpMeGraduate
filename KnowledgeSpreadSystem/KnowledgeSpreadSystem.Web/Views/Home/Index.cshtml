@@ -1,47 +1,63 @@
 ﻿@using Kendo.Mvc.UI
 @using KnowledgeSpreadSystem.Web.ViewModels
+@using KnowledgeSpreadSystem.Web.ViewModels.Course
 @{
     ViewBag.Title = "Home Page";
 }
 
 @section styles
 {
-<link href="~/Content/flexslider.css" rel="stylesheet" />
+    <link href="~/Content/flexslider.css" rel="stylesheet" />
 }
-@*<div class="row" id="flex-container">
-    <div class="flexslider">
-        <ul class="slides">
-            <li>
-                <img src="../../Content/kitchen_adventurer_lemon.jpg" alt="" />
-            </li>
-            <li>
-                <img src="../../Content/kitchen_adventurer_lemon.jpg" alt="" />
-            </li>
-            <li>
-                <img src="../../Content/kitchen_adventurer_lemon.jpg" alt="" />
-            </li>
-            <li>
-                <div class="jumbotron">
-                    <h1>Hi</h1>
-                </div>
-            </li>
-
-        </ul>
-    </div>
-</div>*@
 
 <div class="row">
     <div class="jumbotron">
         <h1 class="page-header text-center">
             Welcome To HelpMeGraduate!
-            <br/>
+            <br />
             <small>The only thing you will need to get through university!</small>
         </h1>
     </div>
 </div>
+<div class="row">
+    <h2 class="text-center">Latest courses:</h2>
+    <hr/>
+
+    @(Html.Kendo().ListView<CourseViewModel>()
+          .Name("list-courses")
+          .TagName("div")
+          .ClientTemplateId("courses-template")
+          
+          .Pageable()
+          .DataSource(data => data
+                                  .PageSize(10)
+                                  .ServerOperation(true)
+                                  .Read("Latest","Courses")
+          )
+          )
+</div>
+
+<script type="text/x-kendo-tmpl" id="courses-template">
+    <hr />
+    <div class="row">
+        <div class="col-md-3 bigger">
+            <strong>@Html.Raw(@Html.ActionLink("#=Name#","Details","Courses",new {id="cID"},null).ToHtmlString().Replace("cID","#=Id#"))</strong>
+        </div>
+        <div class="col-md-3">
+            <p class="text-primary" style="word-wrap:break-word">#=Description#</p>
+        </div>
+        <div class="col-md-2">
+            <strong class="text-primary">#=Year#</strong>
+        </div>
+        <div class="col-md-2">
+            <strong class="text-primary">#=kendo.toString(CreatedOn,'G')#</strong>
+        </div>
+    </div>
+    <hr />
+</script>
 
 @section scripts{
-<script src="~/Scripts/flexslider/jquery.flexslider-min.js"></script>
-<script src="~/Scripts/flexslider/flexslider-config.js"></script>
+    <script src="~/Scripts/flexslider/jquery.flexslider-min.js"></script>
+    <script src="~/Scripts/flexslider/flexslider-config.js"></script>
 }
 

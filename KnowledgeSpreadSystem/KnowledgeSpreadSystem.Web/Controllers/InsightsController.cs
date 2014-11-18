@@ -19,6 +19,7 @@
     using KnowledgeSpreadSystem.Web.ViewModels.Insight;
     using KnowledgeSpreadSystem.Web.ViewModels.Resource;
 
+    [Authorize]
     public class InsightsController : BaseController
     {
         // GET: Insights
