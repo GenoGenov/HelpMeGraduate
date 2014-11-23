@@ -1,6 +1,5 @@
 ﻿namespace KnowledgeSpreadSystem.Web.Controllers
 {
-    using System.Collections;
     using System.Linq;
     using System.Web.Mvc;
 
@@ -13,7 +12,6 @@
     using KnowledgeSpreadSystem.Data;
     using KnowledgeSpreadSystem.Web.Controllers.Base;
     using KnowledgeSpreadSystem.Web.Infrastructure.Extensions;
-    using KnowledgeSpreadSystem.Web.ViewModels;
     using KnowledgeSpreadSystem.Web.ViewModels.Course;
 
     [Authorize]
